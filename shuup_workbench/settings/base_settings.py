@@ -144,6 +144,7 @@ LANGUAGES = [
     ("sv", "Swedish"),
     ("zh-hans", "Simplified Chinese"),
     ("es", "Spanish"),
+    ("pl", "Polish"),
 ]
 
 PARLER_DEFAULT_LANGUAGE_CODE = "en"

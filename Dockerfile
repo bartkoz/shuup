@@ -35,4 +35,5 @@ except IntegrityError:\n\
     pass\n'\
 | python3 -m shuup_workbench shell
 
+CMD ["python3", "-m", "shuup_workbench", "collectstatic"]
 CMD ["python3", "-m", "shuup_workbench", "runserver", "0.0.0.0:8000"]
