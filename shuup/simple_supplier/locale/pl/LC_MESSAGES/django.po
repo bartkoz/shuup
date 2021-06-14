@@ -1,0 +1,261 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+# Bartek Sielicki <sielickib@student.mini.pw.edu.pl>, 2017
+# Fishster Zespół <teamdecathlonpge@gmail.com>, 2021
+# MalT <malt@malt-it.com>, 2016
+msgid ""
+msgstr ""
+"Project-Id-Version: Shuup\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-06-02 18:31+0000\n"
+"PO-Revision-Date: 2021-06-02 23:25+0000\n"
+"Last-Translator: Christian Hess\n"
+"Language-Team: Polish (Poland) (http://www.transifex.com/shuup/shuup/language/pl_PL/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: pl_PL\n"
+"Plural-Forms: nplurals=4; plural=(n==1 ? 0 : (n%10>=2 && n%10<=4) && (n%100<12 || n%100>14) ? 1 : n!=1 && (n%10>=0 && n%10<=1) || (n%10>=5 && n%10<=9) || (n%100>=12 && n%100<=14) ? 2 : 3);\n"
+
+msgid "Stock management"
+msgstr "Zarządzanie stanem magazynowym"
+
+msgid "SKU"
+msgstr "SKU"
+
+msgid "Filter by SKU..."
+msgstr "Filtruj wg SKU..."
+
+msgid "Name"
+msgstr "Nazwa"
+
+msgid "Filter by name..."
+msgstr "Filtruj wg nazwy"
+
+msgid "Supplier"
+msgstr "Dostawca"
+
+msgid "Stock information"
+msgstr "Stany magazynowe"
+
+msgid "Adjust stock"
+msgstr "Dodaj stany"
+
+#, python-format
+msgid ""
+"Success! Added %(delta)s `%(unit_symbol)s` for product `%(product_name)s` "
+"stock (%(supplier_name)s)."
+msgstr "Sukces! Dodano %(delta)s `%(unit_symbol)s` dla zapasów produktu` %(product_name)s` (%(supplier_name)s)."
+
+#, python-format
+msgid ""
+"Success! Removed %(delta)s `%(unit_symbol)s` from product `%(product_name)s`"
+" stock (%(supplier_name)s)."
+msgstr "Sukces! Usunięto %(delta)s `%(unit_symbol)s` z magazynu produktu` %(product_name)s` (%(supplier_name)s)."
+
+#, python-format
+msgid "Alert limit for product `%(product_name)s` set to `%(value)s`."
+msgstr "Alert minimalnej ilości produktu „%(product_name)s” został ustawiony na „%(value)s”."
+
+msgid "Non-POST request methods are forbidden."
+msgstr "Metody żądań non-POST są zabronione."
+
+msgid "Please check submitted values and try again."
+msgstr "Sprawdź przesłane wartości i spróbuj ponownie."
+
+#, python-format
+msgid "Please check submitted values and try again (%(error)s)."
+msgstr "Sprawdź przesłane wartości i spróbuj ponownie (%(error)s)."
+
+#, python-brace-format
+msgid "Stock management is now enabled for {product}."
+msgstr "Zarządzanie zapasami jest teraz włączone dla {product}."
+
+#, python-brace-format
+msgid "Stock management is now disabled for {product}."
+msgstr "Zarządzanie zapasami jest teraz wyłączone dla {product}."
+
+#, python-brace-format
+msgid "Purchase price per unit ({currency_name})"
+msgstr "Cena jednostkowa ({currency_name})"
+
+msgid "Quantity"
+msgstr "Ilość"
+
+msgid "Only non-zero values can be added to stock."
+msgstr "Do stanu można dodać tylko niezerowe wartości."
+
+msgid "Alert limit"
+msgstr "Alert minimalnej ilości produktu"
+
+msgid "product"
+msgstr "produkt"
+
+msgid "supplier"
+msgstr "dostawca"
+
+msgid "created on"
+msgstr "utworzony"
+
+msgid "created by"
+msgstr "utworzone przez"
+
+msgid "delta"
+msgstr "delta"
+
+msgid "type"
+msgstr "typ"
+
+msgid "alert limit"
+msgstr "alert minimalnej ilości produktu"
+
+msgid "stock managed"
+msgstr "Zarządzanie zapasami"
+
+msgid "Use this to override the supplier default stock behavior per product."
+msgstr "Użyj tego, aby zastąpić domyślne zachowanie zapasów sprzedawcy dla każdego produktu."
+
+msgid "logical count"
+msgstr "obliczenia logiczne"
+
+msgid "physical count"
+msgstr "obliczenia fizyczne"
+
+msgid "Simple Supplier"
+msgstr ""
+
+msgid "Error! Insufficient quantity in stock."
+msgstr ""
+
+#, python-format
+msgid "%(name)s (physical stock: %(quantity)s)"
+msgstr ""
+
+#, python-format
+msgid ""
+"Insufficient physical stock count for the following products: "
+"`%(product_counts)s`."
+msgstr ""
+
+msgid "Alert Limit Reached"
+msgstr "Osiągnięto limit minimalnej ilości produktu"
+
+msgid "Product"
+msgstr "Produkt"
+
+msgid "Supplier Email"
+msgstr "Adres e-mail dostawcy"
+
+msgid "Shop Email"
+msgstr "Adres e-mail sklepu"
+
+msgid "Fired in the last 24 hours?"
+msgstr "Wysłane w ciągu ostatnich 24 godzin?"
+
+msgid ""
+"This will be True if this event was already dispatched in the last 24 hours "
+"for the same product and supplier. This is useful to prevent sending "
+"identical notifications in a short period of time."
+msgstr "Będzie to prawda, jeśli to zdarzenie zostało już wysłane w ciągu ostatnich 24 godzin dla tego samego produktu i sprzedawcy. Jest to przydatne, aby zapobiec wysyłaniu identycznych powiadomień w krótkim czasie."
+
+msgid "Send to?"
+msgstr "Wysłać do?"
+
+msgid "Send email to whom?"
+msgstr "Do kogo wysłać e-mail?"
+
+msgid "Do not send the same email within 24 hours."
+msgstr "Nie wysyłaj tego samego e-maila w ciągu 24 godzin."
+
+msgid ""
+"If enabled, avoids sending the same email for the same product and supplier "
+"within 24 hours."
+msgstr "Jeśli jest włączona, unika wysyłania tej samej wiadomości e-mail dotyczącej tego samego produktu i dostawcy w ciągu 24 godzin."
+
+msgid "Send Stock Limit Alert Email"
+msgstr "Wyślij e-mail z ostrzeżeniem o niskim stanie"
+
+msgid ""
+"Send me an email when a product stock is lower than the configured limit."
+msgstr "Powiadom mnie mailowo gdy stan produktu spadnie poniżej ustalonej wartości."
+
+msgid ""
+"This script will send an email to the configured destination alerting about "
+"the a product's low stock of a supplier. You can configure to not send the "
+"same email multiple times in a period of 24 hours. Every time a product's "
+"stock reach its configured limit, this notification will be fired and the "
+"email sent."
+msgstr "Ten skrypt wyśle wiadomość e-mail do skonfigurowanego miejsca docelowego z ostrzeżeniem o niskim stanie produktu u dostawcy. Możesz skonfigurować tak, aby nie wysyłać tej samej wiadomości e-mail wiele razy w ciągu 24 godzin. Za każdym razem, gdy stan zapasów produktu osiągnie wskazany limit, zostanie uruchomione to powiadomienie i zostanie wysłany e-mail."
+
+msgid "Low stock of: {{ product }} from {{ supplier }}"
+msgstr "Niski stan magazynowy produktu {{ product }} od dostawcy {{ supplier }}"
+
+msgid ""
+"Hi!\n"
+"You are receiving this message because the product {{ product}} from {{ supplier }} has a low stock."
+msgstr "Cześć!\nOtrzymujesz tę wiadomość, ponieważ produkt {{produkt}} od {{Supplier}} ma niski stan na stanie."
+
+msgid "Add stock"
+msgstr "Dodaj zaopatrzenie"
+
+#, python-format
+msgid ""
+"Alert limit <a href=\"%(notify_url)s\" target=\"_blank\">notification "
+"scripts</a> are executed when product stock falls below set quantity."
+msgstr "<a href=\"%(notify_url)s\" target=\"_blank\">Skrypty powiadamiające o</a> limitach alertów są wykonywane, gdy stan zapasów produktów spadnie poniżej ustalonej ilości."
+
+msgid "Change alert limit"
+msgstr "Zmień próg ostrzeżenia"
+
+msgid "Disable stock management"
+msgstr "Wyłącz zarządzanie zapasami"
+
+msgid "Enable stock management"
+msgstr "Włącz zarządzanie zapasami"
+
+#, python-format
+msgid ""
+"Product <a href=\"%(product_url)s\" target=\"_blank\">%(product_name)s</a> "
+"does not have suppliers with %(module_name)s module."
+msgstr "Produkt <a href=\"%(product_url)s\" target=\"_blank\">%(product_name)s</a> nie ma dostawców z modułem %(module_name)s."
+
+#, python-format
+msgid ""
+"Please go in this product's Additional tab section and add enabled Suppliers"
+" that have both %(module_name)s module and stock management enabled."
+msgstr "Przejdź do sekcji Dodatkowe zakładki tego produktu i dodaj włączonych dostawców, którzy mają włączony zarówno moduł %(module_name)s, jak i zarządzanie zapasami."
+
+#, python-format
+msgid "No suppliers with %(module_name)s available."
+msgstr "Brak dostawców z dostępnym %(module_name)s."
+
+#, python-format
+msgid ""
+"Please set %(module_name)s module for at least one of the enabled <a "
+"href=\"%(supplier_url)s\" target=\"_blank\">Suppliers</a> and enable the "
+"stock management for them."
+msgstr "Ustaw moduł %(module_name)s dla co najmniej jednego z włączonych <a href=\"%(supplier_url)s\" target=\"_blank\">dostawców</a> i włącz dla nich zarządzanie zapasami."
+
+#, python-brace-format
+msgid "Physical count ({sales_unit})"
+msgstr "Liczba fizyczna ({sales_unit})"
+
+#, python-brace-format
+msgid "Logical count ({sales_unit})"
+msgstr "Liczba logiczna ({sales_unit})"
+
+msgid "Value per unit"
+msgstr "Wartość jednostkowa"
+
+msgid "Total value"
+msgstr "Łączna wartość"
+
+#, python-brace-format
+msgid "Alert limit ({sales_unit})"
+msgstr "Limit alertów ({sales_unit})"
+
+msgid "No stock information available."
+msgstr "Brak informacji o stanie magazynowym."

@@ -1,0 +1,119 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2015 THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+# Bartek Sielicki <sielickib@student.mini.pw.edu.pl>, 2017
+# Fishster Zespół <teamdecathlonpge@gmail.com>, 2021
+# MalT <malt@malt-it.com>, 2016
+# Michał Tyszkiewicz <mi.tyszkiewicz@gmail.com>, 2016
+msgid ""
+msgstr ""
+"Project-Id-Version: Shuup\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-04-29 12:57+0000\n"
+"PO-Revision-Date: 2021-05-23 16:04+0000\n"
+"Last-Translator: Fishster Zespół <teamdecathlonpge@gmail.com>\n"
+"Language-Team: Polish (Poland) (http://www.transifex.com/shuup/shuup/language/pl_PL/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.1.1\n"
+"Language: pl_PL\n"
+"Plural-Forms: nplurals=4; plural=(n==1 ? 0 : (n%10>=2 && n%10<=4) && (n%100<12 || n%100>14) ? 1 : n!=1 && (n%10>=0 && n%10<=1) || (n%10>=5 && n%10<=9) || (n%100>=12 && n%100<=14) ? 2 : 3);\n"
+
+msgid "Shuup Utilities"
+msgstr "Shuup Narzędzia"
+
+msgid "other"
+msgstr "inne"
+
+msgid "audit"
+msgstr "audyt"
+
+msgid "edit"
+msgstr "edytuj"
+
+msgid "deletion"
+msgstr "usunięcie"
+
+msgid "note"
+msgstr "notatka"
+
+msgid "email"
+msgstr "email"
+
+msgid "warning"
+msgstr "ostrzeżenie"
+
+msgid "error"
+msgstr "błąd"
+
+msgid "created on"
+msgstr "utworzony"
+
+msgid "user"
+msgstr "użytkownik"
+
+msgid "message"
+msgstr "wiadomość"
+
+msgid "identifier"
+msgstr "identyfikator"
+
+msgid "log entry kind"
+msgstr "rodzaj logowania"
+
+msgid "extra data"
+msgstr "dodatkowe dane"
+
+msgid "target"
+msgstr "cel"
+
+#, python-format
+msgid "%s day"
+msgid_plural "%s days"
+msgstr[0] "%s dzień"
+msgstr[1] "%s dni"
+msgstr[2] "%s dni"
+msgstr[3] "%s dni"
+
+#, python-format
+msgid "%(min)s--%(max)s days"
+msgstr "od %(min)s do %(max)s dni"
+
+#, python-brace-format
+msgid "You can't select less than {min_limit} item."
+msgid_plural "You can't select less than {min_limit} items."
+msgstr[0] "Nie możesz wybrać mniej niż {min_limit} pozycji."
+msgstr[1] "Nie możesz wybrać mniej niż {min_limit} elementów."
+msgstr[2] "Nie możesz wybrać mniej niż {min_limit} elementów."
+msgstr[3] "Nie możesz wybrać mniej niż {min_limit} elementów."
+
+#, python-brace-format
+msgid "You can't select more than {max_limit} item."
+msgid_plural "You can't select more than {max_limit} items."
+msgstr[0] "Nie możesz wybrać więcej niż {max_limit} elementu."
+msgstr[1] "Nie możesz wybrać więcej niż {max_limit} elementów."
+msgstr[2] "Nie możesz wybrać więcej niż {max_limit} elementów."
+msgstr[3] "Nie możesz wybrać więcej niż {max_limit} elementów."
+
+#, python-format
+msgid "Maximum file size reached (%(size)s MB)."
+msgstr "Osiągnięto maksymalny rozmiar pliku (%(size)s MB)."
+
+msgid "Root"
+msgstr "Żródło"
+
+msgid "This field is required."
+msgstr "To pole jest wymagane."
+
+msgid ""
+"Comma-separated values or ranges, e.g. A-Z,10000-19000. Use exclamation "
+"marks to negate (A-Z,!G will not match G)."
+msgstr "Wartości oddzielone przecinkami lub zakresy, np. A-Z,10000-19000. Użyj wykrzykników aby zanegować wartość (A-Z,!G wyłącza G)."
+
+msgid ""
+"Could not create PDF since Weasyprint is not available. Please contact "
+"support."
+msgstr "Nie udało się utworzyć dokumentu PDF, ponieważ Weasyprint jest niedostępny. Skontaktuj się z działem wsparcia."

@@ -1,0 +1,524 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2015 THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+# Fishster Zespół <teamdecathlonpge@gmail.com>, 2021
+# MalT <malt@malt-it.com>, 2016
+# Michał Tyszkiewicz <mi.tyszkiewicz@gmail.com>, 2016
+msgid ""
+msgstr ""
+"Project-Id-Version: Shuup\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-05-18 23:13+0000\n"
+"PO-Revision-Date: 2021-05-24 07:59+0000\n"
+"Last-Translator: Fishster Zespół <teamdecathlonpge@gmail.com>\n"
+"Language-Team: Polish (Poland) (http://www.transifex.com/shuup/shuup/language/pl_PL/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.1.1\n"
+"Language: pl_PL\n"
+"Plural-Forms: nplurals=4; plural=(n==1 ? 0 : (n%10>=2 && n%10<=4) && (n%100<12 || n%100>14) ? 1 : n!=1 && (n%10>=0 && n%10<=1) || (n%10>=5 && n%10<=9) || (n%100>=12 && n%100<=14) ? 2 : 3);\n"
+
+msgid "Theme identifiers must match."
+msgstr "Identyfikatory motywów muszą być zgodne."
+
+msgid "Either theme_settings or shop should be informed."
+msgstr ""
+
+msgid "Global plugins"
+msgstr "Wtyczki globalne"
+
+msgid "Theme plugins"
+msgstr "Wtyczki tematyczne"
+
+msgid "Shuup Extensible Theme Engine"
+msgstr "Rozszerzalny silnik motywów Shuup "
+
+msgid "Themes"
+msgstr "Szablony"
+
+msgid "Customize the look and feel of your shop"
+msgstr "Dostosuj wygląd i styl swojego sklepu"
+
+msgid "Customize theme"
+msgstr "Dostosuj motyw"
+
+msgid "No theme is active. Click here to activate one."
+msgstr "Szablon nie aktywny. Kliknij tutaj aby aktywować szablon."
+
+msgid "Theming"
+msgstr "Szablony"
+
+msgid "Shuup Extensible Theme Engine Snippets"
+msgstr ""
+
+msgid "Snippets"
+msgstr "Fragmenty"
+
+msgid "Theme Custom CSS/JS"
+msgstr "Motyw niestandardowy CSS/JS"
+
+msgid ""
+"Select the themes that will have this snippet injected. Leave the field "
+"blank to inject in all themes."
+msgstr "Wybierz motywy, do których zostanie wstawiony ten fragment. Pozostaw pole puste, aby wstawić do wszystkich motywów."
+
+msgid "Select the location of the page to inject the snippet."
+msgstr "Wybierz lokalizację strony, aby wstawić fragment."
+
+msgid "Location"
+msgstr "Lokalizacja"
+
+msgid "Filter by location..."
+msgstr "Filtruj według lokalizacji..."
+
+msgid "Type"
+msgstr "Rodzaj"
+
+msgid "activate"
+msgstr "aktywuj"
+
+msgid "Theme"
+msgstr "Szablon"
+
+msgid "Choose a theme for your shop"
+msgstr "Wybierz motyw dla swojego sklepu"
+
+msgid "Theme activated."
+msgstr "Szablon aktywowany."
+
+msgid "Custom CSS/JS"
+msgstr "Niestandardowy CSS / JS"
+
+msgid "Stylesheets"
+msgstr "Arkusze stylów"
+
+msgid "The fonts, colors, and styles to use with your theme."
+msgstr "Czcionki, kolory i style, które mają być używane w motywie."
+
+msgid "Failed to render the plugin"
+msgstr "Nie udało się renderować wtyczki"
+
+msgid "Content in this box is shown to all user types without limitations."
+msgstr "Treść w tym polu jest widoczna dla wszystkich użytkowników bez ograniczeń."
+
+#, python-format
+msgid ""
+"Content in this placeholder is shown for %(category_name)s category only."
+msgstr "Treść w tym symbolu zastępczym jest wyświetlana tylko dla kategorii %(category_name)s."
+
+msgid "Content in this box is shown to guests (anonymous users) only."
+msgstr "Treść w tym polu jest widoczna tylko dla gości (użytkowników anonimowych)."
+
+msgid "Content in this box is shown to company contacts only."
+msgstr "Treść w tym polu jest widoczna tylko dla firm."
+
+msgid ""
+"Content in this box is shown to all logged-in contacts (both person and "
+"company; not anonymous)."
+msgstr "Treść w tym polu jest widoczna dla wszystkich zalogowanych kontaktów (zarówno osoby, jak i firmy; nie dla anonimowych gości)."
+
+msgid "Content in this box is shown to person contacts only."
+msgstr "Treść w tym polu jest pokazywana tylko osobom z grupy kontaktów."
+
+#, python-format
+msgid "Content in this placeholder is shown for %(product_name)s only."
+msgstr "Treść w tym symbolu zastępczym jest wyświetlana tylko dla %(product_name)s."
+
+msgid "Shop '{}' has no active theme"
+msgstr "Sklep „{}” nie ma aktywnego motywu"
+
+msgid "Inline JavaScript"
+msgstr "Wbudowany JavaScript"
+
+msgid "Inline CSS"
+msgstr "Wbudowany CSS"
+
+msgid "Inline HTML"
+msgstr "Wbudowany kod HTML"
+
+msgid "Inline Jinja HTML"
+msgstr "Wbudowany kod HTML Jinja"
+
+msgid "current draft"
+msgstr "aktualny projekt"
+
+msgid "old version"
+msgstr "stara wersja"
+
+msgid "public"
+msgstr "publiczny"
+
+msgid "theme identifier"
+msgstr "identyfikator szablonu"
+
+msgid "view name"
+msgstr "nazwa widoku"
+
+msgid "created on"
+msgstr "utworzony"
+
+msgid "modified on"
+msgstr "zmodyfikowano"
+
+msgid "status"
+msgstr "status"
+
+msgid "internal data"
+msgstr "dane wewnętrzne"
+
+msgid "active"
+msgstr "aktywny"
+
+msgid "data"
+msgstr "dane"
+
+#, python-format
+msgid "Theme configuration for %s"
+msgstr "Konfiguracja szablonu dla %s"
+
+msgid "location"
+msgstr "lokalizacja"
+
+msgid "snippet type"
+msgstr "typ fragmentu"
+
+msgid "snippet"
+msgstr "fragment"
+
+msgid "themes"
+msgstr "motywy"
+
+msgid "Snippet"
+msgstr "Fragment"
+
+msgid "Snippet for {} in {}"
+msgstr "Fragment dla {} w {}"
+
+msgid "Plugin"
+msgstr "Dodatek"
+
+msgid "Categories"
+msgstr "Kategorie"
+
+msgid "Category Links"
+msgstr "Linki kategorii"
+
+msgid "Title"
+msgstr "Tytuł"
+
+msgid "Show all categories"
+msgstr "Pokaż wszystkie kategorie"
+
+msgid "All categories are shown, even if not selected"
+msgstr "Wyświetlane są wszystkie kategorie, nawet jeśli nie zostały wybrane"
+
+msgid "Image"
+msgstr "Obraz"
+
+msgid "Image Link URL"
+msgstr "Adres URL obrazu"
+
+msgid "Full width"
+msgstr "Pełna szerokość"
+
+msgid "Set image to the full width of cell."
+msgstr "Ustaw obraz na pełną szerokość komórki."
+
+msgid "Width (px)"
+msgstr "Szerokość (piksele)"
+
+msgid "Leave blank for default width."
+msgstr "Pozostaw puste dla domyślnej szerokości."
+
+msgid "Height (px)"
+msgstr "Wysokość (piksele)"
+
+msgid "Newest"
+msgstr "Najnowszy"
+
+msgid "Best Selling"
+msgstr "Najlepiej sprzedający się"
+
+msgid "Random"
+msgstr "Losowy"
+
+msgid "Product Highlights"
+msgstr "Najważniejsze cechy produktu"
+
+msgid "Count"
+msgstr "Liczba"
+
+msgid "Only show in-stock and orderable items"
+msgstr "Pokaż tylko pozycje dostępne w magazynie i dostępne do zamówienia"
+
+msgid ""
+"Warning: The final number of products can be lower than 'Count' as it will "
+"filter out unorderable products from a set of 'Count' products."
+msgstr "Ostrzeżenie: ostateczna liczba produktów może być niższa niż „Liczba”, ponieważ odfiltruje produkty niedostępne do zamówienia z zestawu produktów „Liczba”."
+
+msgid "Product Cross Sells"
+msgstr "Sprzedaż krzyżowa produktów"
+
+msgid "Show variation parents"
+msgstr "Pokaż kategorie nadrzędne odmian"
+
+msgid "Render variation parents instead of the children."
+msgstr "Renderuj kategorie nadrzędne odmian zamiast kategorii podrzędnych."
+
+msgid "Category"
+msgstr "Kategoria"
+
+msgid "Category Products Highlight"
+msgstr "Najważniejsze produkty kategorii"
+
+msgid "Products"
+msgstr "Produkty"
+
+msgid "Select all products you want to show"
+msgstr "Wybierz wszystkie produkty, które chcesz pokazać"
+
+msgid "Product Selection"
+msgstr "Wybór produktu"
+
+msgid "Product Highlights (asynchronous)"
+msgstr "Najważniejsze cechy produktu (asynchroniczne)"
+
+msgid "Cutoff days"
+msgstr "Dni graniczne"
+
+msgid "Cache timeout (seconds)"
+msgstr "Limit czasu pamięci podręcznej (sekundy)"
+
+msgid "Product Cross Sells (asynchronous)"
+msgstr "Sprzedaż krzyżowa produktów (asynchroniczne)"
+
+msgid "Category Products Highlight (asynchronous)"
+msgstr "Najważniejsze produkty kategorii (asynchroniczne)"
+
+msgid "Product Selection (asynchronous)"
+msgstr "Wybór produktu (asynchroniczny)"
+
+msgid "In-Place Snippet"
+msgstr "Właściwy Snippet"
+
+msgid "Resource snippet for end of head"
+msgstr "Fragment zasobów na koniec nagłówka"
+
+msgid "Resource snippet for beginning of body"
+msgstr "Fragment zasobu na początek sekcji głównej"
+
+msgid "Resource for end of body"
+msgstr "Zasób na koniec sekcji głównej"
+
+msgid "URL"
+msgstr "URL"
+
+#, python-format
+msgid "%(name)s Ordering"
+msgstr "%(name)s Zamawianie"
+
+msgid "Ordering"
+msgstr "Zamawianie"
+
+msgid "Social Media Links"
+msgstr "Linki do mediów społecznościowych"
+
+msgid "Topic"
+msgstr "Temat"
+
+msgid "Icon Size"
+msgstr "Rozmiar ikony"
+
+msgid "Default"
+msgstr "Domyślna"
+
+msgid "Large"
+msgstr "Duży"
+
+msgid "Alignment"
+msgstr "Wyrównanie"
+
+msgid "Left"
+msgstr "Lewo"
+
+msgid "Center"
+msgstr "Środek"
+
+msgid "Right"
+msgstr "Prawo"
+
+msgid "text"
+msgstr "tekst"
+
+#, python-format
+msgid "Click to edit placeholder: %s"
+msgstr "Edytuj lokalizację: %s"
+
+msgid ""
+"This placeholder is global and content of this placeholder is shown on all "
+"pages."
+msgstr "Ten symbol zastępczy jest globalny, a jego zawartość jest wyświetlana na wszystkich stronach."
+
+msgid "End of head"
+msgstr "Koniec nagłówka"
+
+msgid "Start of head"
+msgstr "Początek nagłówka"
+
+msgid "End of body"
+msgstr "Koniec sekcji głównej"
+
+msgid "Start of body"
+msgstr "Początek sekcji głównej"
+
+msgid "Content start"
+msgstr "Początek treści"
+
+msgid "Content end"
+msgstr "Koniec treści"
+
+msgid "(Error while rendering.)"
+msgstr "(Błąd podczas renderowania)."
+
+msgid "Delete This Cell"
+msgstr "Usuń kolumnę"
+
+msgid "Untranslated"
+msgstr "Nieprzetłumaczone"
+
+msgid "There's nothing to configure in this plugin."
+msgstr "Wtyczka nie wymaga konfiguracji."
+
+msgid "Save Plugin"
+msgstr "Zapisz wtyczkę"
+
+msgid ""
+"Remember to publish your changes for this placeholder when you are done, by "
+"clicking the Publish Changes button at the top."
+msgstr "Pamiętaj, aby po zakończeniu opublikować zmiany dla tego symbolu zastępczego, klikając przycisk Opublikuj zmiany u góry."
+
+msgid "Edit Placeholder"
+msgstr "Edytuj lokalizację"
+
+msgid ""
+"Edit plugins inside this placeholder. By saving the individual plugin, the "
+"changes are saved as a draft, and only you are able to see the changes. To "
+"make your changes Public, Click the Publish Changes button."
+msgstr "Edytuj wtyczki w tym symbolu zastępczym. Zapisując pojedynczą wtyczkę, zmiany są zapisywane jako wersja robocza i tylko Ty możesz je zobaczyć. Aby wprowadzić zmiany jako publiczne, kliknij przycisk Publikuj zmiany."
+
+msgid "Add new cell"
+msgstr "Dodaj kolumnę"
+
+msgid "Delete row"
+msgstr "Usuń wiersz"
+
+msgid "Move row"
+msgstr "Przenieś wiersz"
+
+msgid "Add new row"
+msgstr "Dodaj wiersz"
+
+msgid "Theme Configuration"
+msgstr "Konfiguracja szablonu"
+
+msgid "No themes are installed."
+msgstr "Brak zainstalowanych szablonów."
+
+#, python-format
+msgid "Theme Configuration: %(name)s"
+msgstr "Konfiguracja szablonu: %(name)s"
+
+msgid "There's nothing to configure in this theme."
+msgstr "Nie ma nic do konfiguracji w tym szablonie."
+
+msgid "Select theme"
+msgstr "Wybierz motyw"
+
+msgid "Theme Guide"
+msgstr "Przewodnik tematyczny"
+
+msgid "Author"
+msgstr "Autor"
+
+msgid "Configure"
+msgstr "Skonfiguruj"
+
+msgid "Activate"
+msgstr "Aktywuj"
+
+msgid "Theme Name"
+msgstr "Nazwa motywu"
+
+msgid "Actions"
+msgstr "Akcje"
+
+msgid "Currently active"
+msgstr "Obecnie aktywne"
+
+msgid "Revert Changes"
+msgstr "Cofnij zmiany"
+
+msgid "Publish Changes"
+msgstr "Publikuj zmiany"
+
+msgid "No access to editing."
+msgstr "Brak dostępu do edycji."
+
+#, python-format
+msgid "Unknown command: `%s`."
+msgstr "Nieznane polecenie: `%s`."
+
+msgid "Unable to determine the current theme."
+msgstr "Nie można określić bieżącego motywu."
+
+#, python-format
+msgid "Can't add more than %d cells in one row."
+msgstr "Nie można dodać więcej niż %d komórek w jednym wierszu."
+
+msgid "Published"
+msgstr "Opublikowany"
+
+msgid "Reverted"
+msgstr "Przywrócony"
+
+msgid "Custom"
+msgstr "Nadzwyczajne"
+
+msgid "Full Width"
+msgstr "Pełna szerokość"
+
+msgid "Three Fourths (3/4)"
+msgstr "trzy czwarte (3/4)"
+
+msgid "Two Thirds (2/3)"
+msgstr "dwie trzecie (2/3)"
+
+msgid "Half (1/2)"
+msgstr "Połowa (1/2)"
+
+msgid "One Third (1/3)"
+msgstr "Jedna trzecia (1/3)"
+
+msgid "One Fourth (1/4)"
+msgstr "Jedna czwarta (1/4)"
+
+msgid "Auto"
+msgstr "Automatyczny"
+
+msgid "Cell width"
+msgstr "Szerokość kolumny"
+
+msgid "Cell align"
+msgstr "Wyrównaj komórki"
+
+msgid "Extra classes"
+msgstr "Dodatkowe klasy"
+
+msgid "Add extra CSS classes names to the cell"
+msgstr "Dodaj dodatkowe nazwy klas CSS do komórki"
+
+msgid "No Plugin"
+msgstr "Brak dodatku"

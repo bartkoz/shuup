@@ -1,0 +1,109 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+# Fishster Zespół <teamdecathlonpge@gmail.com>, 2021
+msgid ""
+msgstr ""
+"Project-Id-Version: Shuup\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-12-28 10:59+0000\n"
+"PO-Revision-Date: 2021-05-22 12:36+0000\n"
+"Last-Translator: Fishster Zespół <teamdecathlonpge@gmail.com>\n"
+"Language-Team: Polish (Poland) (http://www.transifex.com/shuup/shuup/language/pl_PL/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: pl_PL\n"
+"Plural-Forms: nplurals=4; plural=(n==1 ? 0 : (n%10>=2 && n%10<=4) && (n%100<12 || n%100>14) ? 1 : n!=1 && (n%10>=0 && n%10<=1) || (n%10>=5 && n%10<=9) || (n%100>=12 && n%100<=14) ? 2 : 3);\n"
+
+msgid "Contact Importer"
+msgstr "Skontaktuj się z importerem"
+
+msgid "Company Contact Importer"
+msgstr ""
+
+msgid ""
+"Parent SKU set for the row, but couldn't find product to match with the "
+"given SKU."
+msgstr "Nadrzędny kod SKU został ustawiony dla wiersza, ale nie można znaleźć produktu pasującego do podanego kodu SKU."
+
+msgid "Parent SKU set for the row, but no variation variables found."
+msgstr "Nadrzędna jednostka SKU ustawiona dla wiersza, ale nie znaleziono zmiennych odmian."
+
+#, python-format
+msgid "Image '%s' was not found, please check whether the image exists."
+msgstr "Nie znaleziono obrazu „%s”. Sprawdź, czy istnieje."
+
+msgid "Please add supplier to the row, before importing stock quantities."
+msgstr "Przed zaimportowaniem ilości magazynowych dodaj dostawcę do wiersza."
+
+msgid "No supplier found, please check that the supplier exists."
+msgstr "Nie znaleziono dostawcy, sprawdź, czy dostawca istnieje."
+
+msgid "No supplier module set, please check that the supplier module is set."
+msgstr "Brak zestawu modułu dostawcy, sprawdź, czy moduł dostawcy jest ustawiony."
+
+msgid "Product Importer"
+msgstr "Importer produktów"
+
+msgid "Quantities"
+msgstr "Wielkie ilości"
+
+msgid "If you are importing products with quantities, ensure the following:"
+msgstr "Jeśli importujesz produkty w dużych ilościach, upewnij się, że:"
+
+#, python-format
+msgid ""
+"You have atleast one <a href=\"%(supplier_url)s\">supplier</a> with \"Stock "
+"Managed\" <strong>on</strong>."
+msgstr "Masz co najmniej jednego <a href=\"%(supplier_url)s\">dostawcę</a> z <strong>włączoną opcją </strong> „Zarządzanie zapasami”."
+
+#, python-format
+msgid ""
+"your <a href=\"%(supplier_url)s\">supplier</a> has \"Stock Managed\" "
+"<strong>on</strong>. (Currently <strong>off</strong>)"
+msgstr "Twój <a href=\"%(supplier_url)s\">dostawca</a> <strong>ma włączone</strong> „Zarządzanie zapasami”. (Obecnie <strong>wyłączone</strong> )"
+
+msgid "your import file has <strong>supplier</strong> field"
+msgstr "Twój plik importu ma pole <strong>dostawcy</strong>"
+
+msgid "Images"
+msgstr "Obrazy"
+
+msgid "If you are importing products with images, ensure the following:"
+msgstr "Jeśli importujesz produkty ze zdjęciami, upewnij się, że:"
+
+#, python-format
+msgid ""
+"\n"
+"                Upload all product images using the <a href=\"%(media_browser_url)s\" target=\"_blank\">Media Browser</a>.\n"
+"            "
+msgstr "\nPrześlij wszystkie zdjęcia produktów za pomocą <a href=\"%(media_browser_url)s\" target=\"_blank\">przeglądarki mediów</a>."
+
+msgid "Upload all product images using the Media Browser."
+msgstr "Prześlij wszystkie zdjęcia produktów za pomocą przeglądarki mediów."
+
+msgid ""
+"Use the image file name on <strong>image</strong> and/or "
+"<strong>images</strong> column(s)."
+msgstr "Użyj nazwy pliku obrazu w kolumnie (kolumnach) <strong>obrazu</strong> i / lub <strong>obrazów</strong>."
+
+msgid ""
+"<strong>images</strong> column can receive a comma-separated list of image "
+"names."
+msgstr "<strong>Kolumna obrazów</strong> może zawierać listę nazw obrazów oddzielonych przecinkami."
+
+msgid ""
+"Image names can be the file name (e.g.: <em>product_001.png</em>) or the path to the image (e.g.: <em>Products/Images/product_001.jpeg</em>).\n"
+"        Using the full path will ensure that the correct image will be used when there is more than one image with the same name."
+msgstr "Nazwy obrazów mogą być nazwą pliku (np .: <em>product_001.png</em>) lub ścieżką do obrazu (np .: <em>Products/Images/product_001.jpeg</em>).\nUżycie pełnej ścieżki zapewni, że zostanie użyty poprawny obraz, gdy istnieje więcej niż jeden obraz o tej samej nazwie."
+
+msgid "Related objects"
+msgstr "Powiązane obiekty"
+
+msgid ""
+"Columns that are relations to other objects (like Category and Supplier) accept both the object ID number\n"
+"    and the object name. Make sure that when using the name, there should be only a single object for that given name."
+msgstr "Kolumny będące relacjami z innymi obiektami (takimi jak Kategoria i Dostawca) akceptują zarówno numer identyfikacyjny obiektu, \njak i nazwę obiektu. Upewnij się, że podczas używania nazwy powinien istnieć tylko jeden obiekt o  podanej nazwie."

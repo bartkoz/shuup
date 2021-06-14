@@ -1,0 +1,101 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# 
+# Translators:
+# Bartek Sielicki <sielickib@student.mini.pw.edu.pl>, 2017
+# Fishster Zespół <teamdecathlonpge@gmail.com>, 2021
+# 
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-04-27 22:28+0000\n"
+"PO-Revision-Date: 2017-01-06 15:35+0000\n"
+"Last-Translator: Fishster Zespół <teamdecathlonpge@gmail.com>, 2021\n"
+"Language-Team: Polish (Poland) (https://www.transifex.com/shuup/teams/55306/pl_PL/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: pl_PL\n"
+"Plural-Forms: nplurals=4; plural=(n==1 ? 0 : (n%10>=2 && n%10<=4) && (n%100<12 || n%100>14) ? 1 : n!=1 && (n%10>=0 && n%10<=1) || (n%10>=5 && n%10<=9) || (n%100>=12 && n%100<=14) ? 2 : 3);\n"
+
+msgid "Reports"
+msgstr "Raporty"
+
+msgid "Type"
+msgstr "Typ"
+
+msgid "Select the type of report to run."
+msgstr "Wybierz typ raportu do wykonania."
+
+msgid "Custom"
+msgstr "Niestandardowe"
+
+msgid "Today"
+msgstr "Dzisiaj"
+
+msgid "Running Week (last 7 days)"
+msgstr "Ostatni tydzień (7 dni)"
+
+msgid "Running Month (last 30 days)"
+msgstr "Ostatni miesiąc (30 dni)"
+
+msgid "This Week"
+msgstr "W tym tygodniu"
+
+msgid "This Month"
+msgstr "Ten miesiąc"
+
+msgid "This Year"
+msgstr "Ten rok"
+
+msgid "All Time"
+msgstr "Od początku"
+
+msgid "Output Format"
+msgstr "Format wyjściowy"
+
+msgid "The format to show the report results."
+msgstr "Format wyników raportu."
+
+msgid "Download"
+msgstr "Pobierz"
+
+msgid "Enable this to download the report."
+msgstr "Włącz tę opcję, aby pobrać raport."
+
+msgid "Shop"
+msgstr "Sklep"
+
+msgid "Filter report results by shop."
+msgstr "Filtruj wyniki raportów wg sklepu."
+
+msgid "Date Range"
+msgstr "Przedział czasowy"
+
+msgid "Filter report results by a date range."
+msgstr "Filtruj raporty wg przedziału czasowego"
+
+msgid "Start Date"
+msgstr "Data rozpoczęcia"
+
+msgid "For a custom date range."
+msgstr "Dla niestandardowego przedziału czasowego."
+
+msgid "End Date"
+msgstr "Data zakończenia"
+
+msgid "Report Description"
+msgstr "Opis raportu"
+
+msgid "Toggle Filters"
+msgstr "Przełącz filtry"
+
+msgid "Get Report"
+msgstr "Uzyskaj raport"
+
+msgid "No reports available"
+msgstr "Brak dostępnych raportów"
