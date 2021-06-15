@@ -2,24 +2,27 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# 
+#
 # Translators:
 # Fishster Zespół <teamdecathlonpge@gmail.com>, 2021
-# 
+#
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-06-22 17:57+0000\n"
+"POT-Creation-Date: 2021-06-15 05:58+0000\n"
 "PO-Revision-Date: 2018-10-02 06:50+0000\n"
 "Last-Translator: Fishster Zespół <teamdecathlonpge@gmail.com>, 2021\n"
-"Language-Team: Polish (Poland) (https://www.transifex.com/shuup/teams/55306/pl_PL/)\n"
+"Language-Team: Polish (Poland) (https://www.transifex.com/shuup/teams/55306/"
+"pl_PL/)\n"
+"Language: pl_PL\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: pl_PL\n"
-"Plural-Forms: nplurals=4; plural=(n==1 ? 0 : (n%10>=2 && n%10<=4) && (n%100<12 || n%100>14) ? 1 : n!=1 && (n%10>=0 && n%10<=1) || (n%10>=5 && n%10<=9) || (n%100>=12 && n%100<=14) ? 2 : 3);\n"
+"Plural-Forms: nplurals=4; plural=(n==1 ? 0 : (n%10>=2 && n%10<=4) && (n"
+"%100<12 || n%100>14) ? 1 : n!=1 && (n%10>=0 && n%10<=1) || (n%10>=5 && n"
+"%10<=9) || (n%100>=12 && n%100<=14) ? 2 : 3);\n"
 
 msgid "Archive Product Discounts"
 msgstr "Archiwizuj rabaty na produkty"
@@ -234,8 +237,7 @@ msgstr "zmodyfikowano"
 msgid ""
 "The name for this discount. Used internally with discount lists for "
 "filtering."
-msgstr ""
-"Nazwa rabatu. Używany wewnętrznie z listami rabatowymi do filtrowania."
+msgstr "Nazwa rabatu. Używany wewnętrznie z listami rabatowymi do filtrowania."
 
 msgid "supplier"
 msgstr "dostawca"
@@ -244,8 +246,8 @@ msgid "Select supplier for this discount."
 msgstr "Wybierz dostawcę dla tej zniżki."
 
 msgid ""
-"Enable this if the discount is currently active. Please also set a start and"
-" an end date."
+"Enable this if the discount is currently active. Please also set a start and "
+"an end date."
 msgstr ""
 "Włącz tę opcję, jeśli rabat jest aktualnie aktywny. Ustaw też datę "
 "rozpoczęcia i zakończenia obowiązywania rabatu."
@@ -264,8 +266,8 @@ msgid "end date and time"
 msgstr "data i godzina zakończenia"
 
 msgid ""
-"The date and time the discount ends. This is only applicable if the discount"
-" is marked as active."
+"The date and time the discount ends. This is only applicable if the discount "
+"is marked as active."
 msgstr ""
 "Data i godzina zakończenia obowiązywania rabatu. Ma zastosowanie tylko, gdy "
 "rabat jest oznaczony jako aktywny."

@@ -1,7 +1,7 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) 2015 THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# 
+#
 # Translators:
 # Bartek Sielicki <sielickib@student.mini.pw.edu.pl>, 2017
 # Fishster Zespół <teamdecathlonpge@gmail.com>, 2021
@@ -11,16 +11,19 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Shuup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-29 12:57+0000\n"
+"POT-Creation-Date: 2021-06-15 05:58+0000\n"
 "PO-Revision-Date: 2021-05-23 16:04+0000\n"
 "Last-Translator: Fishster Zespół <teamdecathlonpge@gmail.com>\n"
-"Language-Team: Polish (Poland) (http://www.transifex.com/shuup/shuup/language/pl_PL/)\n"
+"Language-Team: Polish (Poland) (http://www.transifex.com/shuup/shuup/"
+"language/pl_PL/)\n"
+"Language: pl_PL\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.1.1\n"
-"Language: pl_PL\n"
-"Plural-Forms: nplurals=4; plural=(n==1 ? 0 : (n%10>=2 && n%10<=4) && (n%100<12 || n%100>14) ? 1 : n!=1 && (n%10>=0 && n%10<=1) || (n%10>=5 && n%10<=9) || (n%100>=12 && n%100<=14) ? 2 : 3);\n"
+"Plural-Forms: nplurals=4; plural=(n==1 ? 0 : (n%10>=2 && n%10<=4) && (n"
+"%100<12 || n%100>14) ? 1 : n!=1 && (n%10>=0 && n%10<=1) || (n%10>=5 && n"
+"%10<=9) || (n%100>=12 && n%100<=14) ? 2 : 3);\n"
 
 msgid "Shuup Utilities"
 msgstr "Shuup Narzędzia"
@@ -111,9 +114,13 @@ msgstr "To pole jest wymagane."
 msgid ""
 "Comma-separated values or ranges, e.g. A-Z,10000-19000. Use exclamation "
 "marks to negate (A-Z,!G will not match G)."
-msgstr "Wartości oddzielone przecinkami lub zakresy, np. A-Z,10000-19000. Użyj wykrzykników aby zanegować wartość (A-Z,!G wyłącza G)."
+msgstr ""
+"Wartości oddzielone przecinkami lub zakresy, np. A-Z,10000-19000. Użyj "
+"wykrzykników aby zanegować wartość (A-Z,!G wyłącza G)."
 
 msgid ""
 "Could not create PDF since Weasyprint is not available. Please contact "
 "support."
-msgstr "Nie udało się utworzyć dokumentu PDF, ponieważ Weasyprint jest niedostępny. Skontaktuj się z działem wsparcia."
+msgstr ""
+"Nie udało się utworzyć dokumentu PDF, ponieważ Weasyprint jest niedostępny. "
+"Skontaktuj się z działem wsparcia."
