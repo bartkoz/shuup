@@ -21,7 +21,7 @@ from django.contrib.auth.models import Group as PermissionGroup
 from django.core.files.base import ContentFile
 from django.core.validators import ValidationError, validate_email
 from django.db.transaction import atomic
-from django.utils.text import slugify
+from shuup.core.slugify import slugify
 from django.utils.timezone import now
 from django_countries.data import COUNTRIES
 from factory.django import DjangoModelFactory

@@ -7,7 +7,7 @@
 # LICENSE file in the root directory of this source tree.
 from __future__ import unicode_literals
 
-from django.utils.text import slugify
+from shuup.core.slugify import slugify
 from django.utils.translation import get_language, ugettext_lazy as _
 from markupsafe import Markup
 

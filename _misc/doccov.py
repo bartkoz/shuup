@@ -14,7 +14,7 @@ import os
 import re
 import sys
 from collections import Counter
-from django.utils.text import slugify
+from shuup.core.slugify import slugify
 from sanity_utils import find_files
 
 _paragraph_re = re.compile(r"(?:\r\n|\r|\n){2,}")

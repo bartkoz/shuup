@@ -8,7 +8,7 @@
 import json
 import pytest
 from django.test.utils import override_settings
-from django.utils.text import slugify
+from shuup.core.slugify import slugify
 
 from shuup.admin.modules.suppliers.views import SupplierDeleteView, SupplierEditView, SupplierListView
 from shuup.core.models import Supplier, SupplierType

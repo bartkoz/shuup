@@ -7,7 +7,7 @@
 # LICENSE file in the root directory of this source tree.
 from django.conf import settings
 from django.core.exceptions import ObjectDoesNotExist
-from django.utils.text import slugify
+from shuup.core.slugify import slugify
 
 from shuup.utils.django_compat import force_text
 

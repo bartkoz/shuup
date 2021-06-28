@@ -12,7 +12,8 @@ from django import forms
 from django.db.models import Q
 from django.template.loader import render_to_string
 from django.utils.safestring import mark_safe
-from django.utils.text import capfirst, slugify
+from django.utils.text import capfirst
+from shuup.core.slugify import slugify
 from django.utils.translation import get_language, ugettext_lazy as _
 from itertools import chain
 

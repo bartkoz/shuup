@@ -8,7 +8,7 @@
 import pytest
 from django.core.exceptions import ObjectDoesNotExist
 from django.test import override_settings
-from django.utils.text import slugify
+from shuup.core.slugify import slugify
 from django.utils.translation import activate
 
 from shuup.testing.factories import create_product, get_default_category

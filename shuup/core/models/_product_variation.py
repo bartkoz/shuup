@@ -13,7 +13,7 @@ import six
 from collections import defaultdict
 from django.db import models
 from django.utils.encoding import python_2_unicode_compatible
-from django.utils.text import slugify
+from shuup.core.slugify import slugify
 from django.utils.translation import ugettext_lazy as _
 from enumfields import Enum, EnumIntegerField
 from parler.models import TranslatableModel, TranslatedFields

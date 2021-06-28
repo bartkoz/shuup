@@ -10,7 +10,7 @@ import decimal
 import os
 import six
 from django.db.models import ForeignKey, ManyToManyField, Q
-from django.utils.text import slugify
+from shuup.core.slugify import slugify
 from django.utils.translation import ugettext_lazy as _
 
 from shuup.admin.utils.permissions import has_permission
