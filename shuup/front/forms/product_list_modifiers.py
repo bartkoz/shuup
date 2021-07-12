@@ -531,12 +531,13 @@ class ProductPriceFilter(SimpleProductListModifier):
         if not (min_price and max_price and range_size):
             return
 
-        choices = [(None, "-------")] + get_price_ranges(request.shop, min_price, max_price, range_size)
+        choices = get_price_ranges(request.shop, min_price, max_price, range_size)
         return [
             (
                 "price_range",
-                forms.ChoiceField(
-                    required=False, choices=choices, label=get_form_field_label("price_range", _("Price"))
+                forms.MultipleChoiceField(
+                    required=False, choices=choices, label=get_form_field_label("price_range", _("Price")),
+                    widget=forms.CheckboxSelectMultiple
                 ),
             ),
         ]
@@ -545,8 +546,13 @@ class ProductPriceFilter(SimpleProductListModifier):
         selected_range = data.get("price_range")
         if not selected_range:
             return products
-
-        min_price, max_price = selected_range.split("-", 1)
+        min_price, max_price = selected_range[0].split("-", 1)
+        if len(selected_range) > 1:
+            min_price_value = selected_range[0].split('-', 1)[0]
+            try:
+                int(min_price_value)
+            except ValueError:
+                min_price = selected_range[0].split('-', 1)[1]
         min_price_value = decimal.Decimal(min_price or 0)
         max_price_value = decimal.Decimal(max_price or 0)
         filtered_products = []
