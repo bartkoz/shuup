@@ -110,7 +110,9 @@
                             class="block-title"
                             data-toggle="collapse"
                             aria-expanded="true"
-                            aria-controls="categories">{{ field.label }}</a>
+                            aria-controls="categories">
+                                {{ field.label }} <i class="fa fa-angle-up"></i>
+                            </a>
                             <br>
                             {{ render_field(field, render_label=False) }}
                         </div>
