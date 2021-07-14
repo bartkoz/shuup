@@ -1189,7 +1189,7 @@ msgstr ""
 
 #, python-format
 msgid "By <strong>%(supplier_name)s</strong>"
-msgstr "Przez <strong>%(supplier_name)s</strong>"
+msgstr "od <strong>%(supplier_name)s</strong>"
 
 #, fuzzy, python-brace-format
 msgid ""
