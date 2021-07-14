@@ -146,7 +146,7 @@ msgid "Shipment status"
 msgstr "Status przesyłki"
 
 msgid "Total"
-msgstr "Całkowity"
+msgstr "Cena"
 
 msgid "Order Line Report"
 msgstr "Raport linii zamówienia"
