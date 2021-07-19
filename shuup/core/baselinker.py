@@ -12,9 +12,9 @@ def perform_request(payload):
 
 class BaseLinkerConnector:
 
-    def __init__(self, shop: Shop, storage_id: int):
-        self.token = shop.bl_token
-        self.storage_id = storage_id
+    def __init__(self, shop: Shop):
+        self.token = shop.bl_token.token
+        self.storage = shop.bl_token.storage
 
     def check_if_product_still_available(self, product_id: int, variant_id: int = None):
         is_available = False
@@ -22,23 +22,31 @@ class BaseLinkerConnector:
                    'method': 'getProductsData',
                    'parameters': '''{
                    "storage_id": "%s",
-                   "products": [11768832]}''' % (self.storage_id,)}
-        data = perform_request(payload)
-        if variant_id:
-            if data['products'][product_id][variant_id]['quantity'] > 0:
+                   "products": [%d]}''' % (self.storage, product_id)}
+        data = requests.post(
+            'https://api.baselinker.com/connector.php',
+            data=payload).json()
+        try:
+            if variant_id:
+                if data['products'][product_id][variant_id]['quantity'] > 0:
+                    is_available = True
+            elif data['products'][product_id]['quantity'] > 0:
                 is_available = True
-        elif data['products'][product_id]['quantity'] > 0:
-            is_available = True
+        except KeyError:
+            is_available = False
         return is_available
 
     def update_product_quantity(self, product_id: int, count: int, variant_id: int = None):
-        parameters = '''{
-        "storage_id": "bl_1", 
-        "products":''' + str([product_id, variant_id or 0, count]) + '}'
         payload = {'token': self.token,
                    'method': 'updateProductsQuantity',
-                   'parameters': str(parameters)}
-        perform_request(payload)
+                   'parameters': '''{
+                       "storage_id": "%s",
+                       "products": [
+                           [%d, %d, %d]]}''' % (self.storage, product_id, variant_id or 0, count)
+                   }
+        requests.post(
+            'https://api.baselinker.com/connector.php',
+            data=payload)
 
     def add_order(self, **kwargs):
         # TODO:
