@@ -8,6 +8,7 @@ class BaseLinkerToken(ShuupModel):
         Shop, related_name="bl_token", on_delete=models.CASCADE
     )
     token = models.CharField(max_length=100)
+    storage = models.CharField(max_length=20)
 
 
 class BaseLinkerProductLink(ShuupModel):
