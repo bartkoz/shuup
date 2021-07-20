@@ -370,7 +370,7 @@ class Product(TaxableItem, AttributableMixin, TranslatableModel):
         on_delete=models.SET_NULL,
         verbose_name=_("primary image"),
     )
-
+    baselinker_id = models.CharField(blank=True, null=True, max_length=255)
     translations = TranslatedFields(
         name=models.CharField(
             max_length=256,

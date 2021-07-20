@@ -34,4 +34,11 @@ class Migration(migrations.Migration):
                 'abstract': False,
             },
         ),
+        migrations.AddField(
+            model_name='product',
+            name='baselinker_id',
+            field=models.CharField(blank=True,
+                                   default='',
+                                   max_length=255),
+        ),
     ]

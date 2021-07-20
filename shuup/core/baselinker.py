@@ -16,37 +16,52 @@ class BaseLinkerConnector:
         self.token = shop.bl_token.token
         self.storage = shop.bl_token.storage
 
-    def check_if_product_still_available(self, product_id: int, variant_id: int = None):
+    def check_if_product_still_available(self, product_id: str, count: int = 1, variant_id: str = None):
         is_available = False
         payload = {'token': self.token,
                    'method': 'getProductsData',
                    'parameters': '''{
                    "storage_id": "%s",
-                   "products": [%d]}''' % (self.storage, product_id)}
+                   "products": [%s]}''' % (self.storage, product_id)}
         data = requests.post(
             'https://api.baselinker.com/connector.php',
             data=payload).json()
         try:
             if variant_id:
-                if data['products'][product_id][variant_id]['quantity'] > 0:
+                if data['products'][product_id][variant_id]['quantity'] >= count:
                     is_available = True
-            elif data['products'][product_id]['quantity'] > 0:
+            elif data['products'][product_id]['quantity'] > count:
                 is_available = True
         except KeyError:
             is_available = False
         return is_available
 
-    def update_product_quantity(self, product_id: int, count: int, variant_id: int = None):
+    def update_product_quantity(self, product_id: str, count: str, variant_id: str = None):
         payload = {'token': self.token,
                    'method': 'updateProductsQuantity',
                    'parameters': '''{
                        "storage_id": "%s",
                        "products": [
-                           [%d, %d, %d]]}''' % (self.storage, product_id, variant_id or 0, count)
+                           [%s, %s, %s]]}''' % (self.storage, product_id, variant_id or 0, count)
                    }
         requests.post(
             'https://api.baselinker.com/connector.php',
             data=payload)
+
+    def get_current_storage(self, product_id: str, variant_id: str = None):
+        payload = {'token': self.token,
+                   'method': 'getProductsData',
+                   'parameters': '''{
+                   "storage_id": "%s",
+                   "products": [%s]}''' % (self.storage, product_id)}
+        data = requests.post(
+            'https://api.baselinker.com/connector.php',
+            data=payload).json()
+        if variant_id:
+            quantity = data['products'][product_id][variant_id]['quantity']
+        else:
+            quantity = data['products'][product_id]['quantity']
+        return quantity
 
     def add_order(self, **kwargs):
         # TODO:
