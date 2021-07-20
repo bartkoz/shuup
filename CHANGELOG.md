@@ -8,6 +8,94 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 List all changes after the last release here (newer on top). Each change on a separate bullet point line
 
+## [2.12.0] - 2021-07-15
+
+### Fixed
+
+- Front: SupplierProductListFilter to take all vendors from the category and all sub categories
+- Front: Fix the alert class when it is an error
+- Xtheme: only use the id attribute if the variable is a Product instance in Async Product Cross Sells plugin
+- Reports: do not catch generic `Exception` to prevent hiding other issues
+
+### Changed
+
+- Core: reuse existing `ProductVariationResult` when a combination hash matches
+
+### Added
+
+- Front: add timezone view to save the user's current timezone
+
+## [2.11.0] - 2021-07-07
+
+### Added
+
+- GDPR: create a snippet blocker to prevent injection when cookie is not consented
+- Xtheme: create `xtheme_snippet_blocker` provides to allow blocking a global script injection
+- Xtheme: add name a `Snippet` object
+- Reports: add CSV report writer
+
+### Fixed
+
+- Front: fix so orders that are canceled can't be payed for
+- General: fix critical vulnerability on views that were returning not escaped content making it open to XSS attacks
+- Admin: fix code mirror destruction by node id
+
+### Changed
+
+- Reports: clean malicius content from the HTML and CSV exporters
+- Reports: prevent formulas from being exported in excel writer
+- Tests: log errors into a log file
+- Admin: hide email template button based on permission
+- Reports: improve log when an importer fails
+
+## [2.10.8] - 2021-06-30
+
+### Changed
+
+- Pull translations from Transifex
+
+## [2.10.7] - 2021-06-29
+
+
+### Changed
+
+- Core: only consider lines from the same supplier as the behavior component
+
+
+## [2.10.6] - 2021-06-25
+
+### Fixed
+
+- Utils: fix MultiLanguageModelForm so language dependent filed will only be required if the language is required
+
+## [2.10.5] - 2021-06-21
+
+### Fixed
+
+- Xtheme: removed orderable boolean from async highlights plugin from being rendered
+
+## [2.10.4] - 2021-06-21
+
+### Changed
+
+- Admin: show taxless order total column in order list
+
+## [2.10.3] - 2021-06-15
+
+### Fixed
+
+- Importer: fix so the correct context is displayed on first request when selecting importer
+
+## [2.10.2] - 2021-06-11
+
+### Added
+
+- Xtheme: Add so snippets can have start of head content
+
+### Fixed
+
+- Core: fix so task don't require a identifier
+
 ## [2.10.1] - 2021-06-07
 
 ### Fixed

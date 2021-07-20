@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Shuup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-18 23:13+0000\n"
-"PO-Revision-Date: 2021-05-19 18:05+0000\n"
+"POT-Creation-Date: 2021-07-06 22:55+0000\n"
+"PO-Revision-Date: 2021-07-07 18:01+0000\n"
 "Last-Translator: Christian Hess\n"
 "Language-Team: German (http://www.transifex.com/shuup/shuup/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -66,6 +66,12 @@ msgstr "Wähle die Designs aus, in die dieses Snippet eingefügt werden soll. La
 
 msgid "Select the location of the page to inject the snippet."
 msgstr "Wähle den Ort der Seite aus, an dem das Snippet eingefügt werden soll."
+
+msgid "Name"
+msgstr ""
+
+msgid "Filter by name..."
+msgstr ""
 
 msgid "Location"
 msgstr "Ort"
@@ -178,6 +184,12 @@ msgstr "Daten"
 msgid "Theme configuration for %s"
 msgstr "Design-Konfiguration für %s"
 
+msgid "snippet name"
+msgstr ""
+
+msgid "Untitled"
+msgstr ""
+
 msgid "location"
 msgstr "Standort"
 
@@ -192,9 +204,6 @@ msgstr "Designs"
 
 msgid "Snippet"
 msgstr "Snippet"
-
-msgid "Snippet for {} in {}"
-msgstr "Snippet für {} in {}"
 
 msgid "Plugin"
 msgstr "Plugin"
@@ -302,6 +311,9 @@ msgstr "Artikelauswahl (asynchron)"
 
 msgid "In-Place Snippet"
 msgstr "In-Place-Snippet"
+
+msgid "Resource snippet for start of head"
+msgstr ""
 
 msgid "Resource snippet for end of head"
 msgstr "Ressourcen-Snippet für das Kopfende"
