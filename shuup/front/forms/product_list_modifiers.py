@@ -36,7 +36,7 @@ from shuup.front.utils.sorts_and_filters import (
     get_form_field_label,
 )
 from shuup.utils.i18n import format_money
-
+from shuup_product_reviews.models import ProductReview
 
 class FilterWidget(forms.SelectMultiple):
     def render(self, name, value, attrs=None, choices=(), renderer=None):
@@ -460,8 +460,8 @@ class ProductVariationFilter(SimpleProductListModifier):
 
         variation_values = defaultdict(set)
         for variation in ProductVariationVariable.objects.filter(
-            Q(product__shop_products__categories=category),
-            ~Q(product__shop_products__visibility=ShopProductVisibility.NOT_VISIBLE),
+                Q(product__shop_products__categories=category),
+                ~Q(product__shop_products__visibility=ShopProductVisibility.NOT_VISIBLE),
         ):
             for value in variation.values.all():
                 # TODO: Use ID here instead of this "trick"
@@ -605,8 +605,8 @@ class AttributeProductListFilter(SimpleProductListModifier):
     product_attr_key = "filter_products_by_product_attribute_field"
 
     def _build_attribute_filter_fields(
-        self,
-        attributes,
+            self,
+            attributes,
     ):
         fields = []
         for attribute in attributes:
@@ -649,9 +649,9 @@ class AttributeProductListFilter(SimpleProductListModifier):
         return attributes
 
     def get_fields(
-        self,
-        request,
-        category=None,
+            self,
+            request,
+            category=None,
     ):
         if category:
             attributes = self._get_attributes_from_category(request.shop, category)
@@ -730,3 +730,38 @@ def get_price_ranges(shop, min_price, max_price, range_step):
     max_price_value = format_money(shop.create_price(max_price))
     ranges.append(("%s-" % max_price, _("%(max_limit)s & Above") % {"max_limit": max_price_value}))
     return ranges
+
+
+class ProductOpinionsFilter(SimpleProductListModifier):
+    is_active_key = "filter_products_by_opinions"
+    is_active_label = _("Filter products by opinions")
+    ordering_key = "filter_products_by_opinions_ordering"
+    ordering_label = _("Ordering for filter by opinions")
+    range_min_key = "filter_products_by_opinions_range_min"
+    range_max_key = "filter_products_by_opinions_range_max"
+    range_size_key = "filter_products_by_opinions_range_size"
+
+    def get_fields(self, request, category=None):
+        if not category:
+            return
+
+        configuration = get_configuration(request.shop, category)
+
+        min_opinions = configuration.get(self.range_min_key)
+
+        if not min_opinions:
+            return
+
+        choices = [(None, "-------"), (3, "3*+"), (4, "4*+"), (4.5, "4,5*+")]
+
+        return [
+            ("opinions_range",
+             forms.ChoiceField(
+                 required=False, choices=choices, label=get_form_field_label("opinions_range", _("Opinions"))
+             ))
+        ]
+
+    def filter_products(self, request, products, data):
+        selected_range = data.get("opinions_range")
+        if not selected_range:
+            return products
