@@ -64,11 +64,11 @@ class BaseLinkerConnector:
         return quantity
 
     def add_order(self, **kwargs):
-        # TODO:
+        # TODO: hardcoded order status id
         payload = {'token': self.token,
-                   'method': 'updateProductsQuantity'}
+                   'method': 'addOrder'}
         parameters = {
-            "order_status_id": "49601",
+            "order_status_id": "53894",
             "date_add": "1495963282",
             "user_comments": "User comment",
             "admin_comments": "Seller test comments",
