@@ -1,3 +1,6 @@
+import json
+from datetime import datetime
+
 import requests
 from shuup.core.models import Shop
 
@@ -63,60 +66,64 @@ class BaseLinkerConnector:
             quantity = data['products'][product_id]['quantity']
         return quantity
 
-    def add_order(self, **kwargs):
+    def _build_product(self, line):
+        return {
+            "storage": "db",
+            "storage_id": 0,
+            "product_id": line.product.baselinker_id,
+            "variant_id": 0,
+            "name": line.product.name,
+            "sku": line.product.sku,
+            "ean": "1597368451236",
+            "price_brutto": line.taxful_price.amount.value,
+            "tax_rate": line.product.tax_class.name,
+            "quantity": line.quantity,
+            "weight": line.product.height
+        }
+
+    def add_order(self, basket):
+
         # TODO: hardcoded order status id
         payload = {'token': self.token,
                    'method': 'addOrder'}
         parameters = {
             "order_status_id": "53894",
-            "date_add": "1495963282",
-            "user_comments": "User comment",
-            "admin_comments": "Seller test comments",
-            "phone": "693123123",
-            "email": "test@test.com",
-            "user_login": "nick1",
-            "currency": "GBP",
-            "payment_method": "PayPal",
+            "date_add": basket.order_date.timestamp(),
+            "user_comments": "todo user comment",
+            "admin_comments": "",
+            "phone": basket.orderer.phone,
+            "email": basket.orderer.email,
+            "user_login": basket.orderer.user.username,
+            "currency": basket.currency,
+            "payment_method": basket.payment_method.name,
             "payment_method_cod": "0",
             "paid": "1",
-            "delivery_method": "Expedited shipping",
-            "delivery_price": "10",
-            "delivery_fullname": "John Doe",
-            "delivery_company": "Company",
-            "delivery_address": "Long Str 12",
-            "delivery_city": "London",
-            "delivery_postcode": "E2 8HQ",
-            "delivery_country_code": "GB",
-            "delivery_point_id": "",
-            "delivery_point_name": "",
-            "delivery_point_address": "",
-            "delivery_point_postcode": "",
-            "delivery_point_city": "",
-            "invoice_fullname": "John Doe",
-            "invoice_company": "Company",
-            "invoice_nip": "GB8943245",
-            "invoice_address": "Long Str 12",
-            "invoice_city": "London",
-            "invoice_postcode": "E2 8HQ",
-            "invoice_country_code": "GB",
+            "delivery_method": None,
+            "delivery_price": 0,
+            "invoice_fullname": f'{basket.orderer.first_name} {basket.orderer.last_name}',
+            "invoice_company": "",
+            "invoice_nip": "",
+            "invoice_address": "",
+            "invoice_city": "",
+            "invoice_postcode": "",
+            "invoice_country_code": "",
             "want_invoice": "0",
-            "extra_field_1": "field test 1",
-            "extra_field_2": "",
-            "products": [
-                {
-                    "storage": "db",
-                    "storage_id": 0,
-                    "product_id": "5434",
-                    "variant_id": 52124,
-                    "name": "Harry Potter and the Chamber of Secrets",
-                    "sku": "LU4235",
-                    "ean": "1597368451236",
-                    "price_brutto": 20.00,
-                    "tax_rate": 23,
-                    "quantity": 2,
-                    "weight": 1
-                }
-            ]
+            "products": [self._build_product(line) for line in basket.get_lines()]
         }
-        payload['parameters'] = parameters
+        if basket.shipping_address:
+            parameters = {**parameters, **{"delivery_method": basket.shipping_method.carrier.name,
+                                           "delivery_fullname": basket.shipping_address.name,
+                                           "delivery_address": f'{basket.shipping_address.street} '
+                                                               f'{basket.shipping_address.street2} '
+                                                               f'{basket.shipping_address.street3}',
+                                           "delivery_city": basket.shipping_address.city,
+                                           "delivery_postcode": basket.shipping_address.postal_code,
+                                           "delivery_country_code": basket.shipping_address.country,
+                                           "delivery_point_id": "",
+                                           "delivery_point_name": "",
+                                           "delivery_point_address": "",
+                                           "delivery_point_postcode": "",
+                                           "delivery_point_city": "",
+                                           }}
+        payload['parameters'] = json.dumps(parameters)
         perform_request(payload)

@@ -23,22 +23,4 @@ class Migration(migrations.Migration):
                 'abstract': False,
             },
         ),
-        migrations.CreateModel(
-            name='BaseLinkerProductLink',
-            fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('bl_id', models.IntegerField()),
-                ('product', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, related_name='bl_product_link', to='shuup.Product')),
-            ],
-            options={
-                'abstract': False,
-            },
-        ),
-        migrations.AddField(
-            model_name='product',
-            name='baselinker_id',
-            field=models.CharField(blank=True,
-                                   default='',
-                                   max_length=255),
-        ),
-    ]
+        ]

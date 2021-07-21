@@ -1,5 +1,5 @@
 from django.db import models
-from shuup.core.models import ShuupModel, Shop, Product
+from shuup.core.models import ShuupModel, Shop
 
 
 class BaseLinkerToken(ShuupModel):
@@ -10,10 +10,3 @@ class BaseLinkerToken(ShuupModel):
     token = models.CharField(max_length=100)
     storage = models.CharField(max_length=20)
 
-
-class BaseLinkerProductLink(ShuupModel):
-
-    product = models.OneToOneField(
-        Product, related_name="bl_product_link", on_delete=models.CASCADE
-    )
-    bl_id = models.IntegerField()
