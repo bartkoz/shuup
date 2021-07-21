@@ -75,10 +75,10 @@ class BaseLinkerConnector:
             "name": line.product.name,
             "sku": line.product.sku,
             "ean": "1597368451236",
-            "price_brutto": line.taxful_price.amount.value,
+            "price_brutto": str(round(line.taxful_price.amount.value, 2)),
             "tax_rate": line.product.tax_class.name,
             "quantity": line.quantity,
-            "weight": line.product.height
+            "weight": str(round(line.product.net_weight, 2))
         }
 
     def add_order(self, basket):
