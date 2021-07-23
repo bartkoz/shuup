@@ -1,11 +1,16 @@
 import json
+import logging
+from decimal import Decimal
 from urllib.parse import urlparse
 
 import redis
 import requests
 from django.conf import settings
 
-from shuup.core.models import Shop
+from shuup.core.models import Shop, Product
+from shuup.simple_supplier.models import StockCount
+
+logger = logging.getLogger(__name__)
 
 
 def perform_request(payload):
@@ -140,3 +145,22 @@ class BaseLinkerConnector:
                                            }}
         payload['parameters'] = json.dumps(parameters)
         perform_request(payload)
+
+    def update_stocks(self):
+        payload = {'token': self.token,
+                   'method': 'getProductsList'}
+        parameters = {"storage_id": "bl_1"}
+        payload['parameters'] = json.dumps(parameters)
+        stock = perform_request(payload)
+        for product in stock['products']:
+            try:
+                prod = Product.objects.get(sku=product['sku'])
+                shop_prod = prod.shop_products.first()
+                stock_obj, _ = StockCount.objects.get_or_create(product_id=prod.id,
+                                                                supplier=shop_prod.suppliers.first())
+                stock_obj.logical_count = Decimal(product["quantity"])
+                stock_obj.physical_count = Decimal(product["quantity"])
+                stock_obj.stock_value_value = shop_prod.default_price_value * Decimal(product["quantity"])
+                stock_obj.save()
+            except Exception as e:
+                logger.error(e)
