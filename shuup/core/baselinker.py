@@ -1,7 +1,10 @@
 import json
-from datetime import datetime
+from urllib.parse import urlparse
 
+import redis
 import requests
+from django.conf import settings
+
 from shuup.core.models import Shop
 
 
@@ -11,6 +14,12 @@ def perform_request(payload):
     headers = {}
     response = requests.request("POST", url, headers=headers, data=payload, files=files)
     return response.json()
+
+
+def create_redis_connection():
+    return redis.StrictRedis(
+        host=urlparse(getattr(settings, 'CELERY_BROKER_URL')).netloc.split(':')[0], port=6379, db=0
+    )
 
 
 class BaseLinkerConnector:
@@ -111,14 +120,18 @@ class BaseLinkerConnector:
             "products": [self._build_product(line) for line in basket.get_lines()]
         }
         if basket.shipping_address:
-            parameters = {**parameters, **{"delivery_method": basket.shipping_method.carrier.name,
+            try:
+                delivery_method = basket.shipping_method.carrier.name
+            except AttributeError:
+                delivery_method = None
+            parameters = {**parameters, **{"delivery_method": delivery_method,
                                            "delivery_fullname": basket.shipping_address.name,
                                            "delivery_address": f'{basket.shipping_address.street} '
                                                                f'{basket.shipping_address.street2} '
                                                                f'{basket.shipping_address.street3}',
                                            "delivery_city": basket.shipping_address.city,
                                            "delivery_postcode": basket.shipping_address.postal_code,
-                                           "delivery_country_code": basket.shipping_address.country,
+                                           "delivery_country_code": basket.shipping_address.country.code,
                                            "delivery_point_id": "",
                                            "delivery_point_name": "",
                                            "delivery_point_address": "",
