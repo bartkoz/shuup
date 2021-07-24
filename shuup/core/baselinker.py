@@ -156,11 +156,17 @@ class BaseLinkerConnector:
             try:
                 prod = Product.objects.get(sku=product['sku'])
                 shop_prod = prod.shop_products.first()
+                current_price = Decimal(product['price_brutto'])
+                if current_price != shop_prod.default_price_value:
+                    shop_prod.default_price_value = Decimal(product['price_brutto'])
+                    shop_prod.save(update_fields=['default_price_value'])
                 stock_obj, _ = StockCount.objects.get_or_create(product_id=prod.id,
                                                                 supplier=shop_prod.suppliers.first())
-                stock_obj.logical_count = Decimal(product["quantity"])
-                stock_obj.physical_count = Decimal(product["quantity"])
-                stock_obj.stock_value_value = shop_prod.default_price_value * Decimal(product["quantity"])
-                stock_obj.save()
+                stock_count = Decimal(product["quantity"])
+                if stock_count != stock_obj.physical_count:
+                    stock_obj.logical_count = stock_count
+                    stock_obj.physical_count = stock_count
+                    stock_obj.stock_value_value = shop_prod.default_price_value * Decimal(product["quantity"])
+                    stock_obj.save(update_fields=['logical_count', 'physical_count', 'stock_value_value'])
             except Exception as e:
                 logger.error(e)
