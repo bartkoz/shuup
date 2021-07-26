@@ -14,6 +14,7 @@ from django.views.generic import FormView
 from logging import getLogger
 
 from shuup.apps.provides import get_provide_objects
+from shuup.core.baselinker import BaseLinkerConnector, create_redis_connection
 from shuup.core.models import OrderStatus
 from shuup.front.basket import get_basket_order_creator
 from shuup.front.checkout import CheckoutPhaseViewMixin
@@ -68,6 +69,13 @@ class ConfirmPhase(CheckoutPhaseViewMixin, FormView):
     def process(self):
         self.basket.customer_comment = self.storage.get("comment")
         self.basket.marketing_permission = self.storage.get("marketing")
+        if settings.USE_BASELINKER:
+            self.verify_with_baselinker()
+            redis_connection = create_redis_connection()
+            if not redis_connection.get(self.basket.main_basket.basket_name):
+                self.update_baselinker_storage()
+                self.add_baselinker_order()
+                redis_connection.set(self.basket.main_basket.basket_name, 'basket_key', ex=3600*24)
 
     def is_valid(self):
         # check that all form keys starting with "accept_" must have a valid value
@@ -137,3 +145,27 @@ class ConfirmPhase(CheckoutPhaseViewMixin, FormView):
         order = order_creator.create_order(basket)
         basket.finalize()
         return order
+
+    def verify_with_baselinker(self):
+        bl_connector = BaseLinkerConnector(self.request.shop)
+        for item in self.basket.get_lines():
+            is_available = bl_connector.check_if_product_still_available(product_id=item.product.baselinker_id,
+                                                                         count=int(item.quantity))
+            if not is_available:
+                raise forms.ValidationError(_(f'Product {item.product.name} is no longer available.'))
+
+    def update_baselinker_storage(self):
+        bl_connector = BaseLinkerConnector(self.request.shop)
+        for item in self.basket.get_lines():
+            product_id = item.product.baselinker_id
+            quantity = int(item.quantity)
+            # TODO: make it work with variants
+            variant_id = None
+            current_quantity = bl_connector.get_current_storage(product_id=item.product.baselinker_id)
+            final_quantity = current_quantity - item.quantity
+            bl_connector.update_product_quantity(product_id=product_id,
+                                                 count=final_quantity)
+
+    def add_baselinker_order(self):
+        bl_connector = BaseLinkerConnector(self.request.shop)
+        bl_connector.add_order(self.basket)
