@@ -47,7 +47,7 @@ class BaseLinkerConnector:
             if variant_id:
                 if data['products'][product_id][variant_id]['quantity'] >= count:
                     is_available = True
-            elif data['products'][product_id]['quantity'] > count:
+            elif data['products'][product_id]['quantity'] >= count:
                 is_available = True
         except KeyError:
             is_available = False
