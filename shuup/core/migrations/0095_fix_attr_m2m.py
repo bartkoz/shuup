@@ -6,7 +6,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('shuup', '0092_order_status_history'),
+        ('shuup', '0094_order_status_history'),
     ]
 
     operations = [

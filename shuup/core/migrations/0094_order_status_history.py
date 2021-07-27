@@ -18,7 +18,7 @@ class Migration(migrations.Migration):
 
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ("shuup", "0091_background_tasks"),
+        ("shuup", "0093_product_baselinker_id"),
     ]
 
     operations = [
