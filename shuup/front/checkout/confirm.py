@@ -69,13 +69,6 @@ class ConfirmPhase(CheckoutPhaseViewMixin, FormView):
     def process(self):
         self.basket.customer_comment = self.storage.get("comment")
         self.basket.marketing_permission = self.storage.get("marketing")
-        if settings.USE_BASELINKER:
-            self.verify_with_baselinker()
-            redis_connection = create_redis_connection()
-            if not redis_connection.get(self.basket.main_basket.basket_name):
-                self.update_baselinker_storage()
-                self.add_baselinker_order()
-                redis_connection.set(self.basket.main_basket.basket_name, 'basket_key', ex=3600*24)
 
     def is_valid(self):
         # check that all form keys starting with "accept_" must have a valid value
@@ -108,7 +101,13 @@ class ConfirmPhase(CheckoutPhaseViewMixin, FormView):
     def form_valid(self, form):
         for key, value in form.cleaned_data.items():
             self.storage[key] = value
-
+        if settings.USE_BASELINKER:
+            self.verify_with_baselinker()
+            redis_connection = create_redis_connection()
+            if not redis_connection.get(self.basket.main_basket.basket_name):
+                self.update_baselinker_storage()
+                self.add_baselinker_order(form.cleaned_data.get('comment'))
+                redis_connection.set(self.basket.main_basket.basket_name, 'basket_key', ex=3600*24)
         self.process()
         self.basket.save()
         self.basket.storage.add_log_entry(self.basket, _("Starting to create order."))
@@ -166,6 +165,6 @@ class ConfirmPhase(CheckoutPhaseViewMixin, FormView):
             bl_connector.update_product_quantity(product_id=product_id,
                                                  count=final_quantity)
 
-    def add_baselinker_order(self):
+    def add_baselinker_order(self, comment):
         bl_connector = BaseLinkerConnector(self.request.shop)
-        bl_connector.add_order(self.basket)
+        bl_connector.add_order(self.basket, comment)

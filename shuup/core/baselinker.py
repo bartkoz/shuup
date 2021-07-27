@@ -95,7 +95,7 @@ class BaseLinkerConnector:
             "weight": str(round(line.product.net_weight, 2))
         }
 
-    def add_order(self, basket):
+    def add_order(self, basket, comment):
 
         # TODO: hardcoded order status id
         payload = {'token': self.token,
@@ -103,7 +103,7 @@ class BaseLinkerConnector:
         parameters = {
             "order_status_id": "53894",
             "date_add": basket.order_date.timestamp(),
-            "user_comments": "todo user comment",
+            "user_comments": comment if comment else '',
             "admin_comments": "",
             "phone": basket.orderer.phone,
             "email": basket.orderer.email,
