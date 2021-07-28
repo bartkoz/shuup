@@ -1,160 +1,161 @@
 # SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# Copyright (C) 2015 THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
-#, fuzzy
+# 
+# Translators:
+# Bartek Sielicki <sielickib@student.mini.pw.edu.pl>, 2017
+# Fishster Zespół <teamdecathlonpge@gmail.com>, 2021
+# MalT <malt@malt-it.com>, 2016
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: Shuup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-06-15 05:58+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"POT-Creation-Date: 2020-06-22 17:54+0000\n"
+"PO-Revision-Date: 2021-02-22 17:02+0000\n"
+"Last-Translator: Fishster Zespół <teamdecathlonpge@gmail.com>\n"
+"Language-Team: Polish (Poland) (http://www.transifex.com/shuup/shuup/language/pl_PL/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=4; plural=(n==1 ? 0 : (n%10>=2 && n%10<=4) && (n"
-"%100<12 || n%100>14) ? 1 : n!=1 && (n%10>=0 && n%10<=1) || (n%10>=5 && n"
-"%10<=9) || (n%100>=12 && n%100<=14) ? 2 : 3);\n"
+"Generated-By: Babel 2.1.1\n"
+"Language: pl_PL\n"
+"Plural-Forms: nplurals=4; plural=(n==1 ? 0 : (n%10>=2 && n%10<=4) && (n%100<12 || n%100>14) ? 1 : n!=1 && (n%10>=0 && n%10<=1) || (n%10>=5 && n%10<=9) || (n%100>=12 && n%100<=14) ? 2 : 3);\n"
 
 msgid "Name of the company"
-msgstr ""
+msgstr "Nazwa firmy"
 
 msgid "Registration Received"
-msgstr ""
+msgstr "Rejestracja otrzymana"
 
 msgid "Customer"
-msgstr ""
+msgstr "Klient"
 
 msgid "Customer Email"
-msgstr ""
+msgstr "Email klienta"
 
 msgid "Activation URL"
-msgstr ""
+msgstr "Aktywacja linku URL "
 
 msgid "Is User Active"
-msgstr ""
+msgstr "Czy użytkownik jest aktywny"
 
 msgid "Account Reactivation"
-msgstr ""
+msgstr "Ponowna aktywacja konta"
 
 msgid "Company Registration Received"
-msgstr ""
+msgstr "Otrzymano rejestrację firmy"
 
 msgid "Company Approved"
-msgstr ""
+msgstr "Firma została zatwierdzona"
 
 msgid "Account Activation"
-msgstr ""
+msgstr "Aktywacja konta"
 
 msgid "Company has been activated."
-msgstr ""
+msgstr "Firma została aktywowana."
 
 msgid "Send Registration Received Email"
-msgstr ""
+msgstr "Wyślij e-mail z otrzymaniem rejestracji"
 
 msgid "Send email when a user registers."
-msgstr ""
+msgstr "Wyślij e-mail, gdy użytkownik zarejestruje się."
 
 msgid ""
 "This script will send an email to the user or to any configured email right "
 "after a user get registered."
-msgstr ""
+msgstr "Ten skrypt wyśle wiadomość e-mail do użytkownika lub na dowolny skonfigurowany adres e-mail zaraz po zarejestrowaniu się użytkownika."
 
 msgid "{{ order.shop }} - Welcome!"
-msgstr ""
+msgstr "{{order.shop}} - Witamy!"
 
 msgid "Send account reactivation email"
-msgstr ""
+msgstr "Wyślij e-mail ponownej aktywacji konta"
 
 msgid "Send email when a user account gets reactivated"
-msgstr ""
+msgstr "Wyślij e-mail, gdy konto użytkownika zostanie ponownie aktywowane"
 
 msgid ""
-"This script will send an email to the user or to any configured email when a "
-"account get's reactivated"
-msgstr ""
+"This script will send an email to the user or to any configured email when a"
+" account get's reactivated"
+msgstr "Ten skrypt wyśle wiadomość e-mail do użytkownika lub na dowolny skonfigurowany adres e-mail, gdy konto zostanie ponownie aktywowane"
 
 msgid "{{ customer.username }} is now active again!"
-msgstr ""
+msgstr "{{customer.username}} jest znowu aktywny!"
 
 msgid "Send Company Registration Received Email"
-msgstr ""
+msgstr "Wyślij wiadomość e-mail z otrzymaniem rejestracji firmy"
 
 msgid "Send email when a user registers as a company."
-msgstr ""
+msgstr "Wyślij e-mail, gdy użytkownik zarejestruje się jako firma."
 
 msgid "Send Company Activated Email"
-msgstr ""
+msgstr "Wyślij e-mail aktywowany przez firmę"
 
 msgid "Notify company's contact person that company account is activated"
-msgstr ""
+msgstr "Powiadom osobę kontaktową firmy, że konto firmowe zostało aktywowane"
 
 msgid ""
 "This script will send an email to the user or to any configured email right "
 "after a company is activated."
-msgstr ""
+msgstr "Ten skrypt wyśle wiadomość e-mail do użytkownika lub na dowolny skonfigurowany e-mail zaraz po aktywacji firmy."
 
 msgid "Send account activation email"
-msgstr ""
+msgstr "Wyślij e-mail aktywujący konto"
 
 msgid "Send email when a user account gets activated for the first time"
-msgstr ""
+msgstr "Wyślij e-mail, gdy konto użytkownika zostanie aktywowane po raz pierwszy"
 
 msgid ""
 "This script will send an email to the user or to any configured email when "
 "an account gets activated for the first time"
-msgstr ""
+msgstr "Ten skrypt wyśle wiadomość e-mail do użytkownika lub na dowolny skonfigurowany adres e-mail, gdy konto zostanie aktywowane po raz pierwszy"
 
 msgid "{{ customer.username }} is now active!"
-msgstr ""
+msgstr "{{customer.username}} jest teraz aktywny!"
 
 msgid "Account activation"
-msgstr ""
+msgstr "Aktywacja konta"
 
 msgid "Account activation failed."
-msgstr ""
+msgstr "Aktywacja konta nie powiodła się."
 
 msgid "Register as a Company"
-msgstr ""
+msgstr "Zarejestruj się jako firma"
 
 msgid "Company Registration"
-msgstr ""
+msgstr "Rejestracja firmy"
 
 msgid "Company information"
-msgstr ""
+msgstr "Informacje o firmie"
 
 msgid "Company billing information"
-msgstr ""
+msgstr "Informacje rozliczeniowe firmy"
 
 msgid "Contact person"
-msgstr ""
+msgstr "Osoba kontaktowa"
 
 msgid "Contact information for primary company contact"
-msgstr ""
+msgstr "Dane kontaktowe głównej osoby kontaktowej w firmie"
 
 msgid "Login information"
-msgstr ""
+msgstr "Dane logowania"
 
 msgid "The information you will log in with."
-msgstr ""
+msgstr "Informacje, za pomocą których będziesz się logować."
 
 msgid "Register"
-msgstr ""
+msgstr "Zarejestruj się"
 
 msgid "Registration"
-msgstr ""
+msgstr "Rejestracja"
 
 msgid "Register as a company."
-msgstr ""
+msgstr "Zarejestruj się jako firma."
 
 msgid "Activation successful"
-msgstr ""
+msgstr "Aktywacja zakończona pomyślnie"
 
 msgid ""
 "Registration complete. Please follow the instructions sent to your email "
 "address."
-msgstr ""
+msgstr "Rejestracja zakończona. Proszę postępować zgodnie z instrukcją wysłaną na podany adres email."

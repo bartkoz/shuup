@@ -145,7 +145,7 @@ msgid "Billing address"
 msgstr "Adres rozliczeniowy"
 
 msgid "Confirmation"
-msgstr "Potwierdzenie"
+msgstr "Finalizacja zamówienia"
 
 msgid "Get Order Confirmation PDF"
 msgstr "Uzyskaj potwierdzenie zamówienia w formacie PDF"

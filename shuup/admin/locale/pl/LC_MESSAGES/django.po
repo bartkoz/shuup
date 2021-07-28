@@ -320,7 +320,7 @@ msgid "Basic Information"
 msgstr "Podstawowe informacje"
 
 msgid "Addresses"
-msgstr "Adresy"
+msgstr "Dane odbiorcy przesyłki"
 
 msgid "Members"
 msgstr "Członkowie"
@@ -3728,7 +3728,7 @@ msgstr "Brutto łącznie"
 
 #, python-format
 msgid "Supplied by %(supplier)s"
-msgstr "Dostarczane przez %(supplier)s"
+msgstr "Sprzedawane i wysyłane przez %(supplier)s"
 
 msgid "Discount"
 msgstr "Rabat"

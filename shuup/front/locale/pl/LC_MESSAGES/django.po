@@ -168,7 +168,7 @@ msgid "Use a saved address"
 msgstr "Użyj zapisanego adresu"
 
 msgid "Addresses"
-msgstr "Adresy"
+msgstr "Dane odbiorcy przesyłki"
 
 msgid "Saved addresses."
 msgstr "Zapisane adresy."
@@ -217,7 +217,7 @@ msgid "payment method"
 msgstr "sposób płatności"
 
 msgid "Shipping & Payment"
-msgstr "Wysyłka i płatnośći"
+msgstr "Sposób dostawy i płatności"
 
 msgid "Saved services."
 msgstr "Zapisane usługi."
@@ -872,7 +872,7 @@ msgstr "Razem (włączając podatek)"
 
 #, python-format
 msgid "Supplied by %(supplier)s"
-msgstr "Dostarczane przez %(supplier)s"
+msgstr "Sprzedawane i wysyłane przez %(supplier)s"
 
 msgid "Discount"
 msgstr "Zniżka"
@@ -911,7 +911,7 @@ msgid "You are unable to proceed to checkout!"
 msgstr "Nie możesz przejść do płatności!"
 
 msgid "Checkout"
-msgstr "Płatność"
+msgstr "Twoje zamówienie"
 
 msgid "Error! Please reload the page or move to previous step."
 msgstr "Błąd! Załaduj ponownie stronę lub przejdź do poprzedniego kroku."
@@ -1030,10 +1030,10 @@ msgid "Do you have a coupon code? Enter it here. "
 msgstr "Czy masz kod kuponu? Wprowadź to tutaj."
 
 msgid "Coupon Code"
-msgstr "Kod kupono"
+msgstr "Kod kuponu"
 
 msgid "Submit Code"
-msgstr "Wyślij kod"
+msgstr "Dodaj kod"
 
 msgid "Save cart"
 msgstr "Zapisz koszyk"
@@ -1224,7 +1224,7 @@ msgid "Cart"
 msgstr "Koszyk"
 
 msgid "Items"
-msgstr "Przedmioty"
+msgstr "Produkty"
 
 msgid "View cart"
 msgstr "Zobacz koszyk"
