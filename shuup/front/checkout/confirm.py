@@ -61,8 +61,9 @@ class ConfirmForm(forms.Form):
 
 class ConfirmPhase(CheckoutPhaseViewMixin, FormView):
     identifier = "confirm"
-    title = _("Confirmation")
-
+    #TODO: translations change
+    #title = _("Confirmation")
+    title = _("Finalizacja")
     template_name = "shuup/front/checkout/confirm.jinja"
     form_class = ConfirmForm
 
