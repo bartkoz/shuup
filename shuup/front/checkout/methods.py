@@ -103,7 +103,9 @@ class MethodsForm(forms.Form):
 
 class MethodsPhase(CheckoutPhaseViewMixin, FormView):
     identifier = "methods"
-    title = _("Shipping & Payment")
+    # TODO: translations change
+    # title = _("Shipping & Payment")
+    title = _("Sposób dostawy i płatności")
     template_name = "shuup/front/checkout/methods.jinja"
     form_class = MethodsForm
 
