@@ -256,7 +256,7 @@
     {% set product = shop_product.product %}
     <div class="price text-right product-price-div" id="product-price-div-{{ product_id }}" data-product-id="{{ shop_product.product.id }}">
         <h2>
-            <small class="text-muted">{% trans %}Total{% endtrans %}:</small>
+            <small class="text-muted">{% trans %}{% endtrans %}</small>
             <span class="product-price"><strong>{{ product|price(quantity, supplier=supplier) }}</strong></span>
         </h2>
         <span class="small text-muted">
