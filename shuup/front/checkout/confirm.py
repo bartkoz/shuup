@@ -152,7 +152,7 @@ class ConfirmPhase(CheckoutPhaseViewMixin, FormView):
             is_available = bl_connector.check_if_product_still_available(product_id=item.product.baselinker_id,
                                                                          count=int(item.quantity))
             if not is_available:
-                raise forms.ValidationError(_(f'Product {item.product.name} is no longer available.'))
+                raise forms.ValidationError(_(f'{item.product.name} nie jest juz dostępny, płatność nie została pobrana.'))
 
     def update_baselinker_storage(self):
         bl_connector = BaseLinkerConnector(self.request.shop)
