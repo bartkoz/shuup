@@ -44,7 +44,7 @@ SHIPMENT_CREATED_EMAIL_TEMPLATE = mark_safe_lazy(
             <td>{{ shipment_product.product }}</td>
             <td>{{ shipment_product.quantity }}</td>
         </tr>
-{% endif %}
+{% endfor %}
     </tbody>
 </table>
 """
