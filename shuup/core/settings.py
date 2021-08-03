@@ -15,7 +15,6 @@ about the Shuup settings system.  Especially, when inventing settings of
 your own, the :ref:`apps-naming-settings` section is an important read.
 """
 
-
 #: The home currency for the Shuup installation. All monetary values
 #: are implicitly in this currency unless somehow otherwise specified.
 SHUUP_HOME_CURRENCY = "EUR"
@@ -207,7 +206,9 @@ SHUUP_ADDRESS_MODEL_FORM = "shuup.core.utils.forms.MutableAddressForm"
 #:
 #: It should be noted, however, that overriding some of the settings (such as making a
 #: required field non-required) could create other validation issues.
-SHUUP_ADDRESS_FIELD_PROPERTIES = {}
+SHUUP_ADDRESS_FIELD_PROPERTIES = {
+    "country": {"disabled": True}
+}
 
 #: Indicates maximum days for daily data included to one telemetry request
 SHUUP_MAX_DAYS_IN_TELEMETRY = 180
