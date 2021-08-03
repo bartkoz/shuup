@@ -50,7 +50,6 @@ class ShuupFrontAppConfig(AppConfig):
             "shuup.front.forms.product_list_modifiers.ProductPriceFilter",
             "shuup.front.forms.product_list_modifiers.ProductVariationFilter",
             "shuup.front.forms.product_list_modifiers.SortProductListByCreatedDate",
-            "shuup.front.forms.product_list_modifiers.SortProductListByAscendingCreatedDate",
             "shuup.front.forms.product_list_modifiers.SortProductListByName",
             "shuup.front.forms.product_list_modifiers.SortProductListByPrice",
             "shuup.front.forms.product_list_modifiers.ManufacturerProductListFilter",
