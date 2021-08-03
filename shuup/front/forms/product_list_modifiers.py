@@ -460,8 +460,8 @@ class ProductVariationFilter(SimpleProductListModifier):
 
         variation_values = defaultdict(set)
         for variation in ProductVariationVariable.objects.filter(
-            Q(product__shop_products__categories=category),
-            ~Q(product__shop_products__visibility=ShopProductVisibility.NOT_VISIBLE),
+                Q(product__shop_products__categories=category),
+                ~Q(product__shop_products__visibility=ShopProductVisibility.NOT_VISIBLE),
         ):
             for value in variation.values.all():
                 # TODO: Use ID here instead of this "trick"
@@ -605,8 +605,8 @@ class AttributeProductListFilter(SimpleProductListModifier):
     product_attr_key = "filter_products_by_product_attribute_field"
 
     def _build_attribute_filter_fields(
-        self,
-        attributes,
+            self,
+            attributes,
     ):
         fields = []
         for attribute in attributes:
@@ -649,9 +649,9 @@ class AttributeProductListFilter(SimpleProductListModifier):
         return attributes
 
     def get_fields(
-        self,
-        request,
-        category=None,
+            self,
+            request,
+            category=None,
     ):
         if category:
             attributes = self._get_attributes_from_category(request.shop, category)
@@ -712,8 +712,11 @@ def get_price_ranges(shop, min_price, max_price, range_step):
         return
 
     ranges = []
+    # TODO: translations change
     min_price_value = format_money(shop.create_price(min_price))
-    ranges.append(("-%s" % min_price, _("Under %(min_limit)s") % {"min_limit": str(min_price_value)[:-3]}))
+    # ranges.append(("-%s" % min_price, _("Under %(min_limit)s") % {"min_limit": str(min_price_value)[:-3]}))
+    ranges.append(("-%s" % min_price,
+                   "Poniżej %(min_limit)s" % {"min_limit": str(min_price_value)[:3] + str(min_price_value)[-3:]}))
 
     for range_min in range(min_price, max_price, range_step):
         range_min_price = format_money(shop.create_price(range_min))
@@ -723,10 +726,14 @@ def get_price_ranges(shop, min_price, max_price, range_step):
             ranges.append(
                 (
                     "%s-%s" % (range_min, range_max),
-                    _("%(min)s to %(max)s") % dict(min=str(range_min_price)[:-3], max=str(range_max_price)[:-3]),
+                    # _("%(min)s to %(max)s") % dict(min=str(range_min_price)[:-3], max=str(range_max_price)[:-3]),
+                    "%(min)s do %(max)s" % dict(min=str(range_min_price)[:3] + str(range_min_price)[-3:],
+                                                max=str(range_max_price)[:3] + str(range_max_price)[-3:]),
                 )
             )
 
     max_price_value = format_money(shop.create_price(max_price))
-    ranges.append(("%s-" % max_price, _("%(max_limit)s & Above") % {"max_limit": str(max_price_value)[:-3]}))
+    # ranges.append(("%s-" % max_price, _("%(max_limit)s & Above") % {"max_limit": str(max_price_value)[:-3]}))
+    ranges.append(("%s-" % max_price,
+                   "%(max_limit)s i powyżej" % {"max_limit": str(max_price_value)[:3] + str(max_price_value)[-3:]}))
     return ranges
