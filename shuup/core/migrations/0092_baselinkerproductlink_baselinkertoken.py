@@ -17,6 +17,7 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('token', models.CharField(max_length=100)),
                 ('storage', models.CharField(max_length=20)),
+                ('order_status_id', models.CharField(max_length=50, default='changeme')),
                 ('shop', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, related_name='bl_token', to='shuup.Shop')),
             ],
             options={

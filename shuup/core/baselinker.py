@@ -32,6 +32,7 @@ class BaseLinkerConnector:
     def __init__(self, shop: Shop):
         self.token = shop.bl_token.token
         self.storage = shop.bl_token.storage
+        # self.order_status_id = shop.bl_token.order_status_id
 
     def check_if_product_still_available(self, product_id: str, count: int = 1, variant_id: str = None):
         is_available = False
@@ -101,7 +102,7 @@ class BaseLinkerConnector:
         payload = {'token': self.token,
                    'method': 'addOrder'}
         parameters = {
-            "order_status_id": "53894",
+            "order_status_id": "58521",
             "date_add": basket.order_date.timestamp(),
             "user_comments": comment if comment else '',
             "admin_comments": "",
