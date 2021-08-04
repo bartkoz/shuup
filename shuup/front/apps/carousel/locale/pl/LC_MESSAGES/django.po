@@ -1,281 +1,279 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
-#, fuzzy
+# 
+# Translators:
+# Fishster Zespół <teamdecathlonpge@gmail.com>, 2021
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: Shuup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-06-15 05:58+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"POT-Creation-Date: 2020-06-22 17:54+0000\n"
+"PO-Revision-Date: 2021-05-23 21:25+0000\n"
+"Last-Translator: Fishster Zespół <teamdecathlonpge@gmail.com>\n"
+"Language-Team: Polish (Poland) (http://www.transifex.com/shuup/shuup/language/pl_PL/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=4; plural=(n==1 ? 0 : (n%10>=2 && n%10<=4) && (n"
-"%100<12 || n%100>14) ? 1 : n!=1 && (n%10>=0 && n%10<=1) || (n%10>=5 && n"
-"%10<=9) || (n%100>=12 && n%100<=14) ? 2 : 3);\n"
+"Language: pl_PL\n"
+"Plural-Forms: nplurals=4; plural=(n==1 ? 0 : (n%10>=2 && n%10<=4) && (n%100<12 || n%100>14) ? 1 : n!=1 && (n%10>=0 && n%10<=1) || (n%10>=5 && n%10<=9) || (n%100>=12 && n%100<=14) ? 2 : 3);\n"
 
 msgid "Carousels"
-msgstr ""
+msgstr "Karuzele"
 
 #, python-format
 msgid "%s has been deleted."
-msgstr ""
+msgstr "%s został usunięty."
 
 msgid "Name"
-msgstr ""
+msgstr "Nazwa"
 
 msgid "Filter by name..."
-msgstr ""
+msgstr "Filtruj według nazwy..."
 
 msgid "Carousel"
-msgstr ""
+msgstr "Karuzela"
 
 msgid "Active"
-msgstr ""
+msgstr "Aktywny"
 
 msgid "Slide"
-msgstr ""
+msgstr "Slajd"
 
 msgid "Fade"
-msgstr ""
+msgstr "Znikać"
 
 msgid "Current page"
-msgstr ""
+msgstr "Bieżąca strona"
 
 msgid "New page"
-msgstr ""
+msgstr "Nowa strona"
 
 msgid "shops"
-msgstr ""
+msgstr "sklepy"
 
 msgid "Select which shops you would like the carousel to be visible in."
-msgstr ""
+msgstr "Wybierz sklepy, w których chcesz, aby karuzela była widoczna."
 
 msgid "name"
-msgstr ""
+msgstr "Nazwa"
 
 msgid "The carousel name use for carousel configuration."
-msgstr ""
+msgstr "Nazwa karuzeli używana do konfiguracji karuzeli."
 
 msgid "animation"
-msgstr ""
+msgstr "animacja"
 
 msgid "Animation type for cycling slides."
-msgstr ""
+msgstr "Typ animacji dla slajdów cyklicznych."
 
 msgid "interval"
-msgstr ""
+msgstr "przedział"
 
 msgid "Slide interval in seconds."
-msgstr ""
+msgstr "Odstęp między slajdami w sekundach."
 
 msgid "pause on hover"
-msgstr ""
+msgstr "wstrzymaj po najechaniu"
 
 msgid "When checked, the carousel cycling pauses on mouse over."
-msgstr ""
+msgstr "Po zaznaczeniu tego pola karuzela zatrzymuje się po najechaniu myszą."
 
 msgid "show navigation arrows"
-msgstr ""
+msgstr "pokaż strzałki nawigacyjne"
 
 msgid ""
 "When checked, navigational arrows are shown on the carousel allowing for "
 "customers to go back and forward."
-msgstr ""
+msgstr "Po zaznaczeniu tego pola na karuzeli wyświetlane są strzałki nawigacyjne, umożliwiające klientom przechodzenie do tyłu i do przodu."
 
 msgid "show navigation dots"
-msgstr ""
+msgstr "pokaż kropki nawigacyjne"
 
 msgid "When checked, navigational indicator dots are shown."
-msgstr ""
+msgstr "Po zaznaczeniu tego pola wyświetlane są kropki wskaźników nawigacyjnych."
 
 msgid "image width"
-msgstr ""
+msgstr "Szerokość obrazu"
 
 msgid "Slide images will be cropped to this width."
-msgstr ""
+msgstr "Obrazy slajdów zostaną przycięte do tej szerokości."
 
 msgid "image height"
-msgstr ""
+msgstr "Wysokość obrazu"
 
 msgid "Slide images will be cropped to this height."
-msgstr ""
+msgstr "Obrazy slajdów zostaną przycięte do tej wysokości."
 
 msgid "Arrows color"
-msgstr ""
+msgstr "Kolor strzałek"
 
 msgid "Set the custom color for the arrows."
-msgstr ""
+msgstr "Ustaw niestandardowy kolor strzałek."
 
 msgid "Name is only used to configure slides."
-msgstr ""
+msgstr "Nazwa służy tylko do konfigurowania slajdów."
 
 msgid "product link"
-msgstr ""
+msgstr "link do produktu"
 
 msgid ""
-"Set the product detail page that should be shown when this slide is clicked, "
-"if any."
-msgstr ""
+"Set the product detail page that should be shown when this slide is clicked,"
+" if any."
+msgstr "Ustaw stronę szczegółów produktu, która powinna być wyświetlana po kliknięciu tego slajdu, jeśli istnieje."
 
 msgid "category link"
-msgstr ""
+msgstr "link do kategorii"
 
 msgid ""
 "Set the product category page that should be shown when this slide is "
 "clicked, if any."
-msgstr ""
+msgstr "Ustaw stronę kategorii produktu, która ma być wyświetlana po kliknięciu tego slajdu, jeśli taka istnieje."
 
 msgid "cms page link"
-msgstr ""
+msgstr "link do strony cms"
 
 msgid ""
 "Set the web page that should be shown when the slide is clicked, if any."
-msgstr ""
+msgstr "Ustaw stronę internetową, która ma być wyświetlana po kliknięciu slajdu, jeśli taka istnieje."
 
 msgid "ordering"
-msgstr ""
+msgstr "zamawianie"
 
 msgid ""
 "Set the numeric order in which this slide should appear relative to other "
 "slides in this carousel."
-msgstr ""
+msgstr "Ustaw kolejność numeryczną, w jakiej ten slajd powinien się pojawiać w stosunku do innych slajdów w tej karuzeli."
 
 msgid "link target"
-msgstr ""
+msgstr "miejsce docelowe linku"
 
 msgid ""
 "Set this to current if clicking on this slide should open a new browser tab."
-msgstr ""
+msgstr "Ustaw jako bieżące, jeśli kliknięcie tego slajdu powinno otworzyć nową kartę przeglądarki."
 
 msgid "available since"
-msgstr ""
+msgstr "dostępne od"
 
 msgid ""
 "Set the date and time, starting from which this slide should be visible in "
 "the carousel. This is useful to advertise sales campaigns or other time-"
 "sensitive marketing."
-msgstr ""
+msgstr "Ustaw datę i godzinę, od której ten slajd powinien być widoczny w karuzeli. Jest to przydatne do reklamowania kampanii sprzedażowych lub innych wrażliwych czasowo działań marketingowych."
 
 msgid "available until"
-msgstr ""
+msgstr "dostępne do"
 
 msgid ""
 "Set the date and time, until which this slide should be visible in the "
 "carousel. This is useful to advertise sales campaigns or other time-"
 "sensitive marketing."
-msgstr ""
+msgstr "Ustaw datę i godzinę, do której ten slajd powinien być widoczny w karuzeli. Jest to przydatne do reklamowania kampanii sprzedażowych lub innych wrażliwych czasowo działań marketingowych."
 
 msgid "Inactive dot border color"
-msgstr ""
+msgstr "Nieaktywny kolor obramowania kropek"
 
 msgid "Customize the dot border color when slide is not active."
-msgstr ""
+msgstr "Dostosuj kolor obramowania kropki, gdy slajd nie jest aktywny."
 
 msgid "Active dot color"
-msgstr ""
+msgstr "Aktywny kolor kropek"
 
 msgid "Customize the dot color when slide is active."
-msgstr ""
+msgstr "Dostosuj kolor kropki, gdy slajd jest aktywny."
 
 msgid "caption"
-msgstr ""
+msgstr "nagłówek"
 
 msgid ""
 "Text that describes the image. It is displayed on top of the image if "
-"'Render image text' box is enabled in front-end. Also used for search engine "
-"purposes."
-msgstr ""
+"'Render image text' box is enabled in front-end. Also used for search engine"
+" purposes."
+msgstr "Tekst opisujący obraz. Jest wyświetlany u góry obrazu, jeśli w interfejsie jest włączone pole „Renderuj tekst obrazu”. Używany również do celów wyszukiwarek."
 
 msgid "caption text"
-msgstr ""
+msgstr "tekst nagłówka"
 
 msgid ""
 "Caption text is displayed as secondary text on top of the image if 'Render "
-"image text' box is enabled in front-end for 'Carousel plugin' type (disabled "
-"for 'Banner box' type). It is also shown as a tooltip."
-msgstr ""
+"image text' box is enabled in front-end for 'Carousel plugin' type (disabled"
+" for 'Banner box' type). It is also shown as a tooltip."
+msgstr "Tekst nagłówka jest wyświetlany jako tekst dodatkowy na górze obrazu, jeśli pole „Renderuj tekst obrazu” jest włączone w interfejsie użytkownika dla typu „Wtyczka karuzeli” (wyłączone dla typu „Baner”). Jest również wyświetlany jako podpowiedź."
 
 msgid "external link"
-msgstr ""
+msgstr "link zewnętrzny"
 
 msgid ""
 "Set the external site that should be shown when this slide is clicked, if "
 "any."
-msgstr ""
+msgstr "Ustaw witrynę zewnętrzną, która ma być wyświetlana po kliknięciu tego slajdu, jeśli taka istnieje."
 
 msgid "image"
-msgstr ""
+msgstr "Obraz"
 
 msgid "The slide image to show."
-msgstr ""
+msgstr "Obraz slajdu do pokazania."
 
 msgid "Slides"
-msgstr ""
+msgstr "Slajdy"
 
 msgid "Carousel Plugin"
-msgstr ""
+msgstr "Wtyczka Karuzeli"
 
 msgid "Render image text"
-msgstr ""
+msgstr "Renderuj tekst obrazu"
 
 msgid "Display the text on top of the image."
-msgstr ""
+msgstr "Wyświetl tekst na górze obrazu."
 
 msgid "Banner Box"
-msgstr ""
+msgstr "Pola banerowe"
 
 msgid "Title"
-msgstr ""
+msgstr "Tytuł"
 
 msgid "Slides can be added after saving the Carousel."
-msgstr ""
+msgstr "Slajdy można dodać po zapisaniu karuzeli."
 
 msgid ""
 "This form is also used to define banner boxes. Marked fields only apply to "
 "banner boxes."
-msgstr ""
+msgstr "Ten formularz służy również do definiowania pól  banerowych. Zaznaczone pola dotyczą tylko pól banerowych."
 
 msgid "Adding the carousel to your site"
-msgstr ""
+msgstr "Dodawanie karuzeli do witryny"
 
 msgid ""
-"To add a carousel to your site, you must edit the page using the placeholder "
-"editor. To do this, go to your site and click the 'Edit page' on the page "
+"To add a carousel to your site, you must edit the page using the placeholder"
+" editor. To do this, go to your site and click the 'Edit page' on the page "
 "you want to add the carousel banner to. Then, select the placeholder to "
 "change and add a new plugin row and from the plugin dropdown and select "
 "'Carousel Plugin'. From 'Carousel' dropdown options choose the carousel you "
 "want to display. As a final step, save the plugin and publish changes."
-msgstr ""
+msgstr "Aby dodać karuzelę do swojej witryny, musisz edytować stronę za pomocą edytora zastępczego. Aby to zrobić, przejdź do swojej witryny i kliknij „Edytuj stronę” na stronie, do której chcesz dodać baner karuzeli. Następnie wybierz symbol zastępczy do zmiany i dodaj nowy wiersz wtyczki, a następnie z listy rozwijanej wtyczki wybierz opcję „Wtyczka karuzeli”. Z menu rozwijanego „Karuzela” wybierz karuzelę, którą chcesz wyświetlić. Na koniec zapisz wtyczkę i opublikuj zmiany."
 
 msgid "Learn more."
-msgstr ""
+msgstr "Dowiedz się więcej."
 
 msgid "Basic details"
-msgstr ""
+msgstr "Podstawowe szczegóły"
 
 msgid "Advanced options"
-msgstr ""
+msgstr "Opcje zaawansowane "
 
 msgid "Remove Slide"
-msgstr ""
+msgstr "Usuń slajd"
 
 msgid "Only image for default language is required."
-msgstr ""
+msgstr "Wymagany jest tylko obraz dla języka domyślnego."
 
 msgid ""
 "If external link is not set link will fallback to product link, category "
 "link or cms page link in this order."
-msgstr ""
+msgstr "Jeśli link zewnętrzny nie jest ustawiony, łącze będzie zastępowało łącze do produktu, łącze do kategorii lub łącze do strony CMS w tej kolejności."
 
 msgid "Add new slide"
-msgstr ""
+msgstr "Dodaj nowy slajd"
 
 msgid "New Carousel"
-msgstr ""
+msgstr "Nowa karuzela"
