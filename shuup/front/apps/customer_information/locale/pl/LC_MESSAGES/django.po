@@ -178,13 +178,13 @@ msgid "Billing information"
 msgstr "Informacje o płatnościach"
 
 msgid "Copy to shipping information"
-msgstr "Skopiuj do informacji o wysyłce"
+msgstr "Skopiuj do inf. o wysyłce"
 
 msgid "Shipping information"
 msgstr "Informacje o wysyłce"
 
 msgid "Copy to billing information"
-msgstr "Skopiuj do informacji rozliczeniowych"
+msgstr "Skopiuj do inf. rozliczeniowych"
 
 msgid "Edit customer information"
 msgstr "Edytuj informacje o kliencie"
