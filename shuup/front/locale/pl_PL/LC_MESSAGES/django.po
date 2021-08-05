@@ -255,10 +255,10 @@ msgid "Ordering for sort by price"
 msgstr "Sortuj według ceny"
 
 msgid "Price - Low to High"
-msgstr "Cena - od najniższej do najwyższej"
+msgstr "Cena: od najniższej"
 
 msgid "Price - High to Low"
-msgstr "Cena - od najwyższej do najniższej"
+msgstr "Cena: od najwyższej"
 
 msgid ""
 "Enable this to allow products to be sortable by price (from low to high; "
@@ -274,7 +274,7 @@ msgid "Ordering for sort by date created"
 msgstr "Sortuj według daty utworzenia"
 
 msgid "Date created"
-msgstr "Data utworzenia"
+msgstr "Najnowsze"
 
 msgid ""
 "Enable this to allow products to be sortable from newest to oldest products."
