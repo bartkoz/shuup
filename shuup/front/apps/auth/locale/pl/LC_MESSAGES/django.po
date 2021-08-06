@@ -58,7 +58,7 @@ msgid "Logged out"
 msgstr "Wylogowano"
 
 msgid "You have been logged out. Thank you for visiting!"
-msgstr "Zostałeś wylogowany. Dziękujemy za wizytę!"
+msgstr "Dziękujemy za wizytę!"
 
 msgid "Recover your password"
 msgstr "Odzyskaj hasło"
