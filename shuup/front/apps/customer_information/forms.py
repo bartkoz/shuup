@@ -34,7 +34,7 @@ from .notify_events import CompanyAccountCreated
 
 
 class PersonContactForm(forms.ModelForm):
-    language = LanguageFormField(label=_("Language"), required=False)
+    language = LanguageFormField(label=_("Language"), required=False, initial="pl", disabled=True)
 
     class Meta:
         model = PersonContact
