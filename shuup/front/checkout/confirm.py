@@ -104,11 +104,8 @@ class ConfirmPhase(CheckoutPhaseViewMixin, FormView):
             self.storage[key] = value
         if settings.USE_BASELINKER:
             self.verify_with_baselinker()
-            redis_connection = create_redis_connection()
-            if not redis_connection.get(self.basket.main_basket.basket_name):
-                self.update_baselinker_storage()
-                self.add_baselinker_order(form.cleaned_data.get('comment'))
-                redis_connection.set(self.basket.main_basket.basket_name, 'basket_key', ex=3600*24)
+            self.update_baselinker_storage()
+            self.add_baselinker_order(form.cleaned_data.get('comment'))
         self.process()
         self.basket.save()
         self.basket.storage.add_log_entry(self.basket, _("Starting to create order."))
