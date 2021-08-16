@@ -41,7 +41,7 @@ def get_context_data(context, request, category, product_filters):
     products = post_filter_products(request, category, products, data)
     products = cache_product_things(request, products)
     products = sort_products(request, category, products, data)
-    context["page_size"] = data.get("limit", 48)
+    context["page_size"] = data.get("limit", 24)
     context["products"] = products
 
     if "supplier" in data:
