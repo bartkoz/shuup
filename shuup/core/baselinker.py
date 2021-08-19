@@ -32,7 +32,7 @@ class BaseLinkerConnector:
     def __init__(self, shop: Shop):
         self.token = shop.bl_token.token
         self.storage = shop.bl_token.storage
-        # self.order_status_id = shop.bl_token.order_status_id
+        self.order_status_id = shop.bl_token.order_status_id
 
     def check_if_product_still_available(self, product_id: str, count: int = 1, variant_id: str = None):
         is_available = False
@@ -98,11 +98,10 @@ class BaseLinkerConnector:
 
     def add_order(self, basket, comment):
 
-        # TODO: hardcoded order status id
         payload = {'token': self.token,
                    'method': 'addOrder'}
         parameters = {
-            "order_status_id": "58521",
+            "order_status_id": self.order_status_id,
             "date_add": basket.order_date.timestamp(),
             "user_comments": comment if comment else '',
             "admin_comments": "",
@@ -148,26 +147,30 @@ class BaseLinkerConnector:
         perform_request(payload)
 
     def update_stocks(self):
-        payload = {'token': self.token,
-                   'method': 'getProductsList'}
-        parameters = {"storage_id": "bl_1"}
-        payload['parameters'] = json.dumps(parameters)
-        stock = perform_request(payload)
-        for product in stock['products']:
-            try:
-                prod = Product.objects.get(sku=product['sku'])
-                shop_prod = prod.shop_products.first()
-                current_price = Decimal(product['price_brutto'])
-                if current_price != shop_prod.default_price_value:
-                    shop_prod.default_price_value = Decimal(product['price_brutto'])
-                    shop_prod.save(update_fields=['default_price_value'])
-                stock_obj, _ = StockCount.objects.get_or_create(product_id=prod.id,
-                                                                supplier=shop_prod.suppliers.first())
-                stock_count = Decimal(product["quantity"])
-                if stock_count != stock_obj.physical_count:
-                    stock_obj.logical_count = stock_count
-                    stock_obj.physical_count = stock_count
-                    stock_obj.stock_value_value = shop_prod.default_price_value * Decimal(product["quantity"])
-                    stock_obj.save(update_fields=['logical_count', 'physical_count', 'stock_value_value'])
-            except Exception as e:
-                logger.error(e)
+        # TODO: quickfix
+        skus = Product.objects.values_list('sku', flat=True)
+        for _ in range(1, 5):
+            payload = {'token': self.token,
+                       'method': 'getProductsList'}
+            parameters = {"storage_id": "bl_1", "page": _}
+            payload['parameters'] = json.dumps(parameters)
+            stock = perform_request(payload)
+            for product in stock['products']:
+                if product['sku'] in skus:
+                    try:
+                        prod = Product.objects.get(sku=product['sku'])
+                        shop_prod = prod.shop_products.first()
+                        current_price = Decimal(product['price_brutto'])
+                        if current_price != shop_prod.default_price_value:
+                            shop_prod.default_price_value = Decimal(product['price_brutto'])
+                            shop_prod.save(update_fields=['default_price_value'])
+                        stock_obj, _ = StockCount.objects.get_or_create(product_id=prod.id,
+                                                                        supplier=shop_prod.suppliers.first())
+                        stock_count = Decimal(product["quantity"])
+                        if stock_count != stock_obj.physical_count:
+                            stock_obj.logical_count = stock_count
+                            stock_obj.physical_count = stock_count
+                            stock_obj.stock_value_value = shop_prod.default_price_value * Decimal(product["quantity"])
+                            stock_obj.save(update_fields=['logical_count', 'physical_count', 'stock_value_value'])
+                    except Exception as e:
+                        logger.error(e)
