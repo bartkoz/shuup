@@ -112,7 +112,8 @@ class BaseLinkerConnector:
             "payment_method": basket.payment_method.name,
             "payment_method_cod": "0",
             "paid": "1",
-            "delivery_method": None,
+            # TODO: with mutlivendor orders this will need change!!!!!
+            "delivery_method": next(basket.supplier_baskets)[1].shipping_method.name,
             "delivery_price": 0,
             "invoice_fullname": f'{basket.orderer.first_name} {basket.orderer.last_name}',
             "invoice_company": "",
@@ -136,6 +137,7 @@ class BaseLinkerConnector:
                                                                f'{basket.shipping_address.street3}',
                                            "delivery_city": basket.shipping_address.city,
                                            "delivery_postcode": basket.shipping_address.postal_code,
+                                           "phone": basket.shipping_address.phone,
                                            "delivery_country_code": basket.shipping_address.country.code,
                                            "delivery_point_id": "",
                                            "delivery_point_name": "",

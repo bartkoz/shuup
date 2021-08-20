@@ -172,10 +172,10 @@ class Address(NameMixin, ShuupModel):
         help_text=_("The business tax number. For example, EIN in the USA or VAT code in the EU."),
     )
     phone = models.CharField(
-        verbose_name=_("phone"), max_length=64, blank=True, help_text=_("The primary phone number for the address.")
+        verbose_name=_("phone"), max_length=64, help_text=_("The primary phone number for the address.")
     )
     email = models.EmailField(
-        verbose_name=_("email"), max_length=128, blank=True, help_text=_("The primary email for the address.")
+        verbose_name=_("email"), max_length=128, help_text=_("The primary email for the address.")
     )
     street = models.CharField(verbose_name=_("street"), max_length=255, help_text=_("The street address."))
     street2 = models.CharField(
@@ -185,7 +185,7 @@ class Address(NameMixin, ShuupModel):
         verbose_name=_("street (3)"), max_length=255, blank=True, help_text=_("Any additional street address line.")
     )
     postal_code = models.CharField(
-        verbose_name=_("postal code"), max_length=64, blank=True, help_text=_("The address postal/zip code.")
+        verbose_name=_("postal code"), max_length=64, help_text=_("The address postal/zip code.")
     )
     city = models.CharField(verbose_name=_("city"), max_length=255, help_text=_("The address city."))
     region_code = models.CharField(
