@@ -112,8 +112,6 @@ class BaseLinkerConnector:
             "payment_method": basket.payment_method.name,
             "payment_method_cod": "0",
             "paid": "1",
-            # TODO: with mutlivendor orders this will need change!!!!!
-            "delivery_method": next(basket.supplier_baskets)[1].shipping_method.name,
             "delivery_price": 0,
             "invoice_fullname": f'{basket.orderer.first_name} {basket.orderer.last_name}',
             "invoice_company": "",
@@ -126,8 +124,9 @@ class BaseLinkerConnector:
             "products": [self._build_product(line) for line in basket.get_lines()]
         }
         if basket.shipping_address:
+            # TODO: with mutlivendor orders this will need change!!!!!
             try:
-                delivery_method = basket.shipping_method.carrier.name
+                delivery_method = next(basket.supplier_baskets)[1].shipping_method.name
             except AttributeError:
                 delivery_method = None
             parameters = {**parameters, **{"delivery_method": delivery_method,
