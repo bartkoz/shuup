@@ -96,7 +96,7 @@ class BaseLinkerConnector:
             "weight": str(round(line.product.net_weight, 2))
         }
 
-    def add_order(self, basket, comment):
+    def add_order(self, basket, comment, supplier_basket):
 
         payload = {'token': self.token,
                    'method': 'addOrder'}
@@ -121,12 +121,11 @@ class BaseLinkerConnector:
             "invoice_postcode": "",
             "invoice_country_code": "",
             "want_invoice": "0",
-            "products": [self._build_product(line) for line in basket.get_lines()]
+            "products": [self._build_product(line) for line in supplier_basket.get_lines()]
         }
         if basket.shipping_address:
-            # TODO: with mutlivendor orders this will need change!!!!!
             try:
-                delivery_method = next(basket.supplier_baskets)[1].shipping_method.name
+                delivery_method = supplier_basket.shipping_method.name
             except AttributeError:
                 delivery_method = None
             parameters = {**parameters, **{"delivery_method": delivery_method,

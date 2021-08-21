@@ -14,7 +14,7 @@ from django.views.generic import FormView
 from logging import getLogger
 
 from shuup.apps.provides import get_provide_objects
-from shuup.core.baselinker import BaseLinkerConnector, create_redis_connection
+from shuup.core.baselinker import BaseLinkerConnector
 from shuup.core.models import OrderStatus
 from shuup.front.basket import get_basket_order_creator
 from shuup.front.checkout import CheckoutPhaseViewMixin
@@ -156,14 +156,14 @@ class ConfirmPhase(CheckoutPhaseViewMixin, FormView):
         bl_connector = BaseLinkerConnector(self.request.shop)
         for item in self.basket.get_lines():
             product_id = item.product.baselinker_id
-            quantity = int(item.quantity)
-            # TODO: make it work with variants
-            variant_id = None
             current_quantity = bl_connector.get_current_storage(product_id=item.product.baselinker_id)
             final_quantity = current_quantity - item.quantity
             bl_connector.update_product_quantity(product_id=product_id,
                                                  count=final_quantity)
 
     def add_baselinker_order(self, comment):
-        bl_connector = BaseLinkerConnector(self.request.shop)
-        bl_connector.add_order(self.basket, comment)
+        from shuup_multivendor.basket import SupplierBasket
+        for supplier_basket in self.basket.supplier_baskets:
+            if isinstance(supplier_basket, SupplierBasket):
+                bl_connector = BaseLinkerConnector(supplier_basket.shop)
+                bl_connector.add_order(self.basket, comment, supplier_basket)
