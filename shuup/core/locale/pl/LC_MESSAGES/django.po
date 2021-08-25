@@ -114,7 +114,7 @@ msgid "The name prefix. For example, Mr, Mrs, Ms, Dr, etc."
 msgstr "Przedrostek nazwy. Na przykład Pan, Pani, Pani, Dr itp."
 
 msgid "name"
-msgstr "nazwa"
+msgstr "Imie i nazwisko"
 
 msgid "The name for the address."
 msgstr "Nazwa dla adresu."

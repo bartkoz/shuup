@@ -1127,7 +1127,7 @@ msgstr "Dalej"
 
 #, python-format
 msgid "Items %(start_index)d to %(end_index)d of %(count)d total"
-msgstr "Przedmioty od %(start_index)d do %(end_index)d ze %(count)d"
+msgstr "Produkty od %(start_index)d do %(end_index)d ze %(count)d"
 
 msgid "Change visibility limit to"
 msgstr "Zmień limit widoczności na"

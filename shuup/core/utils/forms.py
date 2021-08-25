@@ -24,15 +24,11 @@ class MutableAddressForm(forms.ModelForm):
         model = MutableAddress
         fields = (
             "name",
-            "name_ext",
             "phone",
             "email",
             "street",
-            "street2",
             "postal_code",
             "city",
-            "region",
-            "region_code",
             "country",
         )
         labels = {"region_code": _("Region")}

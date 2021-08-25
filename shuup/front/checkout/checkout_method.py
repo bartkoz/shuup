@@ -40,7 +40,9 @@ class ChooseToRegisterForm(forms.Form):
 
 class CheckoutMethodPhase(CheckoutPhaseViewMixin, LoginView):
     identifier = "checkout_method"
-    title = _("Checkout Method Choice")
+    # todo: translations change
+    # title = _("Checkout Method Choice")
+    title = "Stwórz konto albo kontynuuj jako gość"
     template_name = "shuup/front/checkout/checkout_method.jinja"
     login_form_key = "login"
     checkout_method_choice_key = "checkout_method_choice"

@@ -5,7 +5,11 @@
             <tr>
                 <th>#</th>
                 <th>{% trans %}Date{% endtrans %}</th>
-                <th class="text-right">{% trans %}Total{% endtrans %}</th>
+                 {#
+                     todo: translations change
+                     <th class="text-right">{% trans %}Total{% endtrans %}</th>
+                 #}
+                <th class="text-right">Suma</th>
                 <th>{% trans %}Order Status{% endtrans %}</th>
                 <th>{% trans %}Shipping Status{% endtrans %}</th>
                 <th>{% trans %}Payment Status{% endtrans %}</th>
@@ -44,7 +48,12 @@
                         {{ order.get_payment_status_display() }}.
                     </p>
                     <p class="list-group-item-text">
-                        {% trans %}Total{% endtrans %} <strong>{{ order.taxful_total_price|money }}</strong>
+                     {#
+                     todo: translations change
+                        {% trans %}Total{% endtrans %}
+                    #}
+                        Suma
+                        <strong>{{ order.taxful_total_price|money }}</strong>
                     </p>
                 </li>
             {% endfor %}

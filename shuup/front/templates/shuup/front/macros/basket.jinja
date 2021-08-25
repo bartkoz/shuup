@@ -91,7 +91,10 @@
         {% if show_prices() and not xtheme.get("hide_prices") %}
             <div class="product-sum">
                 <h4 class="price text-right">
+                {# todo: translations change
                     <small>{% trans %}Total{% endtrans %}: </small>{{ line|price(allow_cache=False) }}
+                 #}
+                    <small>Suma: </small>{{ line|price(allow_cache=False) }}
                     {% if line.is_discounted and line.base_price.value > 0 %}
                         <br><small><s class="text-muted">{{ line|base_price(allow_cache=False) }}</s></small>
                     {% endif %}
@@ -161,7 +164,11 @@
             <div class="row">
                 <div class="col-xs-12 col-sm-6 pull-right">
                     <div class="row">
+                     {#
+                        todo: translations change
                         <div class="total-price-label col-xs-6"><strong>{% trans %}Total{% endtrans %}</strong></div>
+                     #}
+                        <div class="total-price-label col-xs-6"><strong>Suma</strong></div>
                         <div class="total-price text-right col-xs-6"><strong>{{ basket|total_price }}</strong></div>
                     </div>
                 </div>

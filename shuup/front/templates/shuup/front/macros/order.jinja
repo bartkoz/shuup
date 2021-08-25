@@ -71,13 +71,20 @@
                     <th class="text-left">{% trans %}Product{% endtrans %}</th>
                     <th class="text-right">{% trans %}Unit Price{% endtrans %}</th>
                     <th class="text-right">{% trans %}Quantity{% endtrans %}</th>
+                    {# todo: translations change
                     <th class="text-right">{% trans %}Total{% endtrans %}</th>
+                    #}
+                    <th class="text-right">Suma</th>
                 </tr>
             </thead>
             <tfoot>
                 <tr>
                     <td colspan="5" class="text-right">
+                    {# todo: translations change
                         <strong>{% trans %}Total{% endtrans %}:
+                    #}
+                        <strong>Suma:
+
                         <span class="total-price">{{ taxful_total_price|money }}</span></strong>
                         {% if taxless_total_price.amount != taxful_total_price.amount %}
                         <br>
