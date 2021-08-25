@@ -112,8 +112,8 @@ class BaseLinkerConnector:
             "payment_method": basket.payment_method.name,
             "payment_method_cod": "0",
             "paid": "1",
-            "delivery_price": 0,
-            "invoice_fullname": f'{basket.orderer.first_name} {basket.orderer.last_name}',
+            "delivery_price": "9.99",
+            "invoice_fullname": "",
             "invoice_company": "",
             "invoice_nip": "",
             "invoice_address": "",
@@ -121,6 +121,7 @@ class BaseLinkerConnector:
             "invoice_postcode": "",
             "invoice_country_code": "",
             "want_invoice": "0",
+            "extra_field_1": "Fishster",
             "products": [self._build_product(line) for line in basket.get_lines()]
         }
         if basket.shipping_address:
@@ -143,6 +144,16 @@ class BaseLinkerConnector:
                                            "delivery_point_address": "",
                                            "delivery_point_postcode": "",
                                            "delivery_point_city": "",
+                                           "delivery_price": "",
+                                           "invoice_fullname": basket.shipping_address.name,
+                                           "invoice_company": "",
+                                           "invoice_nip": "",
+                                           "invoice_address": f'{basket.shipping_address.street} '
+                                                               f'{basket.shipping_address.street2} '
+                                                               f'{basket.shipping_address.street3}',
+                                           "invoice_city": basket.shipping_address.city,
+                                           "invoice_postcode": basket.shipping_address.postal_code,
+                                           "invoice_country_code": basket.shipping_address.country.code,
                                            }}
         payload['parameters'] = json.dumps(parameters)
         perform_request(payload)
