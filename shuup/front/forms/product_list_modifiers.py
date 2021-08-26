@@ -26,9 +26,10 @@ from shuup.core.models import (
     Manufacturer,
     ProductVariationVariable,
     ShopProduct,
-    ShopProductVisibility,
+    ShopProductVisibility, Product,
 )
 from shuup.core.utils import context_cache
+from shuup.discounts.models import Discount
 from shuup.front.utils.sorts_and_filters import (
     ProductListFormModifier,
     _get_category_configuration_key,
@@ -36,6 +37,8 @@ from shuup.front.utils.sorts_and_filters import (
     get_form_field_label,
 )
 from shuup.utils.i18n import format_money
+
+
 
 
 class FilterWidget(forms.SelectMultiple):
@@ -705,6 +708,64 @@ class AttributeProductListFilter(SimpleProductListModifier):
             form.cleaned_data[attribute_query_string] = form.data.get(attribute_query_string).split(",")
 
         return super().clean_hook(form)
+
+
+class DiscountedProductListFilter(SimpleProductListModifier):
+    is_active_key = "filter_products_by_discounts"
+    is_active_label = _("Filter products by discounts")
+    ordering_key = "filter_products_by_discounts_ordering"
+    ordering_label = _("Ordering for filter by discounts")
+
+    def get_fields(self, request, category=None):
+        discounts = Discount.objects.available(shop=request.shop)
+
+        if category:
+            queryset = Product.objects.filter(
+                Q(product_discounts__in=discounts) | Q(shop_products__categories__category_discounts__in=discounts)
+            ).distinct()
+        else:
+            queryset = Product.objects.filter(
+                product_discounts__in=discounts
+            ).distinct()
+
+        if not queryset.exists():
+            return
+
+        return [
+            (
+                "discounts",
+                forms.ChoiceField(
+                    required=False, choices=[("discounted", "Tylko przecenione produkty")], label=get_form_field_label("discounts", _("Discounts")),
+                    widget=OneChoiceFilterWidget
+                ),
+            ),
+        ]
+
+    def get_filters(self, request, data):
+        discounts = data.get("discounts")
+        if discounts:
+            return Q(product_discounts__in=discounts)
+
+    def filter_products(self, request, products, data):
+        discounts = data.get("discounts")
+        if not discounts:
+            return products
+
+        queryset = Product.objects.filter(
+            product_discounts__in=discounts
+        ).distinct()
+        return queryset
+
+    def get_admin_fields(self):
+        default_fields = super(DiscountedProductListFilter, self).get_admin_fields()
+        default_fields[0][1].help_text = _(
+            "Enable this to allow products to be filterable by discounts for this category."
+        )
+        default_fields[1][1].help_text = _(
+            "Use a numeric value to set the order in which the discounts filters will appear on the "
+            "product listing page."
+        )
+        return default_fields
 
 
 def get_price_ranges(shop, min_price, max_price, range_step):
