@@ -39,8 +39,6 @@ from shuup.front.utils.sorts_and_filters import (
 from shuup.utils.i18n import format_money
 
 
-
-
 class FilterWidget(forms.SelectMultiple):
     def render(self, name, value, attrs=None, choices=(), renderer=None):
         if value is None:
@@ -735,7 +733,8 @@ class DiscountedProductListFilter(SimpleProductListModifier):
             (
                 "discounts",
                 forms.ChoiceField(
-                    required=False, choices=[("discounted", "Tylko przecenione produkty")], label=get_form_field_label("discounts", _("Discounts")),
+                    required=False, choices=[("discounted", "Tylko przecenione produkty")],
+                    label=get_form_field_label("discounts", _("Discounts")),
                     widget=OneChoiceFilterWidget
                 ),
             ),
@@ -747,9 +746,10 @@ class DiscountedProductListFilter(SimpleProductListModifier):
             return Q(product_discounts__in=discounts)
 
     def filter_products(self, request, products, data):
-        discounts = data.get("discounts")
-        if not discounts:
+        filter_discounts = data.get("discounts")
+        if not filter_discounts:
             return products
+        discounts = Discount.objects.available(shop=request.shop)
 
         queryset = Product.objects.filter(
             product_discounts__in=discounts
