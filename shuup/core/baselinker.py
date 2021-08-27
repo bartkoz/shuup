@@ -112,7 +112,7 @@ class BaseLinkerConnector:
             "payment_method": basket.payment_method.name,
             "payment_method_cod": "0",
             "paid": "1",
-            "delivery_price": "9.99",
+            "delivery_price": self.get_shipping_costs(next(basket.supplier_baskets)[1]),
             "want_invoice": "0",
             "extra_field_1": "Fishster",
             "products": [self._build_product(line) for line in basket.get_lines()]
@@ -178,3 +178,13 @@ class BaseLinkerConnector:
                             stock_obj.save(update_fields=['logical_count', 'physical_count', 'stock_value_value'])
                     except Exception as e:
                         logger.error(e)
+
+    def get_shipping_costs(self, basket):
+        costs = []
+        for component in basket.shipping_method.behavior_components.all():
+            try:
+                costs.append(getattr(component, 'price_value'))
+            except AttributeError:
+                continue
+        return float(sum(costs))
+
