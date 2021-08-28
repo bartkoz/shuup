@@ -741,8 +741,11 @@ class DiscountedProductListFilter(SimpleProductListModifier):
         ]
 
     def get_filters(self, request, data):
-        discounts = data.get("discounts")
-        if discounts:
+        filter_discounts = data.get("discounts")
+
+        if filter_discounts:
+            discounts = Discount.objects.available(shop=request.shop)
+
             return Q(product_discounts__in=discounts)
 
     def filter_products(self, request, products, data):
