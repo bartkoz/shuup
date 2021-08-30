@@ -21,6 +21,8 @@ from shuup.xtheme import TemplatedPlugin
 from shuup.xtheme.plugins.forms import GenericPluginForm, TranslatableField
 from shuup.xtheme.plugins.widgets import XThemeSelect2ModelChoiceField, XThemeSelect2ModelMultipleChoiceField
 
+from shuup.front.template_helpers.general import get_products_for_categories_with_children
+
 
 class HighlightType(Enum):
     NEWEST = "newest"
@@ -212,7 +214,7 @@ class ProductsFromCategoryPlugin(TemplatedPlugin):
         orderable_only = self.config.get("orderable_only", True)
 
         if category_id:
-            products = get_products_for_categories(
+            products = get_products_for_categories_with_children(
                 context, [category_id], n_products=count, orderable_only=orderable_only
             )
         return {"request": context["request"], "title": self.get_translated_value("title"), "products": products}

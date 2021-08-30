@@ -37,11 +37,11 @@ def get_login_form(request, id_prefix="quick-login"):
 
 def _group_list_items(group_list, number):
     for i in range(0, len(group_list), number):
-        yield tuple(group_list[i : i + number])
+        yield tuple(group_list[i: i + number])
 
 
 def _get_listed_products(  # noqa (C901)
-    context, n_products, ordering=None, filter_dict=None, orderable_only=True, extra_filters=None
+        context, n_products, ordering=None, filter_dict=None, orderable_only=True, extra_filters=None
 ):
     """
     Returns all products marked as listed that are determined to be
@@ -278,6 +278,46 @@ def get_products_for_categories(context, categories, n_products=6, orderable_onl
     products = cache_product_things(request, products)
     context_cache.set_cached_value(key, products, settings.SHUUP_TEMPLATE_HELPERS_CACHE_DURATION)
     return products
+
+
+@contextfunction
+def get_products_for_categories_with_children(context, categories, n_products=6, orderable_only=True):
+    request = context["request"]
+    key, products = context_cache.get_cached_value(
+        identifier="products_for_category",
+        item=cache_utils.get_products_for_category_cache_item(request.shop),
+        context=request,
+        n_products=n_products,
+        categories=categories,
+        orderable_only=orderable_only,
+    )
+
+    if products is not None:
+        return products
+
+    category = Category.objects.get(id=int(categories[0]))
+    print("dupa", category)
+
+    categories_with_children = children_of_category(category, [])
+
+    products = _get_listed_products(
+        context,
+        n_products,
+        ordering="?",
+        filter_dict={"variation_parent": None, "shop_products__categories__in": categories_with_children},
+        orderable_only=orderable_only,
+    )
+    products = cache_product_things(request, products)
+    context_cache.set_cached_value(key, products, settings.SHUUP_TEMPLATE_HELPERS_CACHE_DURATION)
+    return products
+
+
+def children_of_category(category, children):
+    if category.children:
+        for child in category.children.all():
+            children_of_category(child, children)
+        children.append(category)
+    return children
 
 
 @contextfunction
