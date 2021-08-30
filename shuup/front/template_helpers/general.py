@@ -296,7 +296,6 @@ def get_products_for_categories_with_children(context, categories, n_products=6,
         return products
 
     category = Category.objects.get(id=int(categories[0]))
-    print("dupa", category)
 
     categories_with_children = children_of_category(category, [])
 
