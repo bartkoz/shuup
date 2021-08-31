@@ -31,7 +31,9 @@ class MutableAddressForm(forms.ModelForm):
             "city",
             "country",
         )
-        labels = {"region_code": _("Region")}
+        # todo: translations change
+        labels = {"region_code": _("Region"),
+                  "name": "Imię i nazwisko"}
 
     def __init__(self, **kwargs):
         super(MutableAddressForm, self).__init__(**kwargs)
@@ -128,9 +130,9 @@ class RecoverPasswordForm(forms.Form):
 
     def process_user(self, user_to_recover, request):
         if (
-            not user_to_recover.has_usable_password()
-            or not hasattr(user_to_recover, "email")
-            or not user_to_recover.email
+                not user_to_recover.has_usable_password()
+                or not hasattr(user_to_recover, "email")
+                or not user_to_recover.email
         ):
             return False
 
