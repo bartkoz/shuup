@@ -107,7 +107,7 @@ class BaseLinkerConnector:
             "admin_comments": "",
             "phone": basket.shipping_address.phone,
             "email": basket.shipping_address.email,
-            "user_login": basket.orderer.user.username,
+            "user_login": basket.shipping_address.name,
             "currency": basket.currency,
             "payment_method": basket.payment_method.name,
             "payment_method_cod": "0",
