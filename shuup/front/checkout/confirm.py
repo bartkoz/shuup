@@ -169,5 +169,6 @@ class ConfirmPhase(CheckoutPhaseViewMixin, FormView):
         for supplier_tuple in self.basket.supplier_baskets:
             for supplier_basket in supplier_tuple:
                 if isinstance(supplier_basket, SupplierBasket):
-                    bl_connector = BaseLinkerConnector(supplier_basket.supplier)
-                    bl_connector.add_order(self.basket, comment, supplier_basket)
+                    if supplier_basket.get_lines():
+                        bl_connector = BaseLinkerConnector(supplier_basket.supplier)
+                        bl_connector.add_order(supplier_basket, comment)
