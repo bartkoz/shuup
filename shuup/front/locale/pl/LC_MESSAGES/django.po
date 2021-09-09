@@ -189,7 +189,7 @@ msgid "I accept the terms and conditions"
 msgstr "Akceptuję postanowienia i warunki sprzedaży"
 
 msgid "I want to receive marketing material"
-msgstr "Chcę otrzymywać materiały marketingowe"
+msgstr "Chcę otrzymywać informacje o nowych produktach i ofertach wędkarskich"
 
 msgid "Comment"
 msgstr "Komentarz"

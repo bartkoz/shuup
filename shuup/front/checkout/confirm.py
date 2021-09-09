@@ -144,8 +144,8 @@ class ConfirmPhase(CheckoutPhaseViewMixin, FormView):
         return order
 
     def verify_with_baselinker(self):
-        bl_connector = BaseLinkerConnector(self.request.shop)
         for item in self.basket.get_lines():
+            bl_connector = BaseLinkerConnector(item.shop_product.suppliers.first())
             is_available = bl_connector.check_if_product_still_available(product_id=item.product.baselinker_id,
                                                                          count=int(item.quantity))
             if not is_available:
@@ -153,8 +153,8 @@ class ConfirmPhase(CheckoutPhaseViewMixin, FormView):
                 raise forms.ValidationError(_(f'{item.product.name} nie jest juz dostępny, płatność nie została pobrana.'))
 
     def update_baselinker_storage(self):
-        bl_connector = BaseLinkerConnector(self.request.shop)
         for item in self.basket.get_lines():
+            bl_connector = BaseLinkerConnector(item.shop_product.suppliers.first())
             product_id = item.product.baselinker_id
             quantity = int(item.quantity)
             # TODO: make it work with variants
@@ -165,5 +165,9 @@ class ConfirmPhase(CheckoutPhaseViewMixin, FormView):
                                                  count=final_quantity)
 
     def add_baselinker_order(self, comment):
-        bl_connector = BaseLinkerConnector(self.request.shop)
-        bl_connector.add_order(self.basket, comment)
+        from shuup_multivendor.basket import SupplierBasket
+        for supplier_tuple in self.basket.supplier_baskets:
+            for supplier_basket in supplier_tuple:
+                if isinstance(supplier_basket, SupplierBasket):
+                    bl_connector = BaseLinkerConnector(supplier_basket.supplier)
+                    bl_connector.add_order(self.basket, comment, supplier_basket)
