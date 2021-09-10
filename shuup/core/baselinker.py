@@ -152,7 +152,7 @@ class BaseLinkerConnector:
     def update_stocks(self):
         # TODO: quickfix
         skus = Product.objects.values_list('sku', flat=True)
-        for _ in range(1, 5):
+        for _ in range(1, 10):
             payload = {'token': self.token,
                        'method': 'getProductsList'}
             parameters = {"storage_id": "bl_1", "page": _}
