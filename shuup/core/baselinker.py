@@ -105,9 +105,9 @@ class BaseLinkerConnector:
             "date_add": basket.order_date.timestamp(),
             "user_comments": comment if comment else '',
             "admin_comments": "",
-            "phone": basket.phone,
-            "email": basket.email,
-            "user_login": basket.full_name,
+            "phone": basket.shipping_address.phone,
+            "email": basket.shipping_address.email,
+            "user_login": basket.shipping_address.name,
             "currency": basket.currency,
             "payment_method": basket.payment_method.name,
             "payment_method_cod": "0",
@@ -152,7 +152,7 @@ class BaseLinkerConnector:
     def update_stocks(self):
         # TODO: quickfix
         skus = Product.objects.values_list('sku', flat=True)
-        for _ in range(1, 5):
+        for _ in range(1, 10):
             payload = {'token': self.token,
                        'method': 'getProductsList'}
             parameters = {"storage_id": "bl_1", "page": _}
