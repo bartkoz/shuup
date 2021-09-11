@@ -176,7 +176,7 @@ class BaseLinkerConnector:
                             stock_obj.stock_value_value = shop_prod.default_price_value * Decimal(product["quantity"])
                             stock_obj.save(update_fields=['logical_count', 'physical_count', 'stock_value_value'])
                     except Exception as e:
-                        logger.error(e)
+                        logger.debug(e)
 
     def get_shipping_costs(self, basket):
         costs = []
