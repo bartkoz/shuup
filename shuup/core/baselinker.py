@@ -165,6 +165,9 @@ class BaseLinkerConnector:
                         shop_prod = prod.shop_products.first()
                         current_price = Decimal(product['price_brutto'])
                         if current_price != shop_prod.default_price_value:
+                            if current_price == Decimal(0):
+                                logger.error(f'Price malfunction: {product}')
+                                continue
                             shop_prod.default_price_value = Decimal(product['price_brutto'])
                             shop_prod.save(update_fields=['default_price_value'])
                         stock_obj, _ = StockCount.objects.get_or_create(product_id=prod.id,

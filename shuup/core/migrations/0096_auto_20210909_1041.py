@@ -9,14 +9,4 @@ class Migration(migrations.Migration):
         ('shuup', '0095_fix_attr_m2m'),
     ]
 
-    operations = [
-        migrations.RemoveField(
-            model_name='baselinkertoken',
-            name='shop',
-        ),
-        migrations.AddField(
-            model_name='baselinkertoken',
-            name='shop',
-            field=models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, related_name='bl_token', to='shuup.Supplier'),
-        )
-    ]
+    operations = []

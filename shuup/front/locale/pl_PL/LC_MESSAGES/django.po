@@ -1385,7 +1385,7 @@ msgid "Error"
 msgstr "Błąd"
 
 msgid "Combination not available"
-msgstr "Nie można połączyć"
+msgstr "Produkt niedostępny"
 
 msgid "Open product page"
 msgstr "Otwórz stronę produktu"
