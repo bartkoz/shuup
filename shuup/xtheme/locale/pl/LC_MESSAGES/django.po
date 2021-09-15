@@ -336,7 +336,7 @@ msgid "%(name)s Ordering"
 msgstr "%(name)s Zamawianie"
 
 msgid "Ordering"
-msgstr "Zamawianie"
+msgstr "Kolejność"
 
 msgid "Social Media Links"
 msgstr "Linki do mediów społecznościowych"

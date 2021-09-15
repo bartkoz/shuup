@@ -138,7 +138,7 @@ msgid ""
 msgstr "Ustaw stronę internetową, która ma być wyświetlana po kliknięciu slajdu, jeśli taka istnieje."
 
 msgid "ordering"
-msgstr "zamawianie"
+msgstr "kolejność"
 
 msgid ""
 "Set the numeric order in which this slide should appear relative to other "
