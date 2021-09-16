@@ -1269,10 +1269,10 @@ msgid "This text will be shown alongside the product in the shop. It is useful f
 msgstr "Ten tekst będzie wyświetlany obok produktu w sklepie. Jest to przydatne do informowania klientów o specjalnych numerach magazynowych lub zamówieniach w przedsprzedaży. (Np. dostępne za miesiąc)"
 
 msgid "shop product"
-msgstr "kup produkt"
+msgstr "produkt sklepu"
 
 msgid "shop products"
-msgstr "kup produkty"
+msgstr "produkty sklepu"
 
 msgid "Error! Invalid display unit: Internal unit of the selected display unit does not match with the sales unit of the product."
 msgstr "Błąd! Nieprawidłowa jednostka wyświetlania: Jednostka wewnętrzna wybranej jednostki wyświetlania nie jest zgodna z jednostką sprzedaży produktu."
