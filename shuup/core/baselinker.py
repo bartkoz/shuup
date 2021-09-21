@@ -151,7 +151,7 @@ class BaseLinkerConnector:
 
     def update_stocks(self):
         # TODO: quickfix
-        skus = Product.objects.values_list('sku', flat=True)
+        ids = Product.objects.values_list('baselinker_id', flat=True)
         for _ in range(1, 10):
             payload = {'token': self.token,
                        'method': 'getProductsList'}
@@ -159,9 +159,9 @@ class BaseLinkerConnector:
             payload['parameters'] = json.dumps(parameters)
             stock = perform_request(payload)
             for product in stock['products']:
-                if product['sku'] in skus:
+                if product['product_id'] in ids:
                     try:
-                        prod = Product.objects.get(sku=product['sku'])
+                        prod = Product.objects.get(product_id=product['product_id'])
                         shop_prod = prod.shop_products.first()
                         current_price = Decimal(product['price_brutto'])
                         if current_price != shop_prod.default_price_value:
