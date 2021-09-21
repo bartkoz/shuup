@@ -161,7 +161,7 @@ class BaseLinkerConnector:
             for product in stock['products']:
                 if product['product_id'] in ids:
                     try:
-                        prod = Product.objects.get(product_id=product['product_id'])
+                        prod = Product.objects.get(baselinker_id=product['product_id'])
                         shop_prod = prod.shop_products.first()
                         current_price = Decimal(product['price_brutto'])
                         if current_price != shop_prod.default_price_value:
