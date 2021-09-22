@@ -234,7 +234,7 @@ msgid "A new customer will be created based on billing address."
 msgstr "Nowy klient zostanie utworzony na podstawie adresu rozliczeniowego."
 
 msgid "Customer Information"
-msgstr "Informacje dla klientów"
+msgstr "Twoje dane"
 
 msgid "Order Summary"
 msgstr "Podsumowanie zamówienia"
