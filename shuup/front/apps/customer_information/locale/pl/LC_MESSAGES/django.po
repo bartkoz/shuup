@@ -24,7 +24,7 @@ msgid "Shuup Frontend - Customer Information Editing"
 msgstr "Shuup Frontend - edycja informacji o kliencie"
 
 msgid "Customer Information"
-msgstr "Informacje dla klientów"
+msgstr "Twoje dane"
 
 msgid "Company Information"
 msgstr "informacje o firmie"
@@ -33,7 +33,7 @@ msgid "Edit Company Information."
 msgstr "Edytuj informacje o firmie."
 
 msgid "Address Book"
-msgstr "Książka adresowa"
+msgstr "Adresy"
 
 msgid "Language"
 msgstr "Język"
@@ -125,7 +125,7 @@ msgid "Basic Information"
 msgstr "Podstawowe informacje"
 
 msgid "Name"
-msgstr "Nazwa"
+msgstr "Imię i nazwisko"
 
 msgid "Email"
 msgstr "E-mail"

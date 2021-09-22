@@ -3703,7 +3703,7 @@ msgid "Address Information"
 msgstr "Informacje adresowe"
 
 msgid "Picture"
-msgstr "Obrazek"
+msgstr "Zdjęcie"
 
 msgid "Text"
 msgstr "Tekst"
@@ -4235,7 +4235,7 @@ msgid "Here is an example of the data that would be submitted right now."
 msgstr "Oto przykład danych, które byłyby teraz przesłane."
 
 msgid "Customer Information"
-msgstr "Informacje dla klientów"
+msgstr "Twoje dane"
 
 #, python-format
 msgid "Send a password reset email to %(email)s?"
