@@ -39,7 +39,7 @@ msgid "Status"
 msgstr "Status"
 
 msgid "Total price"
-msgstr "Razem"
+msgstr "Suma"
 
 msgid "Details"
 msgstr "Szczegóły"
@@ -72,7 +72,7 @@ msgid "Ordered by"
 msgstr "Zamówione przez"
 
 msgid "Creator"
-msgstr "Twórca"
+msgstr "Nazwa użytkownika"
 
 msgid "Phone"
 msgstr "Telefon"
@@ -114,13 +114,13 @@ msgid "Billing Address"
 msgstr "Adres do płatności"
 
 msgid "Status history"
-msgstr ""
+msgstr "Historia zmian statusów"
 
 msgid "When"
-msgstr ""
+msgstr "Data"
 
 msgid "Description"
-msgstr ""
+msgstr "Opis"
 
 msgid "Order Contents"
 msgstr "Zawartość zamówienia"
