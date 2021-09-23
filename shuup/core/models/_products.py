@@ -377,6 +377,7 @@ class Product(TaxableItem, AttributableMixin, TranslatableModel):
                                      help_text=_("Unikalny identyfikator produktu w Baselinker. "
                                                  "Można go znależć wchodząc w Magazyn BaseLinker > Produkty "
                                                  "(druga kolumna od lewej)"),)
+    is_presale = models.BooleanField(default=False, verbose_name=_("Przedsprzedaż"))
     translations = TranslatedFields(
         name=models.CharField(
             max_length=256,

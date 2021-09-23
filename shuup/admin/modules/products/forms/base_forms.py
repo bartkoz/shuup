@@ -88,7 +88,8 @@ class ProductBaseForm(MultiLanguageModelForm):
             "name",
             "slug",
             "variation_name",
-            "baselinker_id"
+            "baselinker_id",
+            "is_presale"
         )
         widgets = {
             "keywords": forms.TextInput(),
