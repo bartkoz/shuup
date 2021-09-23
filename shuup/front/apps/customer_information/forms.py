@@ -54,7 +54,6 @@ class PersonContactForm(forms.ModelForm):
         super(PersonContactForm, self).__init__(*args, **kwargs)
         for field in ("first_name", "last_name", "email"):
             self.fields[field].required = True
-        self.initial["language"] = self.instance.language
 
         if settings.SHUUP_CUSTOMER_INFORMATION_ALLOW_PICTURE_UPLOAD:
             self.fields["picture"].widget = PictureDnDUploaderWidget(clearable=True)
