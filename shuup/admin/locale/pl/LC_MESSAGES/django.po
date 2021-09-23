@@ -3682,7 +3682,7 @@ msgid "Ordered by"
 msgstr "Zamówione przez"
 
 msgid "Creator"
-msgstr "Twórca"
+msgstr "Nazwa użytkownika"
 
 msgid "Tax number"
 msgstr "NIP"
