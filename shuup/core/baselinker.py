@@ -255,6 +255,6 @@ class BaseLinkerConnector:
         product_media = ProductMedia.objects.create(kind=ProductMediaKind.IMAGE,
                                                     file=file.file,
                                                     product=product)
-        if iterator == 1:
+        if iterator == 0:
             product.primary_image = product_media
             product.save()
