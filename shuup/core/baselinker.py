@@ -218,6 +218,7 @@ class BaseLinkerConnector:
                         product_obj, created = Product.objects.update_or_create(tax_class_id=1,
                                                                                 sku=product['sku'],
                                                                                 sales_unit_id=1,
+                                                                                type_id=1,
                                                                                 defaults={
                                                                                     'baselinker_id': product[
                                                                                         'product_id'], })
