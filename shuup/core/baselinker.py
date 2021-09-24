@@ -1,15 +1,19 @@
+import io
 import json
 import logging
+import uuid
 from decimal import Decimal
 from urllib.parse import urlparse
 
 import redis
 import requests
 from django.conf import settings
+from django.core.files.images import ImageFile
 
-from shuup.core.models import Shop, Product, ShopProduct
+from shuup.core.models import Shop, Product, ShopProduct, ProductMedia, ProductMediaKind
 from shuup.simple_supplier.models import StockCount
 from .slugify import slugify
+from ..utils.filer import filer_image_from_upload, ensure_media_file
 
 logger = logging.getLogger(__name__)
 
@@ -161,10 +165,6 @@ class BaseLinkerConnector:
             payload['parameters'] = json.dumps(parameters)
             stock = perform_request(payload)
 
-            bl_ids = Product.objects.exclude(baselinker_id=None).values_list('baselinker_id', flat=True)
-            ids_to_add = [x['product_id'] for x in stock['products'] if x['product_id'] not in bl_ids]
-            self.sync_prods_with_bl(ids_to_add)
-
             for product in stock['products']:
                 if product['product_id'] in ids:
                     try:
@@ -196,40 +196,65 @@ class BaseLinkerConnector:
                 continue
         return float(sum(costs))
 
-    def sync_prods_with_bl(self, ids_list):
-        payload = {'token': self.token,
-                   'method': 'getProductsData'}
-        parameters = {"storage_id": "bl_1", "products": ids_list}
-        payload['parameters'] = json.dumps(parameters)
-        data = perform_request(payload)
-        product_list = data.get('products')
-        if product_list:
-            for product in product_list.values():
-                if product['product_id'] in ids_list:
-                    product_obj, _ = Product.objects.update_or_create(tax_class_id=1,
-                                                                      sku=product['sku'],
-                                                                      sales_unit_id=1,
-                                                                      defaults={
-                                                                          'baselinker_id': product['product_id'], })
-                    product_obj.set_current_language('pl')
-                    description = ''
-                    for desc in ['description',
-                                 'description_extra1',
-                                 'description_extra2',
-                                 'description_extra3',
-                                 'description_extra4']:
-                        if product[desc]:
-                            description += f"{product[desc]}\n"
-                    product_obj.name = product['name']
-                    product_obj.description = description
-                    product_obj.slug = slugify(product['name'])
-                    product_obj.save()
-                    if not product_obj.shop_products.exists():
-                        shop_product_obj = ShopProduct.objects.create(default_price_value=product['price_brutto'],
-                                                                      product_id=product_obj.pk,
-                                                                      shop_id=1)
-                        shop_product_obj.set_current_language('pl')
-                        shop_product_obj.name = product['name']
-                        shop_product_obj.slug = slugify(shop_product_obj.name)
-                        shop_product_obj.suppliers.add(self.shop)
-                        shop_product_obj.save()
+    def sync_prods_with_bl(self):
+        for _ in range(1, 10):
+            payload = {'token': self.token,
+                       'method': 'getProductsList'}
+            parameters = {"storage_id": "bl_1", "page": _}
+            payload['parameters'] = json.dumps(parameters)
+            stock = perform_request(payload)
+
+            bl_ids = Product.objects.exclude(baselinker_id=None).values_list('baselinker_id', flat=True)
+            ids_to_add = [x['product_id'] for x in stock['products'] if x['product_id'] not in bl_ids]
+            payload = {'token': self.token,
+                       'method': 'getProductsData'}
+            parameters = {"storage_id": "bl_1", "products": ids_to_add}
+            payload['parameters'] = json.dumps(parameters)
+            data = perform_request(payload)
+            product_list = data.get('products')
+            if product_list:
+                for product in product_list.values():
+                    if product['product_id'] in ids_to_add:
+                        product_obj, created = Product.objects.update_or_create(tax_class_id=1,
+                                                                                sku=product['sku'],
+                                                                                sales_unit_id=1,
+                                                                                defaults={
+                                                                                    'baselinker_id': product[
+                                                                                        'product_id'], })
+                        product_obj.set_current_language('pl')
+                        description = ''
+                        for desc in ['description',
+                                     'description_extra1',
+                                     'description_extra2',
+                                     'description_extra3',
+                                     'description_extra4']:
+                            if product[desc]:
+                                description += f"{product[desc]}\n"
+                        product_obj.name = product['name']
+                        product_obj.description = description
+                        product_obj.slug = slugify(product['name'])
+                        product_obj.save()
+                        if created:
+                            for iterator, product_image_url in enumerate(product['images']):
+                                self._download_and_save_image(product_image_url, product_obj, iterator)
+                        if not product_obj.shop_products.exists():
+                            shop_product_obj = ShopProduct.objects.create(default_price_value=product['price_brutto'],
+                                                                          product_id=product_obj.pk,
+                                                                          shop_id=1)
+                            shop_product_obj.set_current_language('pl')
+                            shop_product_obj.name = product['name']
+                            shop_product_obj.slug = slugify(shop_product_obj.name)
+                            shop_product_obj.suppliers.add(self.shop)
+                            shop_product_obj.save()
+
+    def _download_and_save_image(self, url, product, iterator):
+        img = requests.get(url).content
+        image = ImageFile(io.BytesIO(img), name=str(uuid.uuid4()))
+        filer_file = filer_image_from_upload(request=None, path=None, upload_data=image)
+        file = ensure_media_file(Shop.objects.first(), filer_file)
+        product_media = ProductMedia.objects.create(kind=ProductMediaKind.IMAGE,
+                                                    file=file.file,
+                                                    product=product)
+        if iterator == 1:
+            product.primary_image = product_media
+            product.save()

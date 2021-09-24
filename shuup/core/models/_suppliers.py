@@ -151,6 +151,7 @@ class Supplier(ModuleInterface, TranslatableShuupModel):
         ),
     )
     deleted = models.BooleanField(default=False, verbose_name=_("deleted"))
+    fetch_all_db = models.BooleanField(default=False)
 
     search_fields = ["name"]
     objects = SupplierQueryset.as_manager()
