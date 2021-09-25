@@ -10,7 +10,7 @@ import requests
 from django.conf import settings
 from django.core.files.images import ImageFile
 
-from shuup.core.models import Shop, Product, ShopProduct, ProductMedia, ProductMediaKind
+from shuup.core.models import Shop, Product, ShopProduct, ProductMedia, ProductMediaKind, Supplier
 from shuup.simple_supplier.models import StockCount
 from .slugify import slugify
 from ..utils.filer import filer_image_from_upload, ensure_media_file
@@ -34,7 +34,7 @@ def create_redis_connection():
 
 class BaseLinkerConnector:
 
-    def __init__(self, shop: Shop):
+    def __init__(self, shop: Supplier):
         self.shop = shop
         self.token = shop.bl_token.token
         self.storage = shop.bl_token.storage
@@ -256,6 +256,7 @@ class BaseLinkerConnector:
         product_media = ProductMedia.objects.create(kind=ProductMediaKind.IMAGE,
                                                     file=file.file,
                                                     product=product)
+        product_media.shops.add(Shop.objects.first())
         if iterator == 0:
             product.primary_image = product_media
             product.save()
