@@ -164,8 +164,10 @@ class BaseLinkerConnector:
             parameters = {"storage_id": "bl_1", "page": _}
             payload['parameters'] = json.dumps(parameters)
             stock = perform_request(payload)
-
-            for product in stock['products']:
+            products_list = stock['products']
+            if not products_list:
+                break
+            for product in products_list:
                 if product['product_id'] in ids:
                     try:
                         prod = Product.objects.get(baselinker_id=product['product_id'])
@@ -203,7 +205,9 @@ class BaseLinkerConnector:
             parameters = {"storage_id": "bl_1", "page": _}
             payload['parameters'] = json.dumps(parameters)
             stock = perform_request(payload)
-
+            products_list = stock['products']
+            if not products_list:
+                break
             bl_ids = Product.objects.exclude(baselinker_id=None).values_list('baselinker_id', flat=True)
             ids_to_add = [x['product_id'] for x in stock['products'] if x['product_id'] not in bl_ids]
             payload = {'token': self.token,
