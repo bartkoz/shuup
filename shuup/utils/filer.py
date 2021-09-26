@@ -268,6 +268,7 @@ def ensure_media_file(shop, file):
     media_file, created = MediaFile.objects.get_or_create(file=file)
     if not media_file.shops.filter(id=shop.id).exists():
         media_file.shops.add(shop)
+    return media_file
 
 
 def get_or_create_folder(shop, path, user=None):
