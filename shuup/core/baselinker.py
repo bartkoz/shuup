@@ -264,3 +264,10 @@ class BaseLinkerConnector:
         if iterator == 0:
             product.primary_image = product_media
             product.save()
+
+    def get_categories(self):
+        payload = {'token': self.token,
+                   'method': 'getCategories'}
+        parameters = {"storage_id": "bl_1"}
+        payload['parameters'] = json.dumps(parameters)
+        return perform_request(payload)
