@@ -197,6 +197,12 @@ class BaseLinkerConnector:
         return float(sum(costs))
 
     def sync_prods_with_bl(self):
+        if not self.shop.bl_categories:
+            return
+        allowed_categories = []
+        for category_id, category_data in self.shop.bl_categories.items():
+            if category_data['active']:
+                allowed_categories.append(category_id)
         for _ in range(1, 10):
             payload = {'token': self.token,
                        'method': 'getProductsList'}
@@ -214,7 +220,7 @@ class BaseLinkerConnector:
             product_list = data.get('products')
             if product_list:
                 for product in product_list.values():
-                    if product['product_id'] in ids_to_add:
+                    if product['product_id'] in ids_to_add and product['category_id'] in allowed_categories:
                         product_obj, created = Product.objects.update_or_create(tax_class_id=1,
                                                                                 sku=product['sku'],
                                                                                 sales_unit_id=1,
