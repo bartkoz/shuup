@@ -12,6 +12,7 @@ from django.db.models import Count
 
 from shuup.core.models import Shop, Product, ShopProduct, ProductMedia, ProductMediaKind, Supplier
 from shuup.core.slugify import slugify
+from shuup.simple_supplier.models import StockCount
 from shuup.utils.filer import filer_image_from_upload, ensure_media_file
 from project.celery import app
 
