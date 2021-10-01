@@ -8,9 +8,9 @@ import requests
 from bs4 import BeautifulSoup
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.files.images import ImageFile
+from django.db.models import Count
 
 from shuup.core.models import Shop, Product, ShopProduct, ProductMedia, ProductMediaKind, Supplier
-from shuup.simple_supplier.models import StockCount
 from shuup.core.slugify import slugify
 from shuup.utils.filer import filer_image_from_upload, ensure_media_file
 from project.celery import app
@@ -190,38 +190,57 @@ class BaseLinkerConnector:
         perform_request(payload)
 
     def update_stocks(self):
-        # TODO: quickfix
-        ids = Product.objects.values_list('baselinker_id', flat=True)
         for _ in range(1, 100):
             payload = {'token': self.token,
                        'method': 'getProductsList'}
             parameters = {"storage_id": "bl_1", "page": _}
             payload['parameters'] = json.dumps(parameters)
             stock = perform_request(payload)
-            products_list = stock['products']
-            if not products_list:
+            if not stock.get('products'):
                 break
-            for product in products_list:
-                if product['product_id'] in ids:
-                    try:
-                        prod = Product.objects.get(baselinker_id=product['product_id'])
-                        shop_prod = prod.shop_products.first()
-                        current_price = Decimal(product['price_brutto'])
-                        if current_price != shop_prod.default_price_value:
-                            if current_price == Decimal(0):
-                                continue
-                            shop_prod.default_price_value = Decimal(product['price_brutto'])
-                            shop_prod.save(update_fields=['default_price_value'])
-                        stock_obj, _ = StockCount.objects.get_or_create(product_id=prod.id,
-                                                                        supplier=shop_prod.suppliers.first())
-                        stock_count = Decimal(product["quantity"])
-                        if stock_count != stock_obj.physical_count:
-                            stock_obj.logical_count = stock_count
-                            stock_obj.physical_count = stock_count
-                            stock_obj.stock_value_value = shop_prod.default_price_value * Decimal(product["quantity"])
-                            stock_obj.save(update_fields=['logical_count', 'physical_count', 'stock_value_value'])
-                    except Exception as e:
-                        logger.debug(e)
+            products_list = [x['product_id'] for x in stock['products']]
+            bl_data = {x['product_id']: x for x in stock['products']}
+
+            shop_products_id_map = {
+                x['product__baselinker_id']: x['pk'] for x in
+                                    ShopProduct.objects.filter(
+                                        product__baselinker_id__in=products_list
+                                    ).values('pk', 'product__baselinker_id')
+            }
+            data = [
+                {'id': database_id, 'default_price_value': Decimal(bl_data[bl_id]['price_brutto'])}
+                for bl_id, database_id
+                in shop_products_id_map.items()
+                if bl_data[bl_id]['price_brutto'] != 0
+            ]
+            ShopProduct.objects.bulk_update([ShopProduct(**kv) for kv in data], ['default_price_value'])
+
+            for product in Product.objects.annotate(
+                    Count('simple_supplier_stock_count')
+            ).exclude(
+                simple_supplier_stock_count__count__gt=0
+            ):
+                try:
+                    StockCount.objects.create(
+                        product=product, supplier=product.shop_products.first().suppliers.first()
+                    )
+                except Exception as e:
+                    continue
+
+            stock_id_map = {
+                x['product__baselinker_id']: x['pk'] for x in
+                StockCount.objects.filter(
+                    product__baselinker_id__in=products_list
+                ).values('pk', 'product__baselinker_id')
+            }
+            data = [
+                {'id': database_id,
+                 'logical_count': Decimal(bl_data[bl_id]["quantity"]),
+                 'physical_count': Decimal(bl_data[bl_id]["quantity"])}
+                for bl_id, database_id
+                in stock_id_map.items()
+            ]
+            StockCount.objects.bulk_update([StockCount(**kv) for kv in data], ['logical_count', 'physical_count'])
 
     def get_shipping_costs(self, basket):
         costs = []
@@ -250,7 +269,7 @@ class BaseLinkerConnector:
             parameters = {"storage_id": "bl_1", "page": _}
             payload['parameters'] = json.dumps(parameters)
             stock = perform_request(payload)
-            products_list = stock['products']
+            products_list = stock.get('products')
             if not products_list:
                 break
             ids_to_add.extend([x['product_id'] for x in stock['products'] if x['product_id'] not in bl_ids])
