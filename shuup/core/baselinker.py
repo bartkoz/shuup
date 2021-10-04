@@ -19,6 +19,11 @@ from project.celery import app
 logger = logging.getLogger(__name__)
 
 
+def create_redis_connection():
+    return redis.StrictRedis(
+        host=urlparse(getattr(settings, 'CELERY_BROKER_URL')).netloc.split(':')[0], port=6379, db=0
+    )
+
 @app.task(rate_limit='5/s')
 def create_single_product(product, ids_to_add, supplier_id):
     connector = BaseLinkerConnector(Supplier.objects.get(pk=supplier_id))
