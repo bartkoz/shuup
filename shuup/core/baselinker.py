@@ -298,7 +298,7 @@ class BaseLinkerConnector:
 
     def _download_and_save_image(self, url, product, iterator):
         img = requests.get(url).content
-        image = ImageFile(io.BytesIO(img), name=str(uuid.uuid4()))
+        image = ImageFile(io.BytesIO(img), name=f'{str(uuid.uuid4())}.jpg')
         filer_file = filer_image_from_upload(request=None, path=None, upload_data=image)
         file = ensure_media_file(Shop.objects.first(), filer_file)
         product_media = ProductMedia.objects.create(kind=ProductMediaKind.IMAGE,

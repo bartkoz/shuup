@@ -70,12 +70,7 @@ class ProductModule(AdminModule):
                 r"^products/(?P<pk>\d+)/copy/$",
                 "shuup.admin.modules.products.views.copy.ProductCopyView",
                 name="shop_product.copy",
-            ),
-           admin_url(
-                r"^products/baselinker-categories/$",
-                "shuup.admin.modules.products.views.baselinker.BaselinkerCategoryView",
-                name="shop_product.baselinker_categories",
-            ),
+            )
         ] + get_edit_and_list_urls(
             url_prefix="^products",
             view_template="shuup.admin.modules.products.views.Product%sView",
