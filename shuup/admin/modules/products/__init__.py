@@ -71,6 +71,11 @@ class ProductModule(AdminModule):
                 "shuup.admin.modules.products.views.copy.ProductCopyView",
                 name="shop_product.copy",
             ),
+           admin_url(
+                r"^products/baselinker-categories/$",
+                "shuup.admin.modules.products.views.baselinker.BaselinkerCategoryView",
+                name="shop_product.baselinker_categories",
+            ),
         ] + get_edit_and_list_urls(
             url_prefix="^products",
             view_template="shuup.admin.modules.products.views.Product%sView",
@@ -85,6 +90,12 @@ class ProductModule(AdminModule):
                 url="shuup_admin:shop_product.list",
                 category=PRODUCTS_MENU_CATEGORY,
                 ordering=1,
+            ),
+            MenuEntry(
+                text="Baselinker",
+                icon="fa fa-cube",
+                url="shuup_admin:shop_product.baselinker_categories",
+                category=PRODUCTS_MENU_CATEGORY,
             )
         ]
 

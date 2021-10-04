@@ -13,7 +13,7 @@ from django import forms
 from django.conf import settings
 from django.contrib import messages
 from django.core.exceptions import ValidationError
-from django.forms import BaseModelFormSet
+from django.forms import BaseModelFormSet, ModelForm, CheckboxInput
 from django.forms.formsets import DEFAULT_MAX_NUM, DEFAULT_MIN_NUM
 from django.utils.translation import ugettext, ugettext_lazy as _
 from filer.models import Image
@@ -50,6 +50,7 @@ from shuup.core.models import (
     ShopProduct,
     Supplier,
 )
+from shuup.core.models._baselinker import BaseLinkerCategories
 from shuup.utils.i18n import get_language_name
 from shuup.utils.multilanguage_model_form import MultiLanguageModelForm, to_language_codes
 
@@ -559,3 +560,18 @@ class ProductImageMediaFormSet(ProductMediaFormSet):
                 enabled=True, public=True, kind=ProductMediaKind.IMAGE
             ).first()
             Product.objects.filter(id=self.product.pk).update(primary_image=fallback_primary_image)
+
+
+class BaselinkerCategoryForm(ModelForm):
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for category_id, category_data in self.instance.categories.items():
+            self.fields[category_id] = forms.BooleanField()
+            self.fields[category_id].initial = category_data['active']
+            self.fields[category_id].label = category_data['name']
+            self.fields[category_id].required = False
+
+    class Meta:
+        model = BaseLinkerCategories
+        exclude = ('categories', 'shop')
