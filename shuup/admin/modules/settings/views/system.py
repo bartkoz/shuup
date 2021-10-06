@@ -83,5 +83,5 @@ class ResetElasticSearchView(View):
 
     def get(self, request, *args, **kwargs):
         if request.user.is_superuser:
-            call_command('recreate_elasticsearch')
+            call_command('reindex_elasticsearch')
         return HttpResponseRedirect(reverse('dashboard'))
