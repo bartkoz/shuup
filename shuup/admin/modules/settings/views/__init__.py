@@ -6,6 +6,6 @@
 # LICENSE file in the root directory of this source tree.
 
 from .list import ListSettingsView
-from .system import SystemSettingsView
+from .system import SystemSettingsView, ResetCacheView, ResetElasticSearchView
 
-__all__ = ["ListSettingsView", "SystemSettingsView"]
+__all__ = ["ListSettingsView", "SystemSettingsView", "ResetCacheView", "ResetElasticSearchView"]

@@ -5,10 +5,15 @@
 # This source code is licensed under the OSL-3.0 license found in the
 # LICENSE file in the root directory of this source tree.
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+from django.core.management import call_command
 from django.db.transaction import atomic
+from django.http import HttpResponseRedirect
 from django.shortcuts import redirect
+from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic import FormView
+from django.views import View
 
 from shuup.admin.form_part import FormPartsViewMixin
 from shuup.admin.modules.settings.forms.system import OrderSettingsFormPart
@@ -64,3 +69,19 @@ class SystemSettingsView(FormPartsViewMixin, FormView):
             view=self,
         )
         return context
+
+
+class ResetCacheView(View):
+
+    def get(self, request, *args, **kwargs):
+        if request.user.is_superuser:
+            call_command('clear_cache')
+        return HttpResponseRedirect(reverse('dashboard'))
+
+
+class ResetElasticSearchView(View):
+
+    def get(self, request, *args, **kwargs):
+        if request.user.is_superuser:
+            call_command('recreate_elasticsearch')
+        return HttpResponseRedirect(reverse('dashboard'))

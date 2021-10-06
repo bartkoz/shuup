@@ -19,7 +19,9 @@ class SettingsModule(AdminModule):
     breadcrumbs_menu_entry = MenuEntry(name, url="shuup_admin:settings.list")
 
     def get_urls(self):
-        return [admin_url("^settings/$", "shuup.admin.modules.settings.views.SystemSettingsView", name="settings.list")]
+        return [admin_url("^settings/$", "shuup.admin.modules.settings.views.SystemSettingsView", name="settings.list"),
+                admin_url("^settings/reset_cache$", "shuup.admin.modules.settings.views.ResetCacheView", name="settings.reset_cache"),
+                admin_url("^settings/reset_elasticsearch$", "shuup.admin.modules.settings.views.ResetElasticSearchView", name="settings.reset_elastic")]
 
     def get_menu_entries(self, request):
         return [
@@ -29,5 +31,19 @@ class SettingsModule(AdminModule):
                 url="shuup_admin:settings.list",
                 category=SETTINGS_MENU_CATEGORY,
                 ordering=4,
+            ),
+            MenuEntry(
+                text='Reset cache',
+                icon="fa fa-home",
+                url="shuup_admin:settings.reset_cache",
+                category=SETTINGS_MENU_CATEGORY,
+                ordering=99999,
+            ),
+            MenuEntry(
+                text='Reset ES',
+                icon="fa fa-home",
+                url="shuup_admin:settings.reset_elastic",
+                category=SETTINGS_MENU_CATEGORY,
+                ordering=99999,
             )
         ]
