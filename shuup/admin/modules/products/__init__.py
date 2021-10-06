@@ -86,12 +86,6 @@ class ProductModule(AdminModule):
                 category=PRODUCTS_MENU_CATEGORY,
                 ordering=1,
             ),
-            MenuEntry(
-                text="Baselinker",
-                icon="fa fa-cube",
-                url="shuup_admin:shop_product.baselinker_categories",
-                category=PRODUCTS_MENU_CATEGORY,
-            )
         ]
 
     def get_search_results(self, request, query):
