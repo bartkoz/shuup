@@ -80,7 +80,7 @@
             )
             $.ajax({
                 type: "post",
-                url: "sklep/checkout/" + window.currentPhase + "/",
+                url: "/sklep/checkout/" + window.currentPhase + "/",
                 data: data,
                 success: function (response) {
                     $("#ajax_content").html(response);
@@ -102,7 +102,7 @@
                 )
                 $.ajax({
                     type: "get",
-                    url: "sklep/checkout/" + phase + "/",
+                    url: "/sklep/checkout/" + phase + "/",
                     success: function (response) {
                         $("#ajax_content").html(response);
                     },
