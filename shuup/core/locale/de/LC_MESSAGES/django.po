@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Shuup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-06-02 18:31+0000\n"
-"PO-Revision-Date: 2021-06-04 08:29+0000\n"
+"POT-Creation-Date: 2021-08-03 19:01+0000\n"
+"PO-Revision-Date: 2021-08-09 16:36+0000\n"
 "Last-Translator: Melanie Missbach <melanie@buyhappy.de>\n"
 "Language-Team: German (http://www.transifex.com/shuup/shuup/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -1009,11 +1009,32 @@ msgstr "öffentliche Bezeichnung"
 msgid "The name shown to the customers in shop front."
 msgstr "Der Name, der den Kunden im Marktplatz angezeigt wird."
 
+msgid "allowed next statuses"
+msgstr "Zulässige nächste Status"
+
+msgid "is visible for the user"
+msgstr "ist für den Benutzer sichtbar"
+
+msgid "Indicates whether this status is visible for the customers"
+msgstr "Zeigt an, ob dieser Status für Kunden sichtbar ist"
+
 msgid "order status"
 msgstr "Bestellstatus"
 
 msgid "order statuses"
 msgstr "Bestellstatus"
+
+msgid "order id"
+msgstr "Auftragsnummer"
+
+msgid "previous order status"
+msgstr "vorheriger Bestellstatus"
+
+msgid "next order status"
+msgstr "nächster Bestellstatus"
+
+msgid "creating user"
+msgstr "Benutzer anlegen"
 
 msgid "order identifier"
 msgstr "Bestellbezeichnung"
@@ -1026,9 +1047,6 @@ msgstr "E-Mail-Adresse"
 
 msgid "customer groups"
 msgstr "Kundengruppen"
-
-msgid "creating user"
-msgstr "Benutzer anlegen"
 
 msgid "modifier user"
 msgstr "Benutzer-Modifikator"
@@ -1117,6 +1135,9 @@ msgstr "Der neue Versandstatus wird auf %(shipping_status)s gesetzt."
 msgid "New payment status is set to: %(payment_status)s."
 msgstr "Der neue Zahlungsstatus wird auf %(payment_status)s gesetzt."
 
+msgid "Error! Can not change to this status"
+msgstr "Fehler! Es kann nicht in diesen Status gewechselt werden."
+
 msgid "gateway ID"
 msgstr "Gateway-ID"
 
@@ -1143,6 +1164,77 @@ msgstr "Cache-Eintrag"
 
 msgid "cache entries"
 msgstr "Cache-Einträge"
+
+msgid "Monday"
+msgstr "Montag"
+
+msgid "Tuesday"
+msgstr "Dienstag"
+
+msgid "Wednesday"
+msgstr "Mittwoch"
+
+msgid "Thursday"
+msgstr "Donnerstag"
+
+msgid "Friday"
+msgstr "Freitag"
+
+msgid "Saturday"
+msgstr "Samstag"
+
+msgid "Sunday"
+msgstr "Sonntag"
+
+msgid "Pricing module identifier"
+msgstr "Preismodulkennung"
+
+msgid "price"
+msgstr "Preis"
+
+msgid "The indexed product price"
+msgstr "Der indexierte Produktpreis"
+
+msgid "is available"
+msgstr "ist verfügbar"
+
+msgid ""
+"Whether the product is available for purchasing. This status is managed by "
+"the supplier module."
+msgstr "Ob das Produkt zum Kauf verfügbar ist. Dieser Status wird im Lieferantenmodul verwaltet."
+
+msgid "Catalog rule"
+msgstr "Katalogregel"
+
+msgid "The rule in which this price is available."
+msgstr "Die Regel, in der dieser Preis verfügbar ist."
+
+msgid "Discount module identifier"
+msgstr "Kennung des Rabattmoduls"
+
+msgid "Valid start date and time"
+msgstr "Gültiges Startdatum und -uhrzeit"
+
+msgid "Valid end date and time"
+msgstr "Gültiges Enddatum und -uhrzeit"
+
+msgid "Valid start hour"
+msgstr "Gültige Startzeit"
+
+msgid "Valid end hour"
+msgstr "Gültige Endzeit"
+
+msgid "Valid weekday"
+msgstr "Gültiger Wochentag"
+
+msgid "discounted price"
+msgstr "reduzierter Preis"
+
+msgid "The indexed discounted product price."
+msgstr "Der indexierte, reduzierte Produktpreis"
+
+msgid "The rule in which this discounted price is available."
+msgstr "Die Regel, in der dieser reduzierte Preis verfügbar ist."
 
 msgid "documentation"
 msgstr "Dokumentation"

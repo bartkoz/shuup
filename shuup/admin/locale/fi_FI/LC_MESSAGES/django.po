@@ -27,9 +27,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Shuup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-06-17 12:49+0000\n"
-"PO-Revision-Date: 2021-06-17 15:19+0000\n"
-"Last-Translator: Transifex Bot <>\n"
+"POT-Creation-Date: 2021-08-03 19:12+0000\n"
+"PO-Revision-Date: 2021-08-03 19:13+0000\n"
+"Last-Translator: Christian Hess\n"
 "Language-Team: Finnish (Finland) (http://www.transifex.com/shuup/shuup/language/fi_FI/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -132,6 +132,9 @@ msgstr "Viestit"
 msgid "Attributes"
 msgstr "Attribuutit"
 
+msgid "Allow the user to select attributes in admin."
+msgstr ""
+
 #, python-format
 msgid "%s has been deleted."
 msgstr "%s poistettu."
@@ -168,6 +171,9 @@ msgstr "Lisää tuoteryhmä tuotteiden ryhmittelyä varten."
 
 msgid "New category"
 msgstr "Uusi kategoria"
+
+msgid "Allow the user to select categories in admin."
+msgstr ""
 
 msgid "Can't use this category as a parent for this shop."
 msgstr "Tätä kategoriaa ei voi käyttää tälle kaupalle."
@@ -262,6 +268,15 @@ msgstr[1] "%(count)s jäsentä poistettu."
 
 msgid "Number of Members"
 msgstr "Jäsenien määrä"
+
+msgid "Allow the user to select contacts in admin."
+msgstr ""
+
+msgid "Allow the user to select person contacts in admin."
+msgstr ""
+
+msgid "Allow the user to select company contacts in admin."
+msgstr ""
 
 #, python-format
 msgid "User `%(bind_user)s` already has a contact."
@@ -509,6 +524,9 @@ msgstr "Muutettu"
 msgid "Manufacturers"
 msgstr "Valmistajat"
 
+msgid "Allow the user to select manufacturers in admin."
+msgstr ""
+
 msgid ""
 "Select shops for this manufacturer. Keep it blank to share with all shops."
 msgstr "Valitse kaupat tälle valmistajalle. Jätä tyhjäksi jakaaksesi kaikkien kauppojen kesken."
@@ -718,6 +736,9 @@ msgstr "Lokimerkinnät"
 
 msgid "Admin comment/notes"
 msgstr "Pääkäyttäjän kommentti/muistiinpanot"
+
+msgid "Status history"
+msgstr ""
 
 msgid "Set Status"
 msgstr "Aseta tila"
@@ -993,14 +1014,23 @@ msgstr "Rooli"
 msgid "Default"
 msgstr "Oletus"
 
+msgid "Allowed Next Status"
+msgstr ""
+
+msgid "Visible For Customer"
+msgstr ""
+
+msgid "No allowed next status."
+msgstr ""
+
 msgid "Granular Permission Groups"
 msgstr "Hienojakoiset käyttöoikeusryhmät"
 
+msgid "Allow the user to select permission group in admin."
+msgstr ""
+
 msgid "The Permission Group name."
 msgstr "Käyttöoikeusryhmän nimi"
-
-msgid "Set the users that belong to this Permission Group."
-msgstr "Aseta käyttöoikeusryhmän jäsenet."
 
 msgid "Create new Permission Group"
 msgstr "Luo uusi Käyttöoikeusryhmä"
@@ -1010,6 +1040,9 @@ msgstr "Tuotetyypit"
 
 msgid "Product types"
 msgstr "Tuotetyypit"
+
+msgid "Allow the user to select product types in admin."
+msgstr ""
 
 #, python-format
 msgid "%s has been marked deleted."
@@ -1048,6 +1081,12 @@ msgstr "Tuo"
 
 msgid "Add a product to see it in your store"
 msgstr "Lisää tuote kauppaan"
+
+msgid "Allow the user to select products in admin."
+msgstr ""
+
+msgid "Allow the user to select shop_products in admin."
+msgstr ""
 
 msgid "Primary Product Image"
 msgstr "Päätuotekuva"
@@ -1334,6 +1373,15 @@ msgstr "Ohjeet"
 msgid "Additional instructions shown in the shop checkout process."
 msgstr "Lisätiedot, jotka näytetään ostotapahtuman yhteydessä."
 
+msgid "Allow the user to select carriers in admin."
+msgstr ""
+
+msgid "Allow the user to select payment methods in admin."
+msgstr ""
+
+msgid "Allow the user to select shipping methods in admin."
+msgstr ""
+
 msgid "Shipping Methods"
 msgstr "Toimitustavat"
 
@@ -1473,6 +1521,9 @@ msgstr "Aseta \"{}\" aktiiviseksi kaupaksi"
 msgid "Available Shops [currently active: {}]"
 msgstr "Saatavilla olevat kaupat [tällä hetkellä aktiivinen: {}]"
 
+msgid "Allow the user to select shops in admin."
+msgstr ""
+
 msgid ""
 "This field cannot be changed since there are existing orders for this shop."
 msgstr "Tätä kenttää ei voi muuttaa, koska tälle kaupalle on olemassa tilauksia."
@@ -1553,6 +1604,9 @@ msgstr "Lisää osoite, jotta saat maksuja"
 msgid "Default Tax Class"
 msgstr "Oletusveroluokka"
 
+msgid "Allow the user to select suppliers in admin."
+msgstr ""
+
 msgid "Select shops for this supplier. Keep it blank to share with all shops."
 msgstr "Valitse kaupat tälle toimittajalle. Jätä tyhjäksi, mikäli se jaetaan kaikkien kauppojen kesken."
 
@@ -1605,6 +1659,15 @@ msgstr "Asiakasveroryhmät"
 msgid "Tax Classes"
 msgstr "Veroluokat"
 
+msgid "Allow the user to select customer tax groups in admin."
+msgstr ""
+
+msgid "Allow the user to select taxes in admin."
+msgstr ""
+
+msgid "Allow the user to select tax classes in admin."
+msgstr ""
+
 msgid "Rate"
 msgstr "Määrä"
 
@@ -1636,6 +1699,9 @@ msgid "Allow the user to impersonate a staff user."
 msgstr ""
 
 msgid "Allow the user to change the user list columns."
+msgstr ""
+
+msgid "Allow the user to select users in admin."
 msgstr ""
 
 msgid "Add some users to help manage your shop"
@@ -1784,14 +1850,6 @@ msgstr "Etunimi"
 
 msgid "Last Name"
 msgstr "Sukunimi"
-
-#, python-format
-msgid "First Name: %s"
-msgstr "Etunimi: %s"
-
-#, python-format
-msgid "Last Name: %s"
-msgstr "Sukunimi: %s"
 
 msgid "The two password fields didn't match."
 msgstr "Salasanakentät eivät täsmää"
@@ -3045,6 +3103,9 @@ msgid ""
 "Let’s go through some of the things you can do here. Click next to begin."
 msgstr "Käydään läpi joitakin juttuja, joita voit tehdä täällä. Klikkaa seuraava aloittaaksesi."
 
+msgid "shop logo"
+msgstr ""
+
 msgid "Date"
 msgstr "Päivämäärä"
 
@@ -3225,6 +3286,15 @@ msgid ""
 msgstr "Toimitettuja toimituksia ei tule poistaa. Poistaminen vaikuttaa tuotteet fyysiseen saldoon. Vahvista poisto."
 
 msgid "Do you want to mark this shipment as sent?"
+msgstr ""
+
+msgid "When"
+msgstr ""
+
+msgid "The order has no status history."
+msgstr ""
+
+msgid "Are you sure you want to delete this order status history item?"
 msgstr ""
 
 msgid "Line #"
@@ -3784,3 +3854,6 @@ msgstr "Salasana on vaihdettu."
 #, python-format
 msgid "Couldn't get selections for %s."
 msgstr "%s valintoja ei voitu hakea"
+
+msgid "Selector not found."
+msgstr ""

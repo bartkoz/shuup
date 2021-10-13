@@ -9,9 +9,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Shuup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-06-02 18:31+0000\n"
-"PO-Revision-Date: 2021-06-02 23:24+0000\n"
-"Last-Translator: Christian Hess\n"
+"POT-Creation-Date: 2021-08-03 19:01+0000\n"
+"PO-Revision-Date: 2021-08-05 14:24+0000\n"
+"Last-Translator: Transifex Bot <>\n"
 "Language-Team: Portuguese (Brazil) (http://www.transifex.com/shuup/shuup/language/pt_BR/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1010,11 +1010,32 @@ msgstr "nome público"
 msgid "The name shown to the customers in shop front."
 msgstr "O nome mostrado aos clientes na frente da loja."
 
+msgid "allowed next statuses"
+msgstr ""
+
+msgid "is visible for the user"
+msgstr ""
+
+msgid "Indicates whether this status is visible for the customers"
+msgstr ""
+
 msgid "order status"
 msgstr "status do pedido"
 
 msgid "order statuses"
 msgstr "status do pedido"
+
+msgid "order id"
+msgstr ""
+
+msgid "previous order status"
+msgstr ""
+
+msgid "next order status"
+msgstr ""
+
+msgid "creating user"
+msgstr "usuário criação"
 
 msgid "order identifier"
 msgstr "identificador do pedido"
@@ -1027,9 +1048,6 @@ msgstr "endereço de e-mail"
 
 msgid "customer groups"
 msgstr "grupos de clientes"
-
-msgid "creating user"
-msgstr "usuário criação"
 
 msgid "modifier user"
 msgstr "usuário modificação"
@@ -1118,6 +1136,9 @@ msgstr "O novo status de envio é definido como: %(shipping_status)s."
 msgid "New payment status is set to: %(payment_status)s."
 msgstr "O novo status de pagamento é definido como: %(payment_status)s."
 
+msgid "Error! Can not change to this status"
+msgstr ""
+
 msgid "gateway ID"
 msgstr "ID do gateway"
 
@@ -1144,6 +1165,77 @@ msgstr "entrada de cache"
 
 msgid "cache entries"
 msgstr "entradas de cache"
+
+msgid "Monday"
+msgstr ""
+
+msgid "Tuesday"
+msgstr ""
+
+msgid "Wednesday"
+msgstr ""
+
+msgid "Thursday"
+msgstr ""
+
+msgid "Friday"
+msgstr ""
+
+msgid "Saturday"
+msgstr ""
+
+msgid "Sunday"
+msgstr ""
+
+msgid "Pricing module identifier"
+msgstr ""
+
+msgid "price"
+msgstr ""
+
+msgid "The indexed product price"
+msgstr ""
+
+msgid "is available"
+msgstr ""
+
+msgid ""
+"Whether the product is available for purchasing. This status is managed by "
+"the supplier module."
+msgstr ""
+
+msgid "Catalog rule"
+msgstr ""
+
+msgid "The rule in which this price is available."
+msgstr ""
+
+msgid "Discount module identifier"
+msgstr ""
+
+msgid "Valid start date and time"
+msgstr ""
+
+msgid "Valid end date and time"
+msgstr ""
+
+msgid "Valid start hour"
+msgstr ""
+
+msgid "Valid end hour"
+msgstr ""
+
+msgid "Valid weekday"
+msgstr ""
+
+msgid "discounted price"
+msgstr ""
+
+msgid "The indexed discounted product price."
+msgstr ""
+
+msgid "The rule in which this discounted price is available."
+msgstr ""
 
 msgid "documentation"
 msgstr "documentação"

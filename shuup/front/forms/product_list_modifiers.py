@@ -18,7 +18,7 @@ from django.utils.translation import get_language, ugettext_lazy as _
 from itertools import chain
 
 from shuup import configuration as shuup_config
-from shuup.admin.forms.fields import Select2MultipleField
+from shuup.admin.forms.fields import ObjectSelect2MultipleField
 from shuup.core.models import (
     Attribute,
     AttributeType,
@@ -132,21 +132,12 @@ class SortProductListByName(SimpleProductListModifier):
             ),
         ]
 
-    def sort_products(self, request, products, data):
+    def sort_products_queryset(self, request, queryset, data):
         sort = data.get("sort", "name_a")
-
-        def _get_product_name_lowered_stripped(product):
-            return product.name.lower().strip()
-
-        if not sort:
-            sort = ""
-
-        key = sort[:-2] if sort.endswith(("_a", "_d")) else sort
-        if key == "name":
-            sorter = _get_product_name_lowered_stripped
+        if sort in ("name_a", "name_d"):
             reverse = bool(sort.endswith("_d"))
-            products = sorted(products, key=sorter, reverse=reverse)
-        return products
+            queryset = queryset.translated(get_language()).order_by(f"{'-' if reverse else ''}translations__name")
+        return queryset
 
     def get_admin_fields(self):
         default_fields = super(SortProductListByName, self).get_admin_fields()
@@ -182,24 +173,17 @@ class SortProductListByPrice(SimpleProductListModifier):
             ),
         ]
 
-    def sort_products(self, request, products, data):
+    def sort_products_queryset(self, request, queryset, data):
         sort = data.get("sort")
 
-        def _get_product_price_getter_for_request(request):
-            def _get_product_price(product):
-                return product.get_price(request)
-
-            return _get_product_price
-
         if not sort:
-            sort = ""
+            return queryset
 
         key = sort[:-2] if sort.endswith(("_a", "_d")) else sort
         if key == "price":
             reverse = bool(sort.endswith("_d"))
-            sorter = _get_product_price_getter_for_request(request)
-            return sorted(products, key=sorter, reverse=reverse)
-        return products
+            queryset = queryset.order_by(f"{'-' if reverse else ''}catalog_price")
+        return queryset
 
     def get_admin_fields(self):
         default_fields = super(SortProductListByPrice, self).get_admin_fields()
@@ -236,21 +220,16 @@ class SortProductListByCreatedDate(SimpleProductListModifier):
             ),
         ]
 
-    def sort_products(self, request, products, data):
+    def sort_products_queryset(self, request, queryset, data):
         sort = data.get("sort")
-
-        def _get_product_created_on_datetime(product):
-            return product.created_on
-
         if not sort:
-            sort = ""
+            return queryset
 
         key = sort[:-2] if sort.endswith(("_a", "_d")) else sort
         if key == "created_date":
-            sorter = _get_product_created_on_datetime
             reverse = bool(sort.endswith("_d"))
-            products = sorted(products, key=sorter, reverse=reverse)
-        return products
+            queryset = queryset.order_by(f"{'-' if reverse else ''}created_on")
+        return queryset
 
     def get_admin_fields(self):
         default_fields = super(SortProductListByCreatedDate, self).get_admin_fields()
@@ -461,8 +440,8 @@ class ProductVariationFilter(SimpleProductListModifier):
 
         variation_values = defaultdict(set)
         for variation in ProductVariationVariable.objects.filter(
-                Q(product__shop_products__categories=category),
-                ~Q(product__shop_products__visibility=ShopProductVisibility.NOT_VISIBLE),
+            Q(product__shop_products__categories=category),
+            ~Q(product__shop_products__visibility=ShopProductVisibility.NOT_VISIBLE),
         ):
             for value in variation.values.all():
                 # TODO: Use ID here instead of this "trick"
@@ -482,7 +461,7 @@ class ProductVariationFilter(SimpleProductListModifier):
         context_cache.set_cached_value(key, fields)
         return fields
 
-    def get_queryset(self, queryset, data):
+    def get_products_queryset(self, request, queryset, data):
         if not any([key for key in data.keys() if key.startswith("variation")]):
             return
 
@@ -543,7 +522,7 @@ class ProductPriceFilter(SimpleProductListModifier):
             ),
         ]
 
-    def filter_products(self, request, products, data):
+    def get_products_queryset(self, request, queryset, data):
         selected_range = data.get("price_range")
         if not selected_range:
             return products
@@ -564,7 +543,7 @@ class ProductPriceFilter(SimpleProductListModifier):
         return filtered_products
 
     def get_admin_fields(self):
-        default_fields = super(ProductPriceFilter, self).get_admin_fields()
+        default_fields = super().get_admin_fields()
         default_fields[0][1].help_text = _(
             "Enable this to allow products to be filtered by price. "
             "Prices will be listed in groups from the price range minimum to price range maximum in increments of "
@@ -606,8 +585,8 @@ class AttributeProductListFilter(SimpleProductListModifier):
     product_attr_key = "filter_products_by_product_attribute_field"
 
     def _build_attribute_filter_fields(
-            self,
-            attributes,
+        self,
+        attributes,
     ):
         fields = []
         for attribute in attributes:
@@ -650,9 +629,9 @@ class AttributeProductListFilter(SimpleProductListModifier):
         return attributes
 
     def get_fields(
-            self,
-            request,
-            category=None,
+        self,
+        request,
+        category=None,
     ):
         if category:
             attributes = self._get_attributes_from_category(request.shop, category)
@@ -671,7 +650,7 @@ class AttributeProductListFilter(SimpleProductListModifier):
 
         return attribute_query_strings
 
-    def get_queryset(self, queryset, data):
+    def get_products_queryset(self, request, queryset, data):
         # Filter for chosen attributes
         attributes = self._get_product_attribute_query_strings(data)
         if not attributes:
@@ -690,7 +669,7 @@ class AttributeProductListFilter(SimpleProductListModifier):
         active, ordering = super(AttributeProductListFilter, self).get_admin_fields()
         active[1].help_text = _("Allow products to be filtered according to their attributes.")
 
-        attributes = Select2MultipleField(
+        attributes = ObjectSelect2MultipleField(
             model=Attribute,
             label=_("Attributes that can be filtered"),
             required=False,

@@ -11,6 +11,7 @@ import pytest
 import selenium
 from selenium.webdriver.common.keys import Keys
 
+from shuup.core.models import ShipmentStatus
 from shuup.testing.browser_utils import (
     click_element,
     initialize_admin_browser_test,
@@ -83,7 +84,8 @@ def _test_create_full_refund(browser, live_server, order):
     order.refresh_from_db()
     assert not order.taxful_total_price
     assert order.is_paid()
-    assert order.is_fully_shipped()
+    assert not order.is_fully_shipped()
+    assert not order.shipments.exists()
 
 
 def _test_refund_view(browser, live_server, order):

@@ -8,10 +8,12 @@
 import six
 from django.db.models import Q
 from django.utils.translation import ugettext_lazy as _
+from typing import Iterable
 
 from shuup.admin.base import AdminModule, MenuEntry, SearchResult
 from shuup.admin.menu import PRODUCTS_MENU_CATEGORY
 from shuup.admin.shop_provider import get_shop
+from shuup.admin.utils.object_selector import get_object_selector_permission_name
 from shuup.admin.utils.urls import admin_url, derive_model_url, get_edit_and_list_urls, get_model_url
 from shuup.admin.views.home import HelpBlockCategory, SimpleHelpBlock
 from shuup.core.models import Category
@@ -86,3 +88,9 @@ class CategoryModule(AdminModule):
 
     def get_model_url(self, object, kind, shop=None):
         return derive_model_url(Category, "shuup_admin:category", object, kind)
+
+    def get_extra_permissions(self) -> Iterable[str]:
+        return [get_object_selector_permission_name(Category)]
+
+    def get_permissions_help_texts(self) -> Iterable[str]:
+        return {get_object_selector_permission_name(Category): _("Allow the user to select categories in admin.")}

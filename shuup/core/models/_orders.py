@@ -56,8 +56,8 @@ from ._order_utils import get_order_identifier, get_reference_number
 from ._products import Product
 from ._suppliers import Supplier
 
-if TYPE_CHECKING:
-    from ._service_base import Service, ServiceBehaviorComponent  # noqa (F401)
+if TYPE_CHECKING:  # pragma: no cover
+    from ._service_base import Service, ServiceBehaviorComponent  # noqa: F401
 
 
 class PaymentStatus(Enum):
@@ -822,7 +822,7 @@ class Order(MoneyPropped, models.Model):
     def can_create_shipment(self):
         return self.get_unshipped_products() and not self.is_canceled() and self.shipping_address
 
-    # TODO: Rethink either the usage of shipment parameter or renaming the method for 2.0
+    # TODO: Rethink either the usage of shipment parameter or renaming the method for 3.0
     @atomic
     def create_shipment(self, product_quantities, supplier=None, shipment=None):
         """
@@ -1094,12 +1094,27 @@ class Order(MoneyPropped, models.Model):
 
     def update_shipping_status(self):
         status_before_update = self.shipping_status
-        if not self.get_unshipped_products():
-            self.shipping_status = ShippingStatus.FULLY_SHIPPED
-        elif self.shipments.all_except_deleted().count():
-            self.shipping_status = ShippingStatus.PARTIALLY_SHIPPED
+        shipments_count = self.shipments.all_except_deleted().out_only().count()
+        has_unshipped_products = bool(self.get_unshipped_products())
+
+        if shipments_count:
+            # get the number of sent shipments
+            sent_shipments_count = self.get_sent_shipments().out_only().count()
+
+            # nothing sent
+            if sent_shipments_count == 0:
+                self.shipping_status = ShippingStatus.NOT_SHIPPED
+
+            # fully sent and no unshipped products
+            elif shipments_count == sent_shipments_count and not has_unshipped_products:
+                self.shipping_status = ShippingStatus.FULLY_SHIPPED
+
+            else:
+                self.shipping_status = ShippingStatus.PARTIALLY_SHIPPED
+
         else:
             self.shipping_status = ShippingStatus.NOT_SHIPPED
+
         if status_before_update != self.shipping_status:
             self.add_log_entry(
                 _("New shipping status is set to: %(shipping_status)s." % {"shipping_status": self.shipping_status})

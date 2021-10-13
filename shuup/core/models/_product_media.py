@@ -61,7 +61,7 @@ class ProductMedia(TranslatableModel):
     )
     ordering = models.IntegerField(
         default=0,
-        verbose_name=_("ordering"),
+        verbose_name=_("display order"),
         help_text=_(
             "You can assign numerical values to images to tell the order in which they "
             "shall be displayed on the product page."
@@ -72,6 +72,7 @@ class ProductMedia(TranslatableModel):
     public = models.BooleanField(
         default=True,
         blank=True,
+        db_index=True,
         verbose_name=_("public (shown on product page)"),
         help_text=_("Enable this if you want this image be shown on the product page. Enabled by default."),
     )

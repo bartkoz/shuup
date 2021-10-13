@@ -10,22 +10,103 @@ List all changes after the last release here (newer on top). Each change on a se
 
 ### Fixed
 
-- Reports: prevent tables from overflowing to the right in pdf reports.
+- Admin: fix typo in product cloner
+
+## [3.1.0] - 2021-08-17
 
 ### Changed
 
+- Pull translations from Transifex
+- BREAKING: Suppliers with no supplier modules cannot create shipments
+- Core: Category.get_hierarchy now ignores any None objects
+
+### Fixed
+
+- Core: fix reindex migration to active the default language
+
+## [3.0.0] - 2021-08-16
+
+### Added
+
+- Core: allow saving encrypted configurations
+- Core: add new Catalog API to index and fetch products with annotated price and discounted price
+
+### Fixed
+
+- Admin: do not break when it's not possible to create shipments
+- Admin: Fix primary buttons, list buttons, and filter dropdowns to use css variables
+- Discounts: show the `exclude_selected_category` field in admin
+
+### Changed
+
+- Admin: Do not let users to set value with decimals while adjusting stock quantity if the sales unit doesn't permit.
+- Core: Block an attempt to delete a service provider that still has associated shipping or payment methods.
+- Core: consider an order fully shipped only when all out shipments are sent
+- Front: improve SEO by tuning description meta tag to product, category and CMS pages
+- Importer: index product after importing it
+- BREAKING: Core: Discounts are not cumulative anymore. The best discounted price returned by discount modules is considered.
+- BREAKING: Discounts: Remove coupon code, availability exception and exclude selected contact group from the Discount model.
+  All the related feature were also removed.
+- BREAKING: Front: replaced the `ProductListFormModifier.sort_products`
+  with a new method: `ProductListFormModifier.sort_products_queryset` and
+  removed `ProductListFormModifier.filter_products` and `ProductListFormModifier.filter_products`
+  and `ProductListFormModifier.get_queryset`.
+- Front: user the new Catalog API on every place that retrieve products from the database
+- Xtheme: user the new Catalog API on plugins that retrieve products
+- Core: Edit verbose name for ProductMedia.ordering to be more intuitive.
+
+## [2.14.2] - 2021-08-10
+
+### Fixed
+
+- Admin: Fix auth_block macro to have logo as optional parameter
+- General: Fix formatted Finish translations
+
+## [2.14.1] - 2021-08-04
+
+### Fixed
+
+- Admin: add `model` attribute to `BaseAdminObjectSelector`
+- Admin: Title to use the shop's `requst.shop.public_name` value or `Shuup` as default
+
+## [2.14.0] - 2021-08-03
+
+### Added
+
+- Admin: add new provides `admin_template_injector` that allows injection snippet in admin templates
+
+### Fixed
+
+- Admin: Uploaded shop logo and favicon is updated in admin and auth views
+
+### Changed
+
+- Admin: Overhaul the model selector view in admin to accept generic searches through provides system.
+- Admin: Migrate primary, secondary, success, danger, and text color SCSS variables to CSS variables
+- Admin: Made active state side menu list icon share same color as text
+- Admin: Made the CSS variables stem from initialized Sass variables in Colors object
+- Xtheme: Add typography models
+
+## [2.13.0] - 2021-07-27
+
+### Changed
+
+- GDPR: allow provides to extend the user data serialization
 - Admin: remove the members field from the permission groups
 - Admin: add the groups field in user picotable list
 - Admin: improve the format of the user list for mobile devices
 
 ### Fixed
 
+- Core: Fix basket quantity for parent package products
+- Reports: prevent tables from overflowing to the right in pdf reports
 - Core: don't make attribute choices required fields
 - Front: enforce setting the current customer to the basket
 - Admin: fix crash when viewing an order with a shipment_method without a carrier defined
 
 ### Added
 
+- Tasks: trigger a notification event when a task is created
 - Admin: add warnings to the product page through provides
 - Core: add history for order status changes
 

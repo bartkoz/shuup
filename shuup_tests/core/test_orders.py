@@ -18,6 +18,7 @@ from shuup.core.excs import (
     NoProductsToShipException,
     RefundExceedsAmountException,
     RefundExceedsQuantityException,
+    SupplierHasNoSupplierModules,
 )
 from shuup.core.models import (
     AnonymousContact,
@@ -29,6 +30,7 @@ from shuup.core.models import (
     PaymentStatus,
     ProductMedia,
     ProductMediaKind,
+    ShipmentStatus,
     ShippingStatus,
 )
 from shuup.core.pricing import TaxfulPrice, TaxlessPrice, get_pricing_module
@@ -183,7 +185,7 @@ def test_basic_order():
 
 
 @pytest.mark.django_db
-def test_basic_order_without_supplier_module():
+def test_cannot_ship_basic_order_without_supplier_module():
     PRODUCTS_TO_SEND = 10
     product = get_default_product()
     supplier = get_default_supplier()
@@ -206,33 +208,8 @@ def test_basic_order_without_supplier_module():
     order.check_all_verified()
     order.save()
     assert order.taxful_total_price == TaxfulPrice(PRODUCTS_TO_SEND * (10 + 5) - 30, currency)
-    shipment = order.create_shipment_of_all_products(supplier=supplier)
-    assert shipment.total_products == 0
-    assert shipment.weight == 0
-    assert PRODUCTS_TO_SEND == int(order.get_unshipped_products()[product.id]["unshipped"])
-
-    order.create_payment(order.taxful_total_price)
-    assert order.payments.exists(), "A payment was created"
-    with pytest.raises(NoPaymentToCreateException):
-        order.create_payment(Money(6, currency))
-    assert order.is_paid(), "Order got paid"
-    assert not order.can_set_complete(), "Finalization is possible"
-
-    # Force to be complete
-    order.change_status(next_status=OrderStatus.objects.get_default_complete(), save=False)
-    assert order.is_complete(), "Finalization done"
-
-    summary = order.get_tax_summary()
-    assert len(summary) == 2
-    assert summary[0].tax_rate * 100 == 50
-    assert summary[0].based_on == Money(100, currency)
-    assert summary[0].tax_amount == Money(50, currency)
-    assert summary[0].taxful == summary[0].based_on + summary[0].tax_amount
-    assert summary[1].tax_id is None
-    assert summary[1].tax_code == ""
-    assert summary[1].tax_amount == Money(0, currency)
-    assert summary[1].tax_rate == 0
-    assert order.get_total_tax_amount() == Money(50, currency)
+    with pytest.raises(SupplierHasNoSupplierModules):
+        shipment = order.create_shipment_of_all_products(supplier=supplier)
 
 
 @pytest.mark.django_db
@@ -511,6 +488,13 @@ def test_refund_with_shipment(restock):
     # Shipment should decrease physical count by 2, logical by none
     order.create_shipment({product_line.product: 2}, supplier=supplier)
     check_stock_counts(supplier, product, physical=8, logical=6)
+
+    # mark all shipments as sent
+    order.shipments.update(status=ShipmentStatus.SENT)
+    order.update_shipping_status()
+
+    # still not shipped as there is unshipped products
+    assert order.get_unshipped_products()
     assert order.shipping_status == ShippingStatus.PARTIALLY_SHIPPED
 
     # Check correct refunded quantities
@@ -522,6 +506,12 @@ def test_refund_with_shipment(restock):
         [{"line": product_line, "quantity": 3, "amount": Money(600, order.currency), "restock_products": restock}]
     )
     assert product_line.refunded_quantity == 3
+
+    # mark all shipments as sent
+    order.shipments.update(status=ShipmentStatus.SENT)
+    order.update_shipping_status()
+
+    assert not order.get_unshipped_products()
     assert order.shipping_status == ShippingStatus.FULLY_SHIPPED
     if restock:
         check_stock_counts(supplier, product, physical=9, logical=9)
@@ -545,25 +535,22 @@ def test_refund_with_shipment(restock):
 
 
 @pytest.mark.django_db
-def test_refund_entire_order_restock_shipment_no_supplier_module():
+def test_cannot_refund_entire_order_restock_shipment_no_supplier_module():
     shop = get_default_shop()
     supplier = get_default_supplier()
-    supplier.supplier_modules.clear()
     product = create_product(
         "test-sku",
         shop=get_default_shop(),
         default_price=10,
     )
-    assert not supplier.get_stock_statuses([product.id])
     order = create_order_with_product(product, supplier, 2, 200, shop=shop)
     product_line = order.lines.first()
     order.create_shipment({product_line.product: 2}, supplier=supplier)
-    assert not supplier.get_stock_statuses([product.id])
 
+    supplier.supplier_modules.clear()
     # Create a full refund with `restock_products` set to True
-    order.create_full_refund(restock_products=True)
-
-    assert not supplier.get_stock_statuses([product.id])
+    with pytest.raises(SupplierHasNoSupplierModules):
+        order.create_full_refund(restock_products=True)
 
 
 @pytest.mark.django_db
@@ -904,6 +891,11 @@ def test_product_summary():
     assert order.shipping_status == ShippingStatus.NOT_SHIPPED
     assert order.can_create_shipment()
     order.create_shipment(supplier=supplier, product_quantities={product: 1})
+    assert order.shipping_status == ShippingStatus.NOT_SHIPPED
+
+    # mark all shipments as sent
+    order.shipments.update(status=ShipmentStatus.SENT)
+    order.update_shipping_status()
     assert order.shipping_status == ShippingStatus.PARTIALLY_SHIPPED
 
     order.create_refund([{"line": shipping_line, "quantity": 1, "amount": Money(5, order.currency), "restock": False}])

@@ -12,7 +12,7 @@ from ._background_tasks import BackgroundTask, BackgroundTaskExecution, Backgrou
 from ._base import PolymorphicShuupModel, PolymorphicTranslatableShuupModel, ShuupModel, TranslatableShuupModel
 from ._basket import Basket
 from ._categories import Category, CategoryStatus, CategoryVisibility
-from ._configurations import ConfigurationItem
+from ._configurations import ConfigurationItem, EncryptedConfigurationItem
 from ._contacts import (
     AnonymousContact,
     CompanyContact,
@@ -51,6 +51,12 @@ from ._orders import (
 )
 from ._payments import AbstractPayment, Payment
 from ._persistent_cache import PersistentCacheEntry
+from ._product_catalog import (
+    ProductCatalogDiscountedPrice,
+    ProductCatalogDiscountedPriceRule,
+    ProductCatalogPrice,
+    ProductCatalogPriceRule,
+)
 from ._product_media import ProductMedia, ProductMediaKind
 from ._product_packages import ProductPackageLink
 from ._product_shops import ProductVisibility, ShopProduct, ShopProductVisibility
@@ -126,6 +132,7 @@ __all__ = [
     "Currency",
     "DefaultOrderStatus",
     "DisplayUnit",
+    "EncryptedConfigurationItem",
     "FixedCostBehaviorComponent",
     "get_all_available_combinations",
     "get_company_contact",
@@ -167,6 +174,10 @@ __all__ = [
     "PolymorphicTranslatableShuupModel",
     "Product",
     "ProductAttribute",
+    "ProductCatalogPrice",
+    "ProductCatalogPriceRule",
+    "ProductCatalogDiscountedPrice",
+    "ProductCatalogDiscountedPriceRule",
     "ProductCrossSell",
     "ProductCrossSellType",
     "ProductMedia",

@@ -9,9 +9,11 @@ from __future__ import unicode_literals
 
 from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
+from typing import Iterable
 
 from shuup.admin.base import AdminModule, MenuEntry
 from shuup.admin.menu import CAMPAIGNS_MENU_CATEGORY
+from shuup.admin.utils.object_selector import get_object_selector_permission_name
 from shuup.admin.utils.urls import derive_model_url, get_edit_and_list_urls
 from shuup.admin.views.home import HelpBlockCategory, SimpleHelpBlock
 from shuup.campaigns.admin_module.utils import get_extra_permissions_for_admin_module
@@ -103,8 +105,15 @@ class CampaignAdminModule(AdminModule):
         admin_url = "shuup_admin:%s" % object.admin_url_suffix
         return derive_model_url(type(object), admin_url, object, kind)
 
-    def get_extra_permissions(self):
-        return get_extra_permissions_for_admin_module()
+    def get_extra_permissions(self) -> Iterable[str]:
+        extra_permissions = list(get_extra_permissions_for_admin_module())
+        extra_permissions.append(get_object_selector_permission_name(Coupon))
+        return extra_permissions
+
+    def get_permissions_help_texts(self) -> Iterable[str]:
+        return {
+            get_object_selector_permission_name(Coupon): _("Allow the user to select coupons in admin."),
+        }
 
 
 def _show_catalog_campaigns_in_admin():

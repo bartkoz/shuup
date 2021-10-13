@@ -8,9 +8,11 @@
 from __future__ import unicode_literals
 
 from django.utils.translation import ugettext_lazy as _
+from typing import Iterable
 
 from shuup.admin.base import AdminModule, MenuEntry
 from shuup.admin.menu import STOREFRONT_MENU_CATEGORY
+from shuup.admin.utils.object_selector import get_object_selector_permission_name
 from shuup.admin.utils.urls import admin_url, derive_model_url, get_edit_and_list_urls
 from shuup.core.models import Supplier
 
@@ -46,3 +48,9 @@ class SupplierModule(AdminModule):
 
     def get_model_url(self, object, kind, shop=None):
         return derive_model_url(Supplier, "shuup_admin:supplier", object, kind)
+
+    def get_extra_permissions(self) -> Iterable[str]:
+        return [get_object_selector_permission_name(Supplier)]
+
+    def get_permissions_help_texts(self) -> Iterable[str]:
+        return {get_object_selector_permission_name(Supplier): _("Allow the user to select suppliers in admin.")}

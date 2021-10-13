@@ -8,9 +8,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Shuup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-06-17 12:49+0000\n"
-"PO-Revision-Date: 2021-06-17 15:19+0000\n"
-"Last-Translator: Transifex Bot <>\n"
+"POT-Creation-Date: 2021-08-03 19:12+0000\n"
+"PO-Revision-Date: 2021-08-03 19:13+0000\n"
+"Last-Translator: Christian Hess\n"
 "Language-Team: Japanese (Japan) (http://www.transifex.com/shuup/shuup/language/ja_JP/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -113,6 +113,9 @@ msgstr ""
 msgid "Attributes"
 msgstr "属性"
 
+msgid "Allow the user to select attributes in admin."
+msgstr ""
+
 #, python-format
 msgid "%s has been deleted."
 msgstr ""
@@ -148,6 +151,9 @@ msgid "Add a product category to organize your products."
 msgstr ""
 
 msgid "New category"
+msgstr ""
+
+msgid "Allow the user to select categories in admin."
 msgstr ""
 
 msgid "Can't use this category as a parent for this shop."
@@ -241,6 +247,15 @@ msgstr[0] ""
 
 msgid "Number of Members"
 msgstr "会員数"
+
+msgid "Allow the user to select contacts in admin."
+msgstr ""
+
+msgid "Allow the user to select person contacts in admin."
+msgstr ""
+
+msgid "Allow the user to select company contacts in admin."
+msgstr ""
 
 #, python-format
 msgid "User `%(bind_user)s` already has a contact."
@@ -488,6 +503,9 @@ msgstr ""
 msgid "Manufacturers"
 msgstr "メーカー"
 
+msgid "Allow the user to select manufacturers in admin."
+msgstr ""
+
 msgid ""
 "Select shops for this manufacturer. Keep it blank to share with all shops."
 msgstr ""
@@ -696,6 +714,9 @@ msgid "Log Entries"
 msgstr ""
 
 msgid "Admin comment/notes"
+msgstr ""
+
+msgid "Status history"
 msgstr ""
 
 msgid "Set Status"
@@ -972,13 +993,22 @@ msgstr ""
 msgid "Default"
 msgstr ""
 
+msgid "Allowed Next Status"
+msgstr ""
+
+msgid "Visible For Customer"
+msgstr ""
+
+msgid "No allowed next status."
+msgstr ""
+
 msgid "Granular Permission Groups"
 msgstr ""
 
-msgid "The Permission Group name."
+msgid "Allow the user to select permission group in admin."
 msgstr ""
 
-msgid "Set the users that belong to this Permission Group."
+msgid "The Permission Group name."
 msgstr ""
 
 msgid "Create new Permission Group"
@@ -989,6 +1019,9 @@ msgstr "商品タイプ"
 
 msgid "Product types"
 msgstr "商品タイプ"
+
+msgid "Allow the user to select product types in admin."
+msgstr ""
 
 #, python-format
 msgid "%s has been marked deleted."
@@ -1026,6 +1059,12 @@ msgid "Import"
 msgstr ""
 
 msgid "Add a product to see it in your store"
+msgstr ""
+
+msgid "Allow the user to select products in admin."
+msgstr ""
+
+msgid "Allow the user to select shop_products in admin."
 msgstr ""
 
 msgid "Primary Product Image"
@@ -1313,6 +1352,15 @@ msgstr ""
 msgid "Additional instructions shown in the shop checkout process."
 msgstr ""
 
+msgid "Allow the user to select carriers in admin."
+msgstr ""
+
+msgid "Allow the user to select payment methods in admin."
+msgstr ""
+
+msgid "Allow the user to select shipping methods in admin."
+msgstr ""
+
 msgid "Shipping Methods"
 msgstr ""
 
@@ -1452,6 +1500,9 @@ msgstr ""
 msgid "Available Shops [currently active: {}]"
 msgstr ""
 
+msgid "Allow the user to select shops in admin."
+msgstr ""
+
 msgid ""
 "This field cannot be changed since there are existing orders for this shop."
 msgstr ""
@@ -1532,6 +1583,9 @@ msgstr ""
 msgid "Default Tax Class"
 msgstr ""
 
+msgid "Allow the user to select suppliers in admin."
+msgstr ""
+
 msgid "Select shops for this supplier. Keep it blank to share with all shops."
 msgstr ""
 
@@ -1584,6 +1638,15 @@ msgstr "カスタマー税グループ"
 msgid "Tax Classes"
 msgstr "税クラス"
 
+msgid "Allow the user to select customer tax groups in admin."
+msgstr ""
+
+msgid "Allow the user to select taxes in admin."
+msgstr ""
+
+msgid "Allow the user to select tax classes in admin."
+msgstr ""
+
 msgid "Rate"
 msgstr ""
 
@@ -1615,6 +1678,9 @@ msgid "Allow the user to impersonate a staff user."
 msgstr ""
 
 msgid "Allow the user to change the user list columns."
+msgstr ""
+
+msgid "Allow the user to select users in admin."
 msgstr ""
 
 msgid "Add some users to help manage your shop"
@@ -1763,14 +1829,6 @@ msgstr "名"
 
 msgid "Last Name"
 msgstr "苗字"
-
-#, python-format
-msgid "First Name: %s"
-msgstr "名: %s"
-
-#, python-format
-msgid "Last Name: %s"
-msgstr "苗字: %s"
 
 msgid "The two password fields didn't match."
 msgstr "二つのパスワードフィールドが一致しませんでした。"
@@ -3024,6 +3082,9 @@ msgid ""
 "Let’s go through some of the things you can do here. Click next to begin."
 msgstr ""
 
+msgid "shop logo"
+msgstr ""
+
 msgid "Date"
 msgstr "日付"
 
@@ -3204,6 +3265,15 @@ msgid ""
 msgstr ""
 
 msgid "Do you want to mark this shipment as sent?"
+msgstr ""
+
+msgid "When"
+msgstr ""
+
+msgid "The order has no status history."
+msgstr ""
+
+msgid "Are you sure you want to delete this order status history item?"
 msgstr ""
 
 msgid "Line #"
@@ -3762,4 +3832,7 @@ msgstr ""
 
 #, python-format
 msgid "Couldn't get selections for %s."
+msgstr ""
+
+msgid "Selector not found."
 msgstr ""
