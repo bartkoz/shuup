@@ -74,11 +74,11 @@ class TaxModule(six.with_metaclass(abc.ABCMeta)):
         customer_tax_group = context_data.get("customer_tax_group") or (customer.tax_group if customer else None)
         customer_tax_number = context_data.get("customer_tax_number") or getattr(customer, "tax_number", None)
         location = (
-            context_data.get("location")
-            or context_data.get("shipping_address")
-            or (customer.default_shipping_address if customer else None)
-            or context_data.get("billing_address")
-            or (customer.default_billing_address if customer else None)
+                context_data.get("location")
+                or context_data.get("shipping_address")
+                or (customer.default_shipping_address if customer else None)
+                or context_data.get("billing_address")
+                or (customer.default_billing_address if customer else None)
         )
         return self.taxing_context_class(
             customer_tax_group=customer_tax_group,
@@ -241,7 +241,9 @@ class TaxModule(six.with_metaclass(abc.ABCMeta)):
         for line_tax in taxes:
             refund_line.taxes.create(
                 tax=line_tax.tax,
-                name=_("Refund for %s" % line_tax.name),
+                # TODO: change translations
+                # name=_("Refund for %s" % line_tax.name),
+                name="Zwrot za %s" % line_tax.name,
                 amount_value=-line_tax.amount,
                 base_amount_value=-line_tax.base_amount,
                 ordering=1,
@@ -293,7 +295,7 @@ class TaxModule(six.with_metaclass(abc.ABCMeta)):
             else:
                 # ensure the amount to refund and the order line amount have the same signs
                 if (amount > zero and parent_line.taxful_price.amount < zero) or (
-                    amount < zero and parent_line.taxful_price.amount > zero
+                        amount < zero and parent_line.taxful_price.amount > zero
                 ):
                     raise InvalidRefundAmountException
 
@@ -340,7 +342,9 @@ class TaxModule(six.with_metaclass(abc.ABCMeta)):
                 from shuup.core.models import OrderLine, OrderLineType
 
                 refund_line = OrderLine.objects.create(
-                    text=_("Refund for %s" % parent_line.text),
+                    # TODO: translations change
+                    # text=_("Refund for %s" % parent_line.text),
+                    text="Zwrot za %s" % parent_line.text,
                     order=order,
                     type=OrderLineType.REFUND,
                     parent_line=parent_line,
@@ -354,7 +358,9 @@ class TaxModule(six.with_metaclass(abc.ABCMeta)):
                     tax_amount = tax_base_amount * line_tax.tax.rate
                     refund_line.taxes.create(
                         tax=line_tax.tax,
-                        name=_("Refund for %s" % line_tax.name),
+                        # TODO: translations change
+                        # name=_("Refund for %s" % line_tax.name),
+                        name="Zwrot za %s" % line_tax.name,
                         amount_value=-tax_amount,
                         base_amount_value=-tax_base_amount,
                         ordering=line_tax.ordering,
