@@ -9,6 +9,7 @@ from django import forms
 from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.shortcuts import redirect
+from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic import FormView
 from logging import getLogger
@@ -25,7 +26,7 @@ logger = getLogger(__name__)
 
 class ConfirmForm(forms.Form):
     product_ids = forms.CharField(widget=forms.HiddenInput(), required=True)
-    accept_terms = forms.BooleanField(required=True, label=_(u"I accept the terms and conditions"))
+    accept_terms = forms.BooleanField(required=True, label=mark_safe('Akceptuję <a href=/regulamin target=_blank>regulamin</a>'))
     marketing = forms.BooleanField(required=False, label=_(u"I want to receive marketing material"), initial=False)
     comment = forms.CharField(widget=forms.Textarea(), required=False, label=_(u"Comment"))
 
@@ -61,8 +62,8 @@ class ConfirmForm(forms.Form):
 
 class ConfirmPhase(CheckoutPhaseViewMixin, FormView):
     identifier = "confirm"
-    #TODO: translations change
-    #title = _("Confirmation")
+    # TODO: translations change
+    # title = _("Confirmation")
     title = _("Finalizacja")
     template_name = "shuup/front/checkout/confirm.jinja"
     form_class = ConfirmForm
@@ -150,7 +151,8 @@ class ConfirmPhase(CheckoutPhaseViewMixin, FormView):
                                                                          count=int(item.quantity))
             if not is_available:
                 self.basket.delete()
-                raise forms.ValidationError(_(f'{item.product.name} nie jest juz dostępny, płatność nie została pobrana.'))
+                raise forms.ValidationError(
+                    _(f'{item.product.name} nie jest juz dostępny, płatność nie została pobrana.'))
 
     def update_baselinker_storage(self):
         for item in self.basket.get_lines():
