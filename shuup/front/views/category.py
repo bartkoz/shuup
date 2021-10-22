@@ -7,6 +7,7 @@
 # LICENSE file in the root directory of this source tree.
 from __future__ import with_statement
 
+from django.core.paginator import Paginator
 from django.views.generic import DetailView, TemplateView
 
 from shuup.core.models import Category, Product, Supplier
@@ -18,6 +19,7 @@ from shuup.front.utils.sorts_and_filters import (
     sort_products,
 )
 from shuup.front.utils.views import cache_product_things
+from shuup_elasticsearch.engine import SearchContext, SearchEngine
 
 
 def get_context_data(context, request, category, product_filters):
@@ -55,7 +57,23 @@ class CategoryView(DetailView):
     model = Category
     template_object_name = "category"
 
+    def _get_products(self, search_results, **kwargs):
+        products_ids = [item.object_id for item in search_results.results]
+        products = (
+            Product.objects.listed(shop=self.request.shop, customer=self.request.customer)
+            .filter(get_query_filters(self.request, None, data=[]), pk__in=products_ids)
+        )
+        return products
+
     def get_queryset(self):
+        search_context = SearchContext(category_id=self.kwargs.get("pk"))
+        search_engine = SearchEngine(context=search_context)
+        search_engine.search_products('', limit=1000)
+        paginator = Paginator(
+            products,
+            self.product_search_results_limit if is_product_search else self.general_search_product_results_limit,
+        )
+        page_number = self.request.GET.get("search_page") or 1
         return self.model.objects.all_visible(
             customer=self.request.customer,
             shop=self.request.shop,
@@ -71,6 +89,17 @@ class CategoryView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super(CategoryView, self).get_context_data(**kwargs)
+        search_context = SearchContext(category_id=kwargs.get("pk"))
+        search_engine = SearchEngine(context=search_context)
+        search_engine.search_products('', limit=1000)
+        paginator = Paginator(
+            products,
+            self.product_search_results_limit if is_product_search else self.general_search_product_results_limit,
+        )
+        page_number = self.request.GET.get("search_page") or 1
+        context["products_page"] = paginator.get_page(page_number)
+        context["products_num_pages"] = paginator.num_pages
+        context["products_count"] = paginator.count
         return get_context_data(context, self.request, self.object, self.get_product_filters())
 
 
