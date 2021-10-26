@@ -523,7 +523,7 @@ class OrderSource(object):
     def _compute_payment_method_lines(self):
         if self.payment_method:
             for line in self.payment_method.get_lines(self):
-                yield line
+                    yield line
 
     def _compute_shipping_method_lines(self):
         if self.shipping_method:
