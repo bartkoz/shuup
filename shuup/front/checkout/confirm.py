@@ -26,7 +26,7 @@ logger = getLogger(__name__)
 
 class ConfirmForm(forms.Form):
     product_ids = forms.CharField(widget=forms.HiddenInput(), required=True)
-    accept_terms = forms.BooleanField(required=True, label=mark_safe('Akceptuję <a href=/regulamin target=_blank>regulamin</a>'))
+    accept_terms = forms.BooleanField(required=True, label=mark_safe('Akceptuję <a class="btn-link" href="/regulamin" target="_blank">regulamin</a>'))
     marketing = forms.BooleanField(required=False, label=_(u"I want to receive marketing material"), initial=False)
     comment = forms.CharField(widget=forms.Textarea(), required=False, label=_(u"Comment"))
 
