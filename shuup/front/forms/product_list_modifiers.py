@@ -557,9 +557,9 @@ class ProductPriceFilter(SimpleProductListModifier):
         min_price_value = decimal.Decimal(min_price or 0)
         max_price_value = decimal.Decimal(max_price or 0)
         if min_price_value:
-            products = products.objects.filter(shop_products__default_price_value__gte=min_price_value)
+            products = products.filter(shop_products__default_price_value__gte=min_price_value)
         else:
-            products = products.objects.filter(
+            products = products.filter(
                 Q(shop_products__default_price_value__gte=min_price_value) &
                 Q(shop_products__default_price_value__gte=max_price_value))
         return products
