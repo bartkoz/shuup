@@ -556,12 +556,13 @@ class ProductPriceFilter(SimpleProductListModifier):
                 min_price = selected_range[0].split('-', 1)[1]
         min_price_value = decimal.Decimal(min_price or 0)
         max_price_value = decimal.Decimal(max_price or 0)
-        filtered_products = []
-        for product in products:
-            price_value = product.get_price(request).amount.value
-            if price_value >= min_price_value and (max_price == "" or price_value < max_price_value):
-                filtered_products.append(product)
-        return filtered_products
+        if min_price_value:
+            products = products.objects.filter(shop_products__default_price_value__gte=min_price_value)
+        else:
+            products = products.objects.filter(
+                Q(shop_products__default_price_value__gte=min_price_value) &
+                Q(shop_products__default_price_value__gte=max_price_value))
+        return products
 
     def get_admin_fields(self):
         default_fields = super(ProductPriceFilter, self).get_admin_fields()

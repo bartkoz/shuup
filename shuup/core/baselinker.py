@@ -199,7 +199,7 @@ class BaseLinkerConnector:
         for _ in range(1, 100):
             payload = {'token': self.token,
                        'method': 'getProductsList'}
-            parameters = {"storage_id": "bl_1", "page": _}
+            parameters = {f"storage_id": self.storage, "page": _}
             payload['parameters'] = json.dumps(parameters)
             stock = perform_request(payload)
             if not stock.get('products'):
@@ -272,7 +272,7 @@ class BaseLinkerConnector:
         for _ in range(1, 100):
             payload = {'token': self.token,
                        'method': 'getProductsList'}
-            parameters = {"storage_id": "bl_1", "page": _}
+            parameters = {"storage_id": self.storage, "page": _}
             payload['parameters'] = json.dumps(parameters)
             stock = perform_request(payload)
             products_list = stock.get('products')
@@ -288,7 +288,7 @@ class BaseLinkerConnector:
             payload = {'token': self.token,
                        'method': 'getProductsData'}
 
-            parameters = {"storage_id": "bl_1", "products": chunk}
+            parameters = {"storage_id": self.storage, "products": chunk}
             payload['parameters'] = json.dumps(parameters)
             data = perform_request(payload)
             product_list = data.get('products')
@@ -312,7 +312,7 @@ class BaseLinkerConnector:
     def get_categories(self):
         payload = {'token': self.token,
                    'method': 'getCategories'}
-        parameters = {"storage_id": "bl_1"}
+        parameters = {"storage_id": self.storage}
         payload['parameters'] = json.dumps(parameters)
         return perform_request(payload)
 

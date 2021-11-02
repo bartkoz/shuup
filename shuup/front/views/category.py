@@ -9,7 +9,7 @@ from __future__ import with_statement
 
 from django.views.generic import DetailView, TemplateView
 
-from shuup.core.models import Category, Product, Supplier
+from shuup.core.models import Category, Product, Supplier, ShopProductVisibility
 from shuup.front.utils.sorts_and_filters import (
     ProductListForm,
     get_product_queryset,
@@ -31,15 +31,15 @@ def get_context_data(context, request, category, product_filters):
 
     # TODO: Check if context cache can be utilized here
     products = (
-        Product.objects.listed(customer=request.customer, shop=request.shop)
-        .filter(**product_filters)
-        .filter(get_query_filters(request, category, data=data))
-        .prefetch_related("sales_unit", "sales_unit__translations")
+        Product.objects.filter(**product_filters)
+            .filter(get_query_filters(request, category, data=data))
+            .filter(shop_products__visibility=ShopProductVisibility.ALWAYS_VISIBLE)
+            .prefetch_related(
+            "sales_unit", "sales_unit__translations", "tax_class", "type", "manufacturer", "primary_image"
+        )
     )
 
-    products = get_product_queryset(products, request, category, data).distinct()
     products = post_filter_products(request, category, products, data)
-    products = cache_product_things(request, products)
     products = sort_products(request, category, products, data)
     context["page_size"] = data.get("limit", 15)
     context["products"] = products
@@ -63,10 +63,10 @@ class CategoryView(DetailView):
 
     def get_product_filters(self):
         return {
-            "shop_products__shop": self.request.shop,
+            "shop_products__shop_id": 1,
             "variation_parent__isnull": True,
             "shop_products__categories__in": self.object.get_descendants(include_self=True),
-            "shop_products__suppliers__in": Supplier.objects.enabled(shop=self.request.shop),
+            # "shop_products__suppliers__in": Supplier.objects.enabled(shop=self.request.shop),
         }
 
     def get_context_data(self, **kwargs):
