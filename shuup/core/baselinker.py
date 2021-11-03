@@ -196,7 +196,7 @@ class BaseLinkerConnector:
         perform_request(payload)
 
     def update_stocks(self):
-        for _ in range(1, 100):
+        for _ in range(1, 1000):
             payload = {'token': self.token,
                        'method': 'getProductsList'}
             parameters = {f"storage_id": self.storage, "page": _}
@@ -208,7 +208,7 @@ class BaseLinkerConnector:
             bl_data = {x['product_id']: x for x in stock['products']}
 
             shop_products_id_map = {
-                x['product__baselinker_id']: x['pk'] for x in
+                int(x['product__baselinker_id']): x['pk'] for x in
                                     ShopProduct.objects.filter(
                                         product__baselinker_id__in=products_list
                                     ).values('pk', 'product__baselinker_id')
@@ -234,7 +234,7 @@ class BaseLinkerConnector:
                     continue
 
             stock_id_map = {
-                x['product__baselinker_id']: x['pk'] for x in
+                int(x['product__baselinker_id']): x['pk'] for x in
                 StockCount.objects.filter(
                     product__baselinker_id__in=products_list
                 ).values('pk', 'product__baselinker_id')
