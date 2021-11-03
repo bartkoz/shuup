@@ -7,6 +7,7 @@
 # LICENSE file in the root directory of this source tree.
 from __future__ import with_statement
 
+from cacheops import cached_view_as
 from django.views.generic import DetailView, TemplateView
 
 from shuup.core.models import Category, Product, Supplier, ShopProductVisibility
@@ -41,7 +42,7 @@ def get_context_data(context, request, category, product_filters):
 
     products = post_filter_products(request, category, products, data)
     products = sort_products(request, category, products, data)
-    context["page_size"] = data.get("limit", 60)
+    context["page_size"] = data.get("limit", 15)
     context["products"] = products
 
     if "supplier" in data:
@@ -93,3 +94,6 @@ class AllCategoriesView(TemplateView):
         context = super(AllCategoriesView, self).get_context_data(**kwargs)
         context["category"] = None
         return get_context_data(context, self.request, None, self.get_product_filters())
+
+
+category_index = cached_view_as(Category,)(CategoryView.as_view())
