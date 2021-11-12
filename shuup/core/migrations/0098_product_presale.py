@@ -4,7 +4,7 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
     dependencies = [
-        ('shuup', '0097_baselinkerproductlink_baselinkertoken'),
+        ('shuup', '0096_auto_20210909_1041'),
     ]
 
     operations = [
