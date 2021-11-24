@@ -62,7 +62,7 @@ urllib3==1.26.4           # via requests
 webencodings==0.5.1       # via bleach
 xlrd==2.0.1               # via shuup
 zipp==3.4.1               # via importlib-metadata
-bs4==4.10.0
+beautifulsoup4==4.10.0
 
 # The following packages are considered to be unsafe in a requirements file:
 # pip                       # via prequ

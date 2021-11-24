@@ -113,7 +113,7 @@ REQUIRES = [
     "six>=1.9,<2",
     "unicodecsv==0.14.1",
     "xlrd>=1",
-    "bs4==4.10.0"
+    "beautifulsoup4==4.10.0"
 ]
 
 if __name__ == "__main__":
