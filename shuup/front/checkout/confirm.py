@@ -105,14 +105,14 @@ class ConfirmPhase(CheckoutPhaseViewMixin, FormView):
             self.storage[key] = value
         if settings.USE_BASELINKER:
             self.verify_with_baselinker()
-            self.update_baselinker_storage()
-            self.add_baselinker_order(form.cleaned_data.get('comment'))
+            # self.update_baselinker_storage()
+            # self.add_baselinker_order(form.cleaned_data.get('comment'))
         self.process()
         self.basket.save()
         self.basket.storage.add_log_entry(self.basket, _("Starting to create order."))
 
         order = self.create_order()
-        self.checkout_process.complete()  # Inform the checkout process it's completed
+        # self.checkout_process.complete()  # Inform the checkout process it's completed
 
         # make sure to set marketing permission asked once
         if "marketing" in form.fields and order.customer:
@@ -120,15 +120,15 @@ class ConfirmPhase(CheckoutPhaseViewMixin, FormView):
                 order.customer.options = order.customer.options or {}
                 order.customer.options["marketing_permission_asked"] = True
                 order.customer.save(update_fields=["options"])
-
-        if order.require_verification:
-            response = redirect("shuup:order_requires_verification", pk=order.pk, key=order.key)
-        else:
-            response = redirect("shuup:order_process_payment", pk=order.pk, key=order.key)
-
-        checkout_complete.send(sender=type(self), request=self.request, user=self.request.user, order=order)
-
-        return response
+        return redirect("/checkout/payment/")
+        # if order.require_verification:
+        #     response = redirect("shuup:order_requires_verification", pk=order.pk, key=order.key)
+        # else:
+        #     response = redirect("shuup:order_process_payment", pk=order.pk, key=order.key)
+        #
+        # # checkout_complete.send(sender=type(self), request=self.request, user=self.request.user, order=order)
+        #
+        # return response
 
     def create_order(self):
         basket = self.basket
@@ -141,7 +141,7 @@ class ConfirmPhase(CheckoutPhaseViewMixin, FormView):
         basket.status = OrderStatus.objects.get_default_initial()
         order_creator = get_basket_order_creator()
         order = order_creator.create_order(basket)
-        basket.finalize()
+        # basket.finalize()
         return order
 
     def verify_with_baselinker(self):

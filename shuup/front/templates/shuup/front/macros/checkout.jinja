@@ -8,15 +8,19 @@
     </div>
 {% endmacro %}
 
-{% macro next_button() %}
+{% macro next_button(disabled) %}
+{% if disabled %}
+<button type="submit" class="disabled btn btn-primary btn-lg pull-right">
+{% else %}
     <button type="submit" class="btn btn-primary btn-lg pull-right">
+    {% endif %}
         <i class="fa fa-check"></i> {% trans %}Continue{% endtrans %}
     </button>
 {% endmacro %}
 
-{% macro default_buttons() %}
+{% macro default_buttons(disabled=False) %}
     {% call buttons_container() %}
-        {{ next_button() }}
+        {{ next_button(disabled) }}
     {% endcall %}
 {% endmacro %}
 
