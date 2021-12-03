@@ -111,15 +111,12 @@ class ConfirmPhase(CheckoutPhaseViewMixin, FormView):
         self.basket.save()
         self.basket.storage.add_log_entry(self.basket, _("Starting to create order."))
 
-        order = self.create_order()
+        # order = self.create_order()
         # self.checkout_process.complete()  # Inform the checkout process it's completed
 
         # make sure to set marketing permission asked once
-        if "marketing" in form.fields and order.customer:
-            if not order.customer.options or not order.customer.options.get("marketing_permission_asked"):
-                order.customer.options = order.customer.options or {}
-                order.customer.options["marketing_permission_asked"] = True
-                order.customer.save(update_fields=["options"])
+        if "marketing" in form.fields:
+            self.basket.extra_data['marketing'] = True
         return redirect("/checkout/payment/")
         # if order.require_verification:
         #     response = redirect("shuup:order_requires_verification", pk=order.pk, key=order.key)
@@ -130,21 +127,21 @@ class ConfirmPhase(CheckoutPhaseViewMixin, FormView):
         #
         # return response
 
-    def create_order(self):
-        basket = self.basket
-        assert basket.shop == self.request.shop
-        basket.orderer = self.request.person
-        basket.customer = self.request.customer
-        basket.creator = self.request.user
-        if "impersonator_user_id" in self.request.session:
-            basket.creator = get_user_model().objects.get(pk=self.request.session["impersonator_user_id"])
-        basket.status = OrderStatus.objects.get_default_initial()
-        order_creator = get_basket_order_creator()
-        order = order_creator.create_order(basket)
-        # basket.finalize()
-        basket.extra_data['order_pk'] = order.pk
-        basket.save()
-        return order
+    # def create_order(self):
+    #     basket = self.basket
+    #     assert basket.shop == self.request.shop
+    #     basket.orderer = self.request.person
+    #     basket.customer = self.request.customer
+    #     basket.creator = self.request.user
+    #     if "impersonator_user_id" in self.request.session:
+    #         basket.creator = get_user_model().objects.get(pk=self.request.session["impersonator_user_id"])
+    #     basket.status = OrderStatus.objects.get_default_initial()
+    #     order_creator = get_basket_order_creator()
+    #     order = order_creator.create_order(basket)
+    #     # basket.finalize()
+    #     basket.extra_data['order_pk'] = order.pk
+    #     basket.save()
+    #     return order
 
     def verify_with_baselinker(self):
         for item in self.basket.get_lines():

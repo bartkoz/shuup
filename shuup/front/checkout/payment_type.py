@@ -31,7 +31,7 @@ class PaymentTypeFormP224Locked(forms.Form):
 
 class PaymentType(CheckoutPhaseViewMixin, FormView):
     identifier = "payment_type"
-    title = _("Wybierz metodę płatności")
+    title = _("Wybierz metodę wysyłki")
 
     template_name = "shuup/front/checkout/payment_method.jinja"
 
