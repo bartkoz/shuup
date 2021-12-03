@@ -64,7 +64,7 @@ class ConfirmPhase(CheckoutPhaseViewMixin, FormView):
     identifier = "confirm"
     # TODO: translations change
     # title = _("Confirmation")
-    title = _("Finalizacja")
+    title = _("Podsumowanie")
     template_name = "shuup/front/checkout/confirm.jinja"
     form_class = ConfirmForm
 
@@ -142,6 +142,8 @@ class ConfirmPhase(CheckoutPhaseViewMixin, FormView):
         order_creator = get_basket_order_creator()
         order = order_creator.create_order(basket)
         # basket.finalize()
+        basket.extra_data['order_pk'] = order.pk
+        basket.save()
         return order
 
     def verify_with_baselinker(self):

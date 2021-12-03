@@ -32,7 +32,7 @@ class CheckoutMethodChoices(Enum):
 class ChooseToRegisterForm(forms.Form):
     register = forms.ChoiceField(
         choices=CheckoutMethodChoices.choices(),
-        initial=CheckoutMethodChoices.REGISTER.value,
+        initial=CheckoutMethodChoices.CHECKOUT_AS_GUEST.value,
         label=_("Register with us for future convenience"),
         required=False,
     )
