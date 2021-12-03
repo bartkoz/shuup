@@ -132,6 +132,8 @@ class BaseBasket(OrderSource):
         self._shipping_address = None
         self._billing_address = None
         self._shipping_method = None
+        self._shipping_method_id = None
+
         self._payment_method = None
         self._customer_comment = ""
         self.creator = getattr(request, "user", None)
@@ -362,9 +364,9 @@ class BaseBasket(OrderSource):
     @property
     def shipping_method(self):
         if (
-            self._shipping_method
-            and self.shipping_method_id
-            and self._shipping_method.pk == int(self.shipping_method_id)
+                self._shipping_method
+                and self.shipping_method_id
+                and self._shipping_method.pk == int(self.shipping_method_id)
         ):
             return self._shipping_method
 
