@@ -180,7 +180,7 @@ msgid "Register"
 msgstr "Zarejestruj się"
 
 msgid "Register with us for future convenience"
-msgstr "Zarejestruj się, aby w przyszłości korzystać z konta"
+msgstr "Zamów jako gość albo zarejestruj się, aby w przyszłości korzystać z konta"
 
 msgid "Checkout Method Choice"
 msgstr "Wybór metody płatności"

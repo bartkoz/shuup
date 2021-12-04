@@ -1,10 +1,19 @@
 {% extends "shuup/front/checkout/_base.jinja" %}
 
 {% block checkout_phase_content %}
+<style>
+.custom-radio-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+</style>
     <form role="form" method="post" action="" id="addresses">
         {% set forms = form.forms %}
         {% csrf_token %}
-        {{ form.payment_type }}
+        {% for field in form.payment_type %}
+        <div class="radio checkout-method-radio" style="font-size: 1.2rem;">{{ field }}</div>
+        {% endfor %}
         {{ checkout_macros.default_buttons() }}
     </form>
 {% endblock %}
