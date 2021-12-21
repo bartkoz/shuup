@@ -11,15 +11,15 @@ from shuup.core.models import get_person_contact
 
 class PaymentTypeForm(forms.Form):
 
-    payment_method = forms.ChoiceField(choices=[('p24', mark_safe('Przelewy 24 <img src="https://movyu-prod.s3.eu-west-1.amazonaws.com/przelewy24_logo.svg" alt="przelewy24" style="width: 40px; height: 26px;"')), ('card',
-                                                                                    mark_safe('Karta  <img src="https://movyu-prod.s3.eu-west-1.amazonaws.com/visa.svg" style="width: 40px; height: 26px;" alt="visa"><img src="https://movyu-prod.s3.eu-west-1.amazonaws.com/mastercard.svg" style="width: 40px; height: 26px;"alt="mastercard">'))],
+    payment_method = forms.ChoiceField(choices=[('p24', mark_safe('Przelewy24 <img src="https://movyu-prod.s3.eu-west-1.amazonaws.com/przelewy24_logo.svg" alt="przelewy24" style="width: 40px; height: 26px;"')), ('card',
+                                                                                    mark_safe('Karta Płatnicza <img src="https://movyu-prod.s3.eu-west-1.amazonaws.com/visa.svg" style="width: 40px; height: 26px;" alt="visa"><img src="https://movyu-prod.s3.eu-west-1.amazonaws.com/mastercard.svg" style="width: 40px; height: 26px;"alt="mastercard">'))],
                                        widget=forms.RadioSelect(attrs={'class': "custom-radio-list"}), label=_('Metoda Płatności'))
 
 
 class PaymentTypeFormCardLocked(forms.Form):
 
-    payment_method = forms.ChoiceField(choices=[('p24', mark_safe('Przelewy 24 <img src="https://movyu-prod.s3.eu-west-1.amazonaws.com/przelewy24_logo.svg" alt="przelewy24" style="width: 40px; height: 26px;"')), ('card',
-                                                                                    mark_safe('Karta  <img src="https://movyu-prod.s3.eu-west-1.amazonaws.com/visa.svg" style="width: 40px; height: 26px;" alt="visa"><img src="https://movyu-prod.s3.eu-west-1.amazonaws.com/mastercard.svg" style="width: 40px; height: 26px;"alt="mastercard">'))],
+    payment_method = forms.ChoiceField(choices=[('p24', mark_safe('Przelewy24 <img src="https://movyu-prod.s3.eu-west-1.amazonaws.com/przelewy24_logo.svg" alt="przelewy24" style="width: 40px; height: 26px;"')), ('card',
+                                                                                    mark_safe('Karta Płatnicza  <img src="https://movyu-prod.s3.eu-west-1.amazonaws.com/visa.svg" style="width: 40px; height: 26px;" alt="visa"><img src="https://movyu-prod.s3.eu-west-1.amazonaws.com/mastercard.svg" style="width: 40px; height: 26px;"alt="mastercard">'))],
                                        widget=forms.RadioSelect(attrs={'class': "custom-radio-list"}), label=_('Metoda Płatności'),
                                        disabled=True,
                                        initial='card')
@@ -27,8 +27,8 @@ class PaymentTypeFormCardLocked(forms.Form):
 
 class PaymentTypeFormP224Locked(forms.Form):
 
-    payment_method = forms.ChoiceField(choices=[('p24', mark_safe('Przelewy 24 <img src="https://movyu-prod.s3.eu-west-1.amazonaws.com/przelewy24_logo.svg" alt="przelewy24" style="width: 40px; height: 26px;"')), ('card',
-                                                                                    mark_safe('Karta  <img src="https://movyu-prod.s3.eu-west-1.amazonaws.com/visa.svg" style="width: 40px; height: 26px;" alt="visa"><img src="https://movyu-prod.s3.eu-west-1.amazonaws.com/mastercard.svg" style="width: 40px; height: 26px;"alt="mastercard">'))],
+    payment_method = forms.ChoiceField(choices=[('p24', mark_safe('Przelewy24 <img src="https://movyu-prod.s3.eu-west-1.amazonaws.com/przelewy24_logo.svg" alt="przelewy24" style="width: 40px; height: 26px;"')), ('card',
+                                                                                    mark_safe('Karta Płatnicza  <img src="https://movyu-prod.s3.eu-west-1.amazonaws.com/visa.svg" style="width: 40px; height: 26px;" alt="visa"><img src="https://movyu-prod.s3.eu-west-1.amazonaws.com/mastercard.svg" style="width: 40px; height: 26px;"alt="mastercard">'))],
                                        widget=forms.RadioSelect(attrs={'class': "custom-radio-list"}), label=_('Metoda Płatności'),
                                        disabled=True,
                                        initial='p24')
