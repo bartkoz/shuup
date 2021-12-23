@@ -5,9 +5,11 @@
 #
 # This source code is licensed under the OSL-3.0 license found in the
 # LICENSE file in the root directory of this source tree.
+from django.utils.safestring import mark_safe
 from django.views.generic import TemplateView, View
 
 from shuup.front.basket import get_basket_command_dispatcher, get_basket_view
+from shuup.front.utils.views import build_line
 
 
 class DefaultBasketView(TemplateView):
@@ -18,6 +20,7 @@ class DefaultBasketView(TemplateView):
         basket = self.request.basket  # noqa (F821) type: shuup.front.basket.objects.BaseBasket
         context["basket"] = basket
         context["errors"] = list(basket.get_validation_errors())
+        context['products'] = mark_safe([x for x in [build_line(line) for line in basket.get_final_lines()] if x])
         return context
 
 

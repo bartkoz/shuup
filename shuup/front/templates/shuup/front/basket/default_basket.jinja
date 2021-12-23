@@ -44,4 +44,20 @@
 
 {% block extrajs %}
     {{ basket_macros.render_extrajs() }}
+    <script>
+        var products = "{{ products }}"
+        dataLayer.push({
+            'event': 'pageview',
+            'pageDomain': 'sklep.fishster.pl',
+            'pageURL': '/basket/',
+            'pageType': 'cart',
+              'ecommerce': {
+                'currencyCode': 'PLN',
+                'checkout': {
+                  'actionField': {'step': 1},
+                  'products': products
+                }
+              }
+            });
+    </script>
 {% endblock %}

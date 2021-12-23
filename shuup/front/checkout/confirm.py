@@ -14,6 +14,8 @@ from django.utils.translation import ugettext_lazy as _
 from django.views.generic import FormView
 from logging import getLogger
 
+from shuup.front.utils.views import build_line
+
 from shuup.apps.provides import get_provide_objects
 from shuup.core.baselinker import BaseLinkerConnector, create_redis_connection
 from shuup.core.models import OrderStatus
@@ -98,6 +100,7 @@ class ConfirmPhase(CheckoutPhaseViewMixin, FormView):
         context["errors"] = errors
         context["orderable"] = not errors
         context["product_ids"] = ",".join(self._get_product_ids())
+        context['products'] = mark_safe([x for x in [build_line(line) for line in self.basket.get_final_lines()] if x])
         return context
 
     def form_valid(self, form):

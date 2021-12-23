@@ -12,6 +12,7 @@ from django.db.models.fields import BLANK_CHOICE_DASH
 from django.forms.models import model_to_dict
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic.edit import FormView
+from django.utils.safestring import mark_safe
 
 from shuup.core.models import AnonymousContact, CompanyContact, SavedAddress, SavedAddressRole, SavedAddressStatus
 from shuup.front.checkout import CheckoutPhaseViewMixin
@@ -19,6 +20,7 @@ from shuup.front.utils.companies import TaxNumberCleanMixin, allow_company_regis
 from shuup.utils.django_compat import force_text
 from shuup.utils.form_group import FormGroup
 from shuup.utils.importing import cached_load
+from shuup.front.utils.views import build_line
 
 
 class CompanyForm(TaxNumberCleanMixin, forms.ModelForm):
@@ -173,5 +175,5 @@ class AddressesPhase(CheckoutPhaseViewMixin, FormView):
                     data[key] = force_text(value)
 
             context["saved_address"][saved_address.pk] = data
-
+        context["products"] = mark_safe([x for x in [build_line(line) for line in self.basket.get_final_lines()] if x])
         return context

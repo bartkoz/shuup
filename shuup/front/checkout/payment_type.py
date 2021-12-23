@@ -2,6 +2,7 @@ from django import forms
 from django.utils.safestring import mark_safe
 from django.views.generic import FormView
 from django.utils.translation import ugettext_lazy as _
+from shuup.front.utils.views import build_line
 
 from shuup.front.checkout import CheckoutPhaseViewMixin
 from shuup.utils.form_group import FormGroup
@@ -68,3 +69,8 @@ class PaymentType(CheckoutPhaseViewMixin, FormView):
 
     def process(self):
         return
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['products'] = mark_safe([x for x in [build_line(line) for line in self.basket.get_final_lines()] if x])
+        return context

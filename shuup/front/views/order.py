@@ -8,7 +8,9 @@
 from __future__ import with_statement
 
 from django.shortcuts import get_object_or_404
+from django.utils.safestring import mark_safe
 from django.views.generic import DetailView
+from shuup.front.utils.views import build_line
 
 from shuup.core.models import Order
 from shuup.front.signals import order_complete_viewed
@@ -25,6 +27,11 @@ class OrderCompleteView(DetailView):
 
     def get_object(self, queryset=None):
         return get_object_or_404(self.model, pk=self.kwargs["pk"], key=self.kwargs["key"])
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['products'] = mark_safe([x for x in [build_line(line) for line in self.get_object().lines.all()] if x])
+        return context
 
 
 class OrderRequiresVerificationView(DetailView):

@@ -21,4 +21,20 @@
 {% block extrajs %}
     {{ super() }}
     {{ checkout_macros.address_phase_extrajs() }}
+    <script>
+        var products = "{{ products }}"
+        dataLayer.push({
+            'event': 'pageview',
+            'pageDomain': 'sklep.fishster.pl',
+            'pageURL': '/checkout/payment_method/',
+            'pageType': 'checkout',
+              'ecommerce': {
+                'currencyCode': 'PLN',
+                'checkout': {
+                  'actionField': {'step': 5},
+                  'products': products
+                }
+              }
+            });
+    </script>
 {% endblock %}

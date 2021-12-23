@@ -452,6 +452,10 @@ class Product(TaxableItem, AttributableMixin, TranslatableModel):
         except ObjectDoesNotExist:
             return self.sku
 
+    @property
+    def product_category(self):
+        return self.shop_products.first().primary_category
+
     def get_shop_instance(self, shop, allow_cache=False):
         """
         :type shop: shuup.core.models.Shop

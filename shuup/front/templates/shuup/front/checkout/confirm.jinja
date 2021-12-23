@@ -22,4 +22,20 @@
             $(".btn-lg").text("{% trans %}Please wait...{% endtrans %}").prop("disabled", "true");
         });
     </script>
+    <script>
+        var products = "{{ products }}"
+        dataLayer.push({
+            'event': 'pageview',
+            'pageDomain': 'sklep.fishster.pl',
+            'pageURL': '/checkout/confirm/',
+            'pageType': 'checkout',
+              'ecommerce': {
+                'currencyCode': 'PLN',
+                'checkout': {
+                  'actionField': {'step': 6},
+                  'products': products
+                }
+              }
+            });
+    </script>
 {% endblock %}

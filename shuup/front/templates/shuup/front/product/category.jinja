@@ -35,4 +35,7 @@
 
 {% block extrajs %}
     {{ category_macros.render_extrajs() }}
+    <script>
+        dataLayer.push({'event': 'pageview', 'pageDomain': 'sklep.fishster.pl', 'pageURL': '/c/{{ object.pk }}-{{ object.slug }}/', 'pageType': 'listing'});
+    </script>
 {% endblock %}

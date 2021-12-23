@@ -23,3 +23,18 @@ def cache_product_things(request, products, language=None, attribute_identifiers
         )
     products = cache_translations(products, (language,))
     return products
+
+
+def build_line(line):
+    try:
+        return {
+            'name': line.product.name,
+            'id': line.product.sku,
+            'price': line.base_unit_price.amount.value,
+            'brand': line.supplier.name,
+            'dimension11': '',
+            'category': line.product.product_category,
+            'quantity': line.quantity
+        }
+    except AttributeError:
+        pass

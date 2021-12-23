@@ -9,8 +9,10 @@ from __future__ import unicode_literals
 
 from django import forms
 from django.http import HttpResponseRedirect
+from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext_lazy as _
 from enumfields import Enum
+from shuup.front.utils.views import build_line
 
 from shuup.front.apps.auth.views import LoginView
 from shuup.front.apps.registration.views import RegistrationNoActivationView
@@ -95,6 +97,11 @@ class CheckoutMethodPhase(CheckoutPhaseViewMixin, LoginView):
                 }
             )
         return kwargs
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['products'] = mark_safe([x for x in [build_line(line) for line in self.basket.get_final_lines()] if x])
+        return context
 
 
 class RegisterPhase(CheckoutPhaseViewMixin, RegistrationNoActivationView):
