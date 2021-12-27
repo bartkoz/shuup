@@ -176,9 +176,9 @@
                         {% endfor %}
                      {% endfor %}
                      <div class="total-price-label col-xs-6"><strong>Wartość produktów</strong></div>
-                     <div class="total-price text-right col-xs-6"><strong>{{ '%0.2f zł'|format(products_price["price"]|float) }}</strong></div>
+                     <div class="total-price-label text-right col-xs-6"><strong>{{ ('%0.2f zł'|format(products_price["price"]|float)).replace('.', ',') }}</strong></div>
                      <div class="total-price-label col-xs-6"><strong>Dostawa</strong></div>
-                     <div class="total-price text-right col-xs-6"><strong>{{ '%0.2f zł'|format((((basket|total_price).replace(",",".")[:-3])|float) - (products_price["price"]|float)) }}</strong></div>
+                     <div class="total-price-label text-right col-xs-6"><strong>{{ ('%0.2f zł'|format((((basket|total_price).replace(",",".")[:-3])|float) - (products_price["price"]|float))).replace('.', ',') }}</strong></div>
 
                         <div class="total-price-label col-xs-6"><strong>Do zapłaty</strong></div>
                         <div class="total-price text-right col-xs-6"><strong>{{ basket|total_price }}</strong></div>
