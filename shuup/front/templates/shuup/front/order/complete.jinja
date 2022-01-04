@@ -20,7 +20,7 @@
     {% endif %}
     {{ order_macros.print_order_detail(order, True) }}
     <script>
-        var products = "{{ products }}"
+        var products = eval("{{ products }}")
         dataLayer.push({
             'event': 'pageview',
             'pageDomain': 'sklep.fishster.pl',
@@ -29,7 +29,7 @@
               'ecommerce': {
                 'currencyCode': 'PLN',
                 'checkout': {
-                  'actionField': {'step': 8},
+                  'actionField': {'step': 7},
                   'products': products
                 }
               }

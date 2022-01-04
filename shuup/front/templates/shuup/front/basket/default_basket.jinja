@@ -45,7 +45,7 @@
 {% block extrajs %}
     {{ basket_macros.render_extrajs() }}
     <script>
-        var products = "{{ products }}"
+        var products = eval("{{ products }}")
         dataLayer.push({
             'event': 'pageview',
             'pageDomain': 'sklep.fishster.pl',

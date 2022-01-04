@@ -23,7 +23,7 @@
         });
     </script>
     <script>
-        var products = "{{ products }}"
+        var products = eval("{{ products }}")
         dataLayer.push({
             'event': 'pageview',
             'pageDomain': 'sklep.fishster.pl',
@@ -32,7 +32,7 @@
               'ecommerce': {
                 'currencyCode': 'PLN',
                 'checkout': {
-                  'actionField': {'step': 6},
+                  'actionField': {'step': 5},
                   'products': products
                 }
               }

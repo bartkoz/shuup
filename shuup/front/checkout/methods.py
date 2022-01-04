@@ -22,6 +22,7 @@ from shuup.front.checkout import CheckoutPhaseViewMixin
 from shuup.utils.iterables import first
 
 from ._services import get_checkout_phases_for_service
+from ..utils.views import build_line
 
 LOG = logging.getLogger(__name__)
 
@@ -167,6 +168,7 @@ class MethodsPhase(CheckoutPhaseViewMixin, FormView):
     def get_context_data(self, **kwargs):
         context = super(MethodsPhase, self).get_context_data(**kwargs)
         context["show_shipping"] = self.basket.has_shippable_lines()
+        context['products'] = mark_safe([x for x in [build_line(line) for line in self.basket.get_final_lines()] if x])
         return context
 
 

@@ -304,7 +304,7 @@
                   'products': [{
                     'name': "{{ product.name }}",
                     'id': "{{ product.sku }}",
-                    'price': "{{ product.shop_products.first().default_price_value }}",
+                    'price': parseFloat("{{ product.shop_products.first().default_price_value }}").toFixed(2),
                     'brand': "{{ product.shop_products.first().suppliers.first() }}",
                     'dimension11': '',
                     'category': "{{ product.shop_products.first().primary_category }}",

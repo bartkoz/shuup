@@ -7,6 +7,8 @@
 # LICENSE file in the root directory of this source tree.
 from __future__ import with_statement
 
+from decimal import Decimal
+
 from django.utils.translation import get_language
 
 from shuup.core.models import Product, ProductAttribute
@@ -30,10 +32,10 @@ def build_line(line):
         return {
             'name': line.product.name,
             'id': line.product.sku,
-            'price': line.base_unit_price.amount.value,
+            'price': str(line.base_unit_price.amount.value.quantize(Decimal('.01'))),
             'brand': line.supplier.name,
             'dimension11': '',
-            'category': line.product.product_category,
+            'category': line.product.product_category.name or 'null',
             'quantity': line.quantity
         }
     except AttributeError:

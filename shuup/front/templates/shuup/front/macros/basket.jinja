@@ -168,17 +168,17 @@
                         todo: translations change
                         <div class="total-price-label col-xs-6"><strong>{% trans %}Total{% endtrans %}</strong></div>
                      #}
-                     {% set products_price = {"price": 0} %}
-                     {% for supplier_basket in basket.supplier_baskets %}
+{#                     {% set products_price = {"price": 0} %}#}
+{#                     {% for supplier_basket in basket.supplier_baskets %}#}
 
-                        {% for line in supplier_basket[-1].get_product_lines() %}
-                            {% set _ = products_price.update({"price":(products_price["price"] + line.price.amount.value)}) %}
-                        {% endfor %}
-                     {% endfor %}
+{#                        {% for line in supplier_basket[-1].get_product_lines() %}#}
+{#                            {% set _ = products_price.update({"price":(products_price["price"] + line.price.amount.value)}) %}#}
+{#                        {% endfor %}#}
+{#                     {% endfor %}#}
                      <div class="total-price-label col-xs-6"><strong>Wartość produktów</strong></div>
-                     <div class="total-price-label text-right col-xs-6"><strong>{{ ('%0.2f zł'|format(products_price["price"]|float)).replace('.', ',') }}</strong></div>
+                     <div class="total-price-label text-right col-xs-6"><strong>{{ ('%0.2f zł'|format(basket.taxful_total_price_of_products)).replace('.', ',') }}</strong></div>
                      <div class="total-price-label col-xs-6"><strong>Dostawa</strong></div>
-                     <div class="total-price-label text-right col-xs-6"><strong>{{ ('%0.2f zł'|format((((basket|total_price).replace(",",".")[:-3])|float) - (products_price["price"]|float))).replace('.', ',') }}</strong></div>
+                     <div class="total-price-label text-right col-xs-6"><strong>{{ ('%0.2f zł'|format(basket.total_price - basket.taxful_total_price_of_products)).replace('.', ',') }}</strong></div>
 
                         <div class="total-price-label col-xs-6"><strong>Do zapłaty</strong></div>
                         <div class="total-price text-right col-xs-6"><strong>{{ basket|total_price }}</strong></div>

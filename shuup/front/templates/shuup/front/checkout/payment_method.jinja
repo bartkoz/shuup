@@ -22,7 +22,7 @@
     {{ super() }}
     {{ checkout_macros.address_phase_extrajs() }}
     <script>
-        var products = "{{ products }}"
+        var products = eval("{{ products }}")
         dataLayer.push({
             'event': 'pageview',
             'pageDomain': 'sklep.fishster.pl',
@@ -31,7 +31,7 @@
               'ecommerce': {
                 'currencyCode': 'PLN',
                 'checkout': {
-                  'actionField': {'step': 5},
+                  'actionField': {'step': 4},
                   'products': products
                 }
               }

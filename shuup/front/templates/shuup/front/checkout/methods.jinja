@@ -9,4 +9,20 @@
         {{ checkout_macros.method_phase_payment_panel(form) }}
         {{ checkout_macros.default_buttons() }}
     </form>
+    <script>
+        var products = eval("{{ products }}")
+        dataLayer.push({
+            'event': 'pageview',
+            'pageDomain': 'sklep.fishster.pl',
+            'pageURL': '/checkout/methods/',
+            'pageType': 'checkout',
+              'ecommerce': {
+                'currencyCode': 'PLN',
+                'checkout': {
+                  'actionField': {'step': 3},
+                  'products': products
+                }
+              }
+            });
+    </script>
 {% endblock %}
