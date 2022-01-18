@@ -369,9 +369,8 @@
 {% endmacro %}
 
 {% macro render_metadata(object, title, text, content_type) %}
-    {% if text %}
-        <meta name="description" content="{{ text|safe|striptags|truncate(160)|replace("\n", " ")|replace("\"", "'") }}">
-    {% endif %}
+    <meta name="title" content="{{ title }} - sklep wędkarski Fishster">
+    <meta name="description" content="{{ title }} | 100% bezpieczeństwo zakupów, profesjonalne doradztwo, zwrot produktów do 14 dni. Kup Teraz!">
     {{ render_open_graph_metadata(object, title, text, content_type) }}
 {% endmacro %}
 

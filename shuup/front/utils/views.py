@@ -29,13 +29,14 @@ def cache_product_things(request, products, language=None, attribute_identifiers
 
 def build_line(line):
     try:
+        prod_category = line.product.product_category
         return {
             'name': line.product.name,
             'id': line.product.sku,
             'price': str(line.base_unit_price.amount.value.quantize(Decimal('.01'))),
             'brand': line.supplier.name,
             'dimension11': '',
-            'category': line.product.product_category.name or 'null',
+            'category': str(prod_category) if prod_category else 'null',
             'quantity': line.quantity
         }
     except AttributeError:

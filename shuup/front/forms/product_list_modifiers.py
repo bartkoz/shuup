@@ -561,7 +561,7 @@ class ProductPriceFilter(SimpleProductListModifier):
         else:
             products = products.filter(
                 Q(shop_products__default_price_value__gte=min_price_value) &
-                Q(shop_products__default_price_value__gte=max_price_value))
+                Q(shop_products__default_price_value__lte=max_price_value))
         return products
 
     def get_admin_fields(self):

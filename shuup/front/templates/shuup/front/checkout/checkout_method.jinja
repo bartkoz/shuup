@@ -43,19 +43,21 @@
         });
     </script>
     <script>
+    if (window.currentPhase === 'checkout_method') {
         var products = eval("{{ products }}")
         dataLayer.push({
             'event': 'pageview',
             'pageDomain': 'sklep.fishster.pl',
             'pageURL': '/checkout/checkout_method/',
             'pageType': 'checkout',
-              'ecommerce': {
+            'ecommerce': {
                 'currencyCode': 'PLN',
                 'checkout': {
-                  'actionField': {'step': 2},
-                  'products': products
+                    'actionField': {'step': 2},
+                    'products': products
                 }
-              }
-            });
+            }
+        });
+    }
     </script>
 {% endblock %}

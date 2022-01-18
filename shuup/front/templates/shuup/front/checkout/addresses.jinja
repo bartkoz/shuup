@@ -18,19 +18,21 @@
     {{ super() }}
     {{ checkout_macros.address_phase_extrajs() }}
     <script>
+    if (window.currentPhase === 'addresses') {
         var products = eval("{{ products }}")
         dataLayer.push({
             'event': 'pageview',
             'pageDomain': 'sklep.fishster.pl',
-            'pageURL': '/checkout/addresses/',
+            'pageURL': '/checkout/checkout_form/',
             'pageType': 'checkout',
-              'ecommerce': {
+            'ecommerce': {
                 'currencyCode': 'PLN',
                 'checkout': {
-                  'actionField': {'step': 2},
-                  'products': products
+                    'actionField': {'step': 4},
+                    'products': products
                 }
-              }
-            });
+            }
+        });
+    }
     </script>
 {% endblock %}
