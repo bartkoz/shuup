@@ -37,7 +37,7 @@ def build_line(line):
             'brand': line.supplier.name,
             'dimension11': '',
             'category': str(prod_category) if prod_category else 'null',
-            'quantity': line.quantity
+            'quantity': int(line.quantity)
         }
     except AttributeError:
         pass
