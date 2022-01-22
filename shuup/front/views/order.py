@@ -28,9 +28,27 @@ class OrderCompleteView(DetailView):
     def get_object(self, queryset=None):
         return get_object_or_404(self.model, pk=self.kwargs["pk"], key=self.kwargs["key"])
 
+    def _build_action_field(self, line, order_id, revenue):
+        return {
+            'id': order_id,
+            'revenue': revenue,
+            'tax': 0,
+            'shipping': float(line.raw_taxful_price.value),
+            'coupon': ''
+        }
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['products'] = mark_safe([x for x in [build_line(line) for line in self.get_object().lines.all()] if x])
+        product_orders = []
+        for order in self.get_object().order_group.group.grouped_orders.all():
+            prod_obj = {}
+            prod_obj['order_lines'] = ([x for x in [build_line(line) for line in order.order.lines.all()] if x])
+            for line in order.order.lines.all():
+                if 'shipping' in line.extra_data.get('source_line_id'):
+                    prod_obj['action_field'] = self._build_action_field(line, order.order.pk, float(order.order.taxful_total_price.value))
+                    break
+            product_orders.append(prod_obj)
+        context['products'] = mark_safe(product_orders)
         return context
 
 
