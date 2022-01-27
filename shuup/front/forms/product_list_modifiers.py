@@ -544,19 +544,23 @@ class ProductPriceFilter(SimpleProductListModifier):
         ]
 
     def filter_products(self, request, products, data):
-        selected_range = data.get("price_range")
+        selected_range = request.GET.get('price_range')
         if not selected_range:
             return products
-        min_price, max_price = selected_range[0].split("-", 1)
+        else:
+            selected_range = selected_range.split(',')
         if len(selected_range) > 1:
-            min_price_value = selected_range[0].split('-', 1)[0]
-            try:
-                int(min_price_value)
-            except ValueError:
-                min_price = selected_range[0].split('-', 1)[1]
+            if selected_range[0] == '-100':
+                min_price = '0'
+            else:
+                min_price = selected_range[0].split('-')[0]
+            min_price = min_price if min_price.isdigit() else selected_range[0].split('-')[1]
+            max_price = selected_range[-1].split('-')[-1]
+        else:
+            min_price, max_price = selected_range[0].split("-", 1)
         min_price_value = decimal.Decimal(min_price or 0)
         max_price_value = decimal.Decimal(max_price or 0)
-        if min_price_value:
+        if not max_price_value and min_price_value:
             products = products.filter(shop_products__default_price_value__gte=min_price_value)
         else:
             products = products.filter(

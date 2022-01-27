@@ -6,6 +6,7 @@
 # This source code is licensed under the OSL-3.0 license found in the
 # LICENSE file in the root directory of this source tree.
 from django.http.response import HttpResponseRedirect
+from django.utils.safestring import mark_safe
 from django.utils.translation import get_language, ugettext_lazy as _
 from django.views.generic import DetailView
 
@@ -37,6 +38,14 @@ class ProductDetailView(DetailView):
         context.update(get_product_context(self.request, self.object, language, supplier))
         # TODO: Maybe add hook for ProductDetailView get_context_data?
         # dispatch_hook("get_context_data", view=self, context=context)
+        variation_pk_map = {x['result_product_pk']: x['text_description'].replace('wariant: ', '') for x in
+                            self.get_object().get_all_available_combinations()}
+        final_data = {}
+        for item in Product.objects.filter(pk__in=variation_pk_map.keys()).values('sku', 'pk'):
+            final_data[variation_pk_map[item['pk']]] = item['sku']
+        # TODO: Maybe add hook for ProductDetailView get_context_data?
+        # dispatch_hook("get_context_data", view=self, context=context)
+        context['sku_map'] = mark_safe(final_data)
         return context
 
     def get(self, request, *args, **kwargs):

@@ -61,6 +61,32 @@
 {% endmacro %}
 
 {% macro variable_variation_form(shop_product, quantity, variation_variables, orderable_variation_children, supplier) %}
+{#    that's bad#}
+    <script>
+        function pushToGTM(variant_name) {
+        const variant_price = document.querySelectorAll('.product-price')[2].innerText.replace(' zł', '').replace(',', '.')
+        const variant = "{{ product }}" + ' ' + variant_name
+            dataLayer.push({
+                'event': 'pageview',
+                'pageDomain': 'sklep.fishster.pl',
+                'pageURL': '{{ request.path }}',
+                'pageType': 'product',
+                'ecommerce': {
+                    'currencyCode': 'PLN',
+                    'detail': {
+                        'products': [{
+                            'name': variant,
+                            'id': JSON.parse(localStorage.getItem('testObject'))[variant_name],
+                            'price': variant_price,
+                            'brand': '',
+                            'dimension11': '',
+                            'category': '{{ category }}'
+                        }]
+                    }
+                }
+            });
+        }
+    </script>
     {% set variation_orderable = orderable_variation_children|length %}
     {% if shop_product.product.variation_parent %}
         {%- set product_id = shop_product.product.variation_parent.pk -%}
@@ -82,7 +108,8 @@
                              data-target-product="{{ var.id }}"
                              data-primary-product="{{ product_id }}"
                              data-level="{{ idx }}"
-                             data-product-id="{{ pvvv.pk }}">
+                             data-product-id="{{ pvvv.pk }}"
+                             onclick="pushToGTM('{{ pvvv }}')">
                         {{ pvvv.value }}
                     </button>
                 {% endfor %}

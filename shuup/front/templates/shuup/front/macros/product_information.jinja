@@ -48,7 +48,9 @@
 
     <div class="product-tabs" role="tabpanel">
         <ul class="nav nav-tabs nav-justified" role="tablist">
+            {% if product.description != "<p><br></p>" and product.description %}
             {{ render_product_title_tab("description", "fa fa-file-text-o") }}
+            {% endif %}
             {{ render_product_title_tab("details", "fa fa-info-circle") }}
             {% if attributes %}
                 {{ render_product_title_tab("attributes", "fa fa-tags") }}
@@ -56,7 +58,9 @@
             {% if media_files %}
                 {{ render_product_title_tab("files", "fa fa-file-archive-o") }}
             {% endif %}
+            {% if product.product_reviews.count() %}
             {{ render_product_title_tab("product_reviews", "fa fa-star") }}
+            {% endif %}
             {% if xtheme.get("product_detail_extra_tab_title") %}
                 <li role="presentation">
                     <a href="#extra" aria-controls="extra" role="tab" data-toggle="tab">
@@ -82,7 +86,7 @@
                             </ul>
                         {% endif %}
                     {% else %}
-                        {% trans %}No product description available{% endtrans %}
+{#                        {% trans %}No product description available{% endtrans %}#}
                     {% endif %}
                 </div>
             {% endif %}

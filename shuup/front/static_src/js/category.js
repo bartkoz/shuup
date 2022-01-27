@@ -27,6 +27,9 @@ if (typeof window.CustomEvent !== "function") {
 window.ProductListScrollTarget = ".products-wrap";
 
 window.refreshFilters = debounce(function refreshFilters(pageNumber = 1) {
+    ajax_content = document.getElementById('ajax_content')
+    ajax_content.innerHTML = '<div class="centered"><div class="lds-default"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div>';
+    window.scrollTo(0, $("#ajax_content").offset().top);
     const pagination = $("ul.pagination");
     const currentState = new URLSearchParams(window.location.search);
     const state = {};
