@@ -172,6 +172,18 @@
     {% if show_prices() and not xtheme.get("hide_prices") %}
         {% if (show_price or show_quantity) %}
         <div class="row">
+                <div id="stock-quantity">
+        {% if not 'parent' in product.sku %}
+            {% set count = product.simple_supplier_stock_count.first().physical_count %}
+            {% if count >= 4 %}
+                <p style="color: green">Produkt dostępny</p>
+            {% elif count >= 2 %}
+                <p style="color: orange">Ostatnie sztuki. <b>Kup teraz zanim zniknie!</b></p>
+            {% elif count == 1 %}
+                <p style="color: red">Ostatnia sztuka. <b>Kup teraz zanim zniknie!</b></p>
+            {% endif %}
+            {% endif %}
+                </div>
             <div class="col-sm-6">
             {% if show_quantity and not xtheme.get("catalog_mode") %}
                 {{ quantity_box(shop_product, quantity) }}
@@ -281,6 +293,12 @@
         {%- set product_id = shop_product.product.pk -%}
     {% endif %}
     {% set product = shop_product.product %}
+    <script>
+    if (document.getElementById('cartContent').innerHTML === ""){
+        document.getElementById('price-tag-placeholder').innerHTML = <div class="price text-right product-price-div" id="product-price-div-{{ product_id }}" data-product-id="{{ shop_product.product.id }}"></div>;
+    }
+    </script>
+    <div id="price-tag-placeholder">
     <div class="price text-right product-price-div" id="product-price-div-{{ product_id }}" data-product-id="{{ shop_product.product.id }}">
         <h2>
             <small class="text-muted">{% trans %}{% endtrans %}</small>
@@ -293,6 +311,7 @@
             {{ product|discounted_unit_price(quantity, supplier=supplier) }}/{{ product.sales_unit.symbol }}
         </span>
     </div>
+        </div>
 {% endmacro %}
 
 {% macro add_to_cart_btn(shop_product, is_orderable, button_text=None) %}
