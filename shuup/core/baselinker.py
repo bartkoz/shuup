@@ -217,11 +217,16 @@ class BaseLinkerConnector:
             for bl_id, database_id in shop_products_id_map.items():
                 try:
                     if bl_data[bl_id]['price_brutto'] != 0:
-                        data.append({'id': database_id, 'default_price_value': Decimal(bl_data[bl_id]['price_brutto'])})
+                        data.append({'id': database_id, 'default_price_value': Decimal(bl_data[bl_id]['price_brutto']).quantize(Decimal('0.01'))})
                 except KeyError as e:
                         logger.error(e)
             ShopProduct.objects.bulk_update([ShopProduct(**kv) for kv in data], ['default_price_value'])
-
+            ids = [x['id'] for x in data]
+            existing_prods = [{'id': x.pk, 'default_price_value': x.default_price_value.quantize(Decimal('0.01'))} for x
+                              in ShopProduct.objects.filter(id__in=ids).only('pk', 'default_price_value')]
+            to_save = [x['id'] for x in data if x not in existing_prods]
+            for sp in ShopProduct.objects.filter(pk__in=to_save):
+                sp.save()
             for product in Product.objects.annotate(
                     Count('simple_supplier_stock_count')
             ).exclude(
