@@ -8,6 +8,8 @@
 from __future__ import unicode_literals
 
 import decimal
+
+from django.core.exceptions import ObjectDoesNotExist
 from django.http import Http404
 
 from shuup.core.models import ProductVariationResult, Supplier
@@ -46,8 +48,16 @@ class ProductPriceView(ProductDetailView):
             )
 
         is_orderable = shop_product.is_orderable(context["supplier"], self.request.customer, context["quantity"])
+        # patching
+        try:
+            remaining_quantity = int(product.simple_supplier_stock_count.first().physical_count)
+        except ObjectDoesNotExist:
+            remaining_quantity = 0
+        if remaining_quantity < quantity:
+            is_orderable = False
         if not context["product"] or not is_orderable:
             self.template_name = "shuup/front/product/detail_order_section_no_product.jinja"
+            context['remaining_quantity'] = remaining_quantity
             return context
 
         return context

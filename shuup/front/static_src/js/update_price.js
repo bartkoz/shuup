@@ -36,8 +36,6 @@ window.updatePrice = function updatePrice(productId) {
         });
     }
     jQuery.ajax({url: "/sklep/xtheme/product_price", dataType: "html", data: data}).done(function(responseText) {
-        console.log(document.getElementById('product-price-div-" + productId'))
-        console.log(responseText)
         const $content = $("<div>").append($.parseHTML(responseText));
         const priceDiv = "#product-price-div-" + productId;
         const quantityDiv = "#stock-quantity"

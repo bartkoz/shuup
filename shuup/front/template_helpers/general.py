@@ -351,7 +351,7 @@ def get_additional_categories(context):
     category_names = ['Wędki', 'Kołowrotki', 'Zanęty, przynęty wędkarskie',
                       'Ubrania wędkarskie', 'Biwak wędkarski', 'Akcesoria wędkarskie']
     parent = Category.objects.get(translations__name='Katalog')
-    return [c for c in Category.objects.filter(translations__name__in=category_names, parent=parent).distinct()]
+    return [c for c in Category.objects.filter(translations__name__in=category_names, parent=parent).distinct().order_by('ordering')]
 
 
 @contextfunction

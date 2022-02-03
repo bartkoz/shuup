@@ -66,6 +66,8 @@
         function pushToGTM(variant_name) {
         const variant_price = document.querySelectorAll('.product-price')[2].innerText.replace(' zł', '').replace(',', '.')
         const variant = "{{ product }}" + ' ' + variant_name
+        const prod = "{{ product.id }}"
+        const id = JSON.parse(JSON.parse(localStorage.getItem('skuMap')).prod.replace(/'/g, '"'))[variant_name]
             dataLayer.push({
                 'event': 'pageview',
                 'pageDomain': 'sklep.fishster.pl',
@@ -76,7 +78,7 @@
                     'detail': {
                         'products': [{
                             'name': variant,
-                            'id': JSON.parse(localStorage.getItem('testObject'))[variant_name],
+                            'id': id,
                             'price': variant_price,
                             'brand': '',
                             'dimension11': '',
@@ -85,6 +87,10 @@
                     }
                 }
             });
+        }
+        window.onload = function(){
+            const variant_name = document.querySelectorAll('.btn-variation.btn-active')[0].textContent.replace(/\n/g, '').replace('                        ', '').replace('                    ', '')
+            pushToGTM(variant_name)
         }
     </script>
     {% set variation_orderable = orderable_variation_children|length %}
@@ -293,12 +299,6 @@
         {%- set product_id = shop_product.product.pk -%}
     {% endif %}
     {% set product = shop_product.product %}
-    <script>
-    if (document.getElementById('cartContent').innerHTML === ""){
-        document.getElementById('price-tag-placeholder').innerHTML = <div class="price text-right product-price-div" id="product-price-div-{{ product_id }}" data-product-id="{{ shop_product.product.id }}"></div>;
-    }
-    </script>
-    <div id="price-tag-placeholder">
     <div class="price text-right product-price-div" id="product-price-div-{{ product_id }}" data-product-id="{{ shop_product.product.id }}">
         <h2>
             <small class="text-muted">{% trans %}{% endtrans %}</small>
@@ -311,7 +311,6 @@
             {{ product|discounted_unit_price(quantity, supplier=supplier) }}/{{ product.sales_unit.symbol }}
         </span>
     </div>
-        </div>
 {% endmacro %}
 
 {% macro add_to_cart_btn(shop_product, is_orderable, button_text=None) %}
@@ -339,6 +338,13 @@
     </div>
     <script>
         function sendToGtm() {
+            var id = "{{ product.sku }}"
+            var variant_name = document.querySelectorAll('.btn-variation.btn-active')[0]
+            if (variant_name) {
+                var prod = "{{ product.id }}"
+                var variant = variant_name.textContent.replace(/\n/g, '').replace('                        ', '').replace('                    ', '')
+                var id = JSON.parse(JSON.parse(localStorage.getItem('skuMap')).prod.replace(/'/g, '"'))[variant_name]
+            }
           dataLayer.push({
             'event': 'event',
             'category': 'ecommerce',
@@ -349,7 +355,7 @@
                 'add': {
                   'products': [{
                     'name': "{{ product.name }}",
-                    'id': "{{ product.sku }}",
+                    'id': id,
                     'price': parseFloat("{{ product.shop_products.first().default_price_value }}").toFixed(2),
                     'brand': "{{ product.shop_products.first().suppliers.first() }}",
                     'dimension11': '',

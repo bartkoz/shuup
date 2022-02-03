@@ -14,5 +14,9 @@
         <span class="product-price"><strong>--</strong></span>
         {% endif %}
     </h2>
+        {% if remaining_quantity %}
+    <span class="small text-muted">ilość pozostała w magazynie: {{ remaining_quantity }}</span>
+    {% else %}
     <span class="small text-muted">{% trans %}Combination not available{% endtrans %}</span>
+    {% endif %}
 </div>

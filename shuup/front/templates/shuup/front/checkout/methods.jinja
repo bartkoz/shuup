@@ -1,9 +1,6 @@
 {% extends "shuup/front/checkout/_base.jinja" %}
 
 {% block checkout_phase_content %}
-    <script>
-    console.log('elo')
-    </script>
     <form role="form" method="post" action="" id="methods">
         {% csrf_token %}
         {% if show_shipping %}

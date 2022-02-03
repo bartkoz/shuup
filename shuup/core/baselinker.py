@@ -2,13 +2,14 @@ import io
 import json
 import logging
 import uuid
-from decimal import Decimal
+from urllib.parse import urlparse
 
+import redis
 import requests
 from bs4 import BeautifulSoup
+from django.conf import settings
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.files.images import ImageFile
-from django.db.models import Count
 
 from shuup.core.models import Shop, Product, ShopProduct, ProductMedia, ProductMediaKind, Supplier
 from shuup.core.slugify import slugify
@@ -23,6 +24,7 @@ def create_redis_connection():
     return redis.StrictRedis(
         host=urlparse(getattr(settings, 'CELERY_BROKER_URL')).netloc.split(':')[0], port=6379, db=0
     )
+
 
 @app.task(rate_limit='5/s')
 def create_single_product(product, ids_to_add, supplier_id):
@@ -195,6 +197,22 @@ class BaseLinkerConnector:
         payload['parameters'] = json.dumps(parameters)
         perform_request(payload)
 
+    # @app.task()
+    # def update_single_product(self, sku, price, quantity):
+    #     prod = Product.objects.get(sku=sku)
+    #     stock = prod.simple_supplier_stock_count.first()
+    #     if not stock:
+    #         stock = StockCount.objects.create(
+    #             product=prod, supplier=prod.shop_products.first().suppliers.first()
+    #         )
+    #     count = quantity
+    #     stock.physical_count = count
+    #     stock.logical_count = count
+    #     stock.save()
+    #     sp = prod.shop_products.first()
+    #     sp.default_price_value = price
+    #     sp.save()
+
     def update_stocks(self):
         for _ in range(1, 1000):
             payload = {'token': self.token,
@@ -204,56 +222,84 @@ class BaseLinkerConnector:
             stock = perform_request(payload)
             if not stock.get('products'):
                 break
-            products_list = [x['product_id'] for x in stock['products']]
             bl_data = {str(x['product_id']): x for x in stock['products']}
-
-            shop_products_id_map = {
-                x['product__baselinker_id']: x['pk'] for x in
-                                    ShopProduct.objects.filter(
-                                        product__baselinker_id__in=products_list
-                                    ).values('pk', 'product__baselinker_id')
-            }
-            data = []
-            for bl_id, database_id in shop_products_id_map.items():
+            for entry in bl_data.values():
                 try:
-                    if bl_data[bl_id]['price_brutto'] != 0:
-                        data.append({'id': database_id, 'default_price_value': Decimal(bl_data[bl_id]['price_brutto']).quantize(Decimal('0.01'))})
-                except KeyError as e:
-                        logger.error(e)
-            ShopProduct.objects.bulk_update([ShopProduct(**kv) for kv in data], ['default_price_value'])
-            ids = [x['id'] for x in data]
-            existing_prods = [{'id': x.pk, 'default_price_value': x.default_price_value.quantize(Decimal('0.01'))} for x
-                              in ShopProduct.objects.filter(id__in=ids).only('pk', 'default_price_value')]
-            to_save = [x['id'] for x in data if x not in existing_prods]
-            for sp in ShopProduct.objects.filter(pk__in=to_save):
-                sp.save()
-            for product in Product.objects.annotate(
-                    Count('simple_supplier_stock_count')
-            ).exclude(
-                simple_supplier_stock_count__count__gt=0
-            ):
-                try:
-                    StockCount.objects.create(
-                        product=product, supplier=product.shop_products.first().suppliers.first()
-                    )
+                    prod = Product.objects.get(sku=entry['sku'])
+                    stock = prod.simple_supplier_stock_count.first()
+                    if not stock:
+                            stock = StockCount.objects.create(
+                                product=prod, supplier=prod.shop_products.first().suppliers.first()
+                            )
+                    sp = prod.shop_products.first()
+                    sp.default_price_value = entry['price_brutto']
+                    sp.save()
+                    count = entry['quantity']
+                    stock.physical_count = count
+                    stock.logical_count = count
+                    stock.save()
                 except Exception as e:
+                    logger.debug(e)
                     continue
 
-            stock_id_map = {
-                x['product__baselinker_id']: x['pk'] for x in
-                StockCount.objects.filter(
-                    product__baselinker_id__in=products_list
-                ).values('pk', 'product__baselinker_id')
-            }
-            data = []
-            for bl_id, database_id in stock_id_map.items():
-                try:
-                    data.append({'id': database_id,
-                                 'logical_count': Decimal(bl_data[bl_id]["quantity"]),
-                                 'physical_count': Decimal(bl_data[bl_id]["quantity"])})
-                except KeyError as e:
-                    logger.error(e)
-            StockCount.objects.bulk_update([StockCount(**kv) for kv in data], ['logical_count', 'physical_count'])
+        # for _ in range(1, 1000):
+        #     payload = {'token': self.token,
+        #                'method': 'getProductsList'}
+        #     parameters = {f"storage_id": self.storage, "page": _}
+        #     payload['parameters'] = json.dumps(parameters)
+        #     stock = perform_request(payload)
+        #     if not stock.get('products'):
+        #         break
+        #     products_list = [x['product_id'] for x in stock['products']]
+        #     bl_data = {str(x['product_id']): x for x in stock['products']}
+        #
+        #     shop_products_id_map = {
+        #         x['product__baselinker_id']: x['pk'] for x in
+        #                             ShopProduct.objects.filter(
+        #                                 product__baselinker_id__in=products_list
+        #                             ).values('pk', 'product__baselinker_id')
+        #     }
+        #     data = []
+        #     for bl_id, database_id in shop_products_id_map.items():
+        #         try:
+        #             if bl_data[bl_id]['price_brutto'] != 0:
+        #                 data.append({'id': database_id, 'default_price_value': Decimal(bl_data[bl_id]['price_brutto']).quantize(Decimal('0.01'))})
+        #         except KeyError as e:
+        #                 logger.error(e)
+        #     ShopProduct.objects.bulk_update([ShopProduct(**kv) for kv in data], ['default_price_value'])
+        #     ids = [x['id'] for x in data]
+        #     existing_prods = [{'id': x.pk, 'default_price_value': x.default_price_value.quantize(Decimal('0.01'))} for x
+        #                       in ShopProduct.objects.filter(id__in=ids).only('pk', 'default_price_value')]
+        #     to_save = [x['id'] for x in data if x not in existing_prods]
+        #     for sp in ShopProduct.objects.filter(pk__in=to_save):
+        #         sp.save()
+        #     for product in Product.objects.annotate(
+        #             Count('simple_supplier_stock_count')
+        #     ).exclude(
+        #         simple_supplier_stock_count__count__gt=0
+        #     ):
+        #         try:
+        #             StockCount.objects.create(
+        #                 product=product, supplier=product.shop_products.first().suppliers.first()
+        #             )
+        #         except Exception as e:
+        #             continue
+        #
+        #     stock_id_map = {
+        #         x['product__baselinker_id']: x['pk'] for x in
+        #         StockCount.objects.filter(
+        #             product__baselinker_id__in=products_list
+        #         ).values('pk', 'product__baselinker_id')
+        #     }
+        #     data = []
+        #     for bl_id, database_id in stock_id_map.items():
+        #         try:
+        #             data.append({'id': database_id,
+        #                          'logical_count': Decimal(bl_data[bl_id]["quantity"]),
+        #                          'physical_count': Decimal(bl_data[bl_id]["quantity"])})
+        #         except KeyError as e:
+        #             logger.error(e)
+        #     StockCount.objects.bulk_update([StockCount(**kv) for kv in data], ['logical_count', 'physical_count'])
 
     def get_shipping_costs(self, basket):
         costs = []
