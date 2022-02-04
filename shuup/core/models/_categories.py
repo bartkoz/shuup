@@ -127,6 +127,15 @@ class Category(MPTTModel, TranslatableModel):
             "button in the list view to order them visually with a drag-and-drop."
         ),
     )
+    horizontal_ordering = models.IntegerField(
+        default=0,
+        verbose_name=_("ordering"),
+        help_text=_(
+            "You can assign numerical values to images to tell the order in which they "
+            "shall be displayed on the vendor page. You can also use the `Organize` "
+            "button in the list view to order them visually with a drag-and-drop."
+        ),
+    )
     visibility = EnumIntegerField(
         CategoryVisibility,
         db_index=True,

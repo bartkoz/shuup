@@ -64,10 +64,10 @@
 {#    that's bad#}
     <script>
         function pushToGTM(variant_name) {
-        const variant_price = document.querySelectorAll('.product-price')[2].innerText.replace(' zł', '').replace(',', '.')
-        const variant = "{{ product }}" + ' ' + variant_name
-        const prod = "{{ product.id }}"
-        const id = JSON.parse(JSON.parse(localStorage.getItem('skuMap')).prod.replace(/'/g, '"'))[variant_name]
+        var variant_price = document.querySelectorAll('.product-price')[2].innerText.replace(' zł', '').replace(',', '.')
+        var variant = "{{ product }}" + ' ' + variant_name
+        var prod = "{{ product.id }}"
+        var id = JSON.parse(JSON.parse(localStorage.getItem('skuMap'))[prod].replace(/'/g, '"'))[variant_name]
             dataLayer.push({
                 'event': 'pageview',
                 'pageDomain': 'sklep.fishster.pl',
@@ -343,7 +343,7 @@
             if (variant_name) {
                 var prod = "{{ product.id }}"
                 var variant = variant_name.textContent.replace(/\n/g, '').replace('                        ', '').replace('                    ', '')
-                var id = JSON.parse(JSON.parse(localStorage.getItem('skuMap')).prod.replace(/'/g, '"'))[variant_name]
+                var id = JSON.parse(JSON.parse(localStorage.getItem('skuMap'))[prod].replace(/'/g, '"'))[variant]
             }
           dataLayer.push({
             'event': 'event',

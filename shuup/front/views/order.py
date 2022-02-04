@@ -7,6 +7,8 @@
 # LICENSE file in the root directory of this source tree.
 from __future__ import with_statement
 
+from decimal import Decimal
+
 from django.shortcuts import get_object_or_404
 from django.utils.safestring import mark_safe
 from django.views.generic import DetailView
@@ -30,10 +32,10 @@ class OrderCompleteView(DetailView):
 
     def _build_action_field(self, line, order_id, revenue):
         return {
-            'id': order_id,
-            'revenue': revenue,
-            'tax': 0,
-            'shipping': float(line.raw_taxful_price.value),
+            'id': str(order_id),
+            'revenue': str(revenue),
+            'tax': "0",
+            'shipping': str(line.raw_taxful_price.value.quantize(Decimal("0.01"))),
             'coupon': ''
         }
 
@@ -45,7 +47,7 @@ class OrderCompleteView(DetailView):
             prod_obj['order_lines'] = ([x for x in [build_line(line) for line in order.order.lines.all()] if x])
             for line in order.order.lines.all():
                 if 'shipping' in line.extra_data.get('source_line_id'):
-                    prod_obj['action_field'] = self._build_action_field(line, order.order.pk, float(order.order.taxful_total_price.value))
+                    prod_obj['action_field'] = self._build_action_field(line, order.order.pk, order.order.taxful_total_price.value.quantize(Decimal("0.01")))
                     break
             product_orders.append(prod_obj)
         context['products'] = mark_safe(product_orders)

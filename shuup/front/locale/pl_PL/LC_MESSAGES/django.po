@@ -1117,7 +1117,7 @@ msgid "Other information"
 msgstr "Pozostałe informacje"
 
 msgid "Place Order"
-msgstr "Złóż zamówienie"
+msgstr "Kontynuuj"
 
 msgid "Previous"
 msgstr "Wstecz"
