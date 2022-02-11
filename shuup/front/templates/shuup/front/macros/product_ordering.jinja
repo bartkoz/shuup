@@ -10,7 +10,9 @@
     {% if not quantity %}
         {%- set quantity = shop_product.rounded_minimum_purchase_quantity -%}
     {% endif %}
-
+{#    {% if request.is_ajax() %}#}
+{#    <div id="prod_description">{{ product.description }}</div>#}
+{#    {% endif %}#}
     <div id="product-price-section">
         {% if request.is_ajax() %}
             <script type="text/javascript">

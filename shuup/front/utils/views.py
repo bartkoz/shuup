@@ -7,12 +7,15 @@
 # LICENSE file in the root directory of this source tree.
 from __future__ import with_statement
 
+import logging
 from decimal import Decimal
 
 from django.utils.translation import get_language
 
 from shuup.core.models import Product, ProductAttribute
 from shuup.utils.translation import cache_translations
+
+logger = logging.getLogger(__name__)
 
 
 def cache_product_things(request, products, language=None, attribute_identifiers=("author",)):
@@ -29,15 +32,18 @@ def cache_product_things(request, products, language=None, attribute_identifiers
 
 def build_line(line):
     try:
-        prod_category = line.product.product_category
+        prod_category = line.shop_product.product.product_category
+    except AttributeError:
+        prod_category = 'null'
+    try:
         return {
             'name': line.product.name,
             'id': line.product.sku,
             'price': str(line.base_unit_price.amount.value.quantize(Decimal('.01'))),
             'brand': line.supplier.name,
             'dimension11': '',
-            'category': str(prod_category) if prod_category else 'null',
+            'category': str(prod_category),
             'quantity': int(line.quantity)
         }
-    except AttributeError:
-        pass
+    except AttributeError as e:
+        logger.error(e)

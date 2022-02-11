@@ -11,7 +11,8 @@ from django.conf import settings
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.files.images import ImageFile
 
-from shuup.core.models import Shop, Product, ShopProduct, ProductMedia, ProductMediaKind, Supplier
+from shuup.core.models import Shop, Product, ShopProduct, ProductMedia, ProductMediaKind, Supplier, \
+    ShopProductVisibility
 from shuup.core.slugify import slugify
 from shuup.simple_supplier.models import StockCount
 from shuup.utils.filer import filer_image_from_upload, ensure_media_file
@@ -231,10 +232,14 @@ class BaseLinkerConnector:
                             stock = StockCount.objects.create(
                                 product=prod, supplier=prod.shop_products.first().suppliers.first()
                             )
+                    count = entry['quantity']
                     sp = prod.shop_products.first()
                     sp.default_price_value = entry['price_brutto']
+                    if count <= 0:
+                        sp.visibility = ShopProductVisibility.SEARCHABLE
+                    else:
+                        sp.visibility = ShopProductVisibility.ALWAYS_VISIBLE
                     sp.save()
-                    count = entry['quantity']
                     stock.physical_count = count
                     stock.logical_count = count
                     stock.save()

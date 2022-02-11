@@ -1,7 +1,7 @@
 from django.db import models
 from jsonfield import JSONField
 
-from shuup.core.models import ShuupModel, Supplier
+from shuup.core.models import ShuupModel, Supplier, Product
 
 
 class BaseLinkerToken(ShuupModel):
@@ -20,3 +20,9 @@ class BaseLinkerCategories(ShuupModel):
         Supplier, related_name="bl_categories", on_delete=models.CASCADE
     )
     categories = JSONField()
+
+
+class BaseLinkerProductProperties(ShuupModel):
+
+    product = models.OneToOneField(Product, on_delete=models.CASCADE, related_name="bl_product_properties")
+    data = JSONField()

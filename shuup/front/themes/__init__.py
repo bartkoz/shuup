@@ -73,7 +73,8 @@ class BaseThemeFieldsMixin(object):
         product_detail_tabs = [
             ("description", _("Description")),
             ("details", _("Details")),
-            ("attributes", _("Attributes")),
+            # TODO: translations
+            ("attributes", _("Informacje techniczne")),
             ("files", _("Files")),
         ]
         if has_installed("shuup_product_reviews"):
