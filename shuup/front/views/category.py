@@ -36,7 +36,7 @@ def get_context_data(context, request, category, product_filters):
             .filter(shop_products__visibility=ShopProductVisibility.ALWAYS_VISIBLE)
             .prefetch_related(
             "sales_unit", "sales_unit__translations", "tax_class", "type", "manufacturer", "primary_image"
-        )
+        ).distinct()
     )
 
     products = post_filter_products(request, category, products, data)
