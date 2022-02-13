@@ -48,6 +48,8 @@ window.updatePrice = function updatePrice(productId) {
 
         $(priceDiv).replaceWith($content.find(priceDiv));
         $(quantityDiv).replaceWith($content.find(quantityDiv));
+        // $("#description").replaceWith($content.find("#prod_description"));
+        // console.log($content.find("#prod_description"))
 
         // ensure images are updated
         const combinationCarouselID = "#carousel_product_" + $(priceDiv).data("product-id");

@@ -214,21 +214,21 @@ def _get_best_selling_products(cutoff_days, n_products, orderable_only, request,
 def get_newest_products(context, n_products=6, orderable_only=True):
     request = context["request"]
 
-    key, products = context_cache.get_cached_value(
-        identifier="newest_products",
-        item=cache_utils.get_newest_products_cache_item(request.shop),
-        context=request,
-        n_products=n_products,
-        orderable_only=orderable_only,
-    )
-    if products is not None:
-        return products
+    # key, products = context_cache.get_cached_value(
+    #     identifier="newest_products",
+    #     item=cache_utils.get_newest_products_cache_item(request.shop),
+    #     context=request,
+    #     n_products=n_products,
+    #     orderable_only=orderable_only,
+    # )
+    # if products is not None:
+    #     return products
 
     products = _get_listed_products(
         context, n_products, ordering="-pk", filter_dict={"variation_parent": None}, orderable_only=orderable_only
     )
-    products = cache_product_things(request, products)
-    context_cache.set_cached_value(key, products, settings.SHUUP_TEMPLATE_HELPERS_CACHE_DURATION)
+    # products = cache_product_things(request, products)
+    # context_cache.set_cached_value(key, products, settings.SHUUP_TEMPLATE_HELPERS_CACHE_DURATION)
     return products
 
 

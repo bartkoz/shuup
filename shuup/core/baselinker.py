@@ -139,7 +139,7 @@ class BaseLinkerConnector:
             "name": line.product.name,
             "sku": line.product.sku,
             "ean": "1597368451236",
-            "price_brutto": str(round(line.taxful_price.amount.value, 2)),
+            "price_brutto": str(round(line.taxful_price.amount.value/line.quantity, 2)),
             "tax_rate": line.product.tax_class.name,
             "quantity": line.quantity,
             "weight": str(round(line.product.net_weight, 2))
@@ -197,22 +197,6 @@ class BaseLinkerConnector:
                                            }}
         payload['parameters'] = json.dumps(parameters)
         perform_request(payload)
-
-    # @app.task()
-    # def update_single_product(self, sku, price, quantity):
-    #     prod = Product.objects.get(sku=sku)
-    #     stock = prod.simple_supplier_stock_count.first()
-    #     if not stock:
-    #         stock = StockCount.objects.create(
-    #             product=prod, supplier=prod.shop_products.first().suppliers.first()
-    #         )
-    #     count = quantity
-    #     stock.physical_count = count
-    #     stock.logical_count = count
-    #     stock.save()
-    #     sp = prod.shop_products.first()
-    #     sp.default_price_value = price
-    #     sp.save()
 
     def update_stocks(self):
         for _ in range(1, 1000):
@@ -307,6 +291,10 @@ class BaseLinkerConnector:
         #     StockCount.objects.bulk_update([StockCount(**kv) for kv in data], ['logical_count', 'physical_count'])
 
     def get_shipping_costs(self, basket):
+        waive_limit = basket.shipping_method.behavior_components.filter(waivingcostbehaviorcomponent__isnull=False).first()
+        if waive_limit:
+            if waive_limit.waive_limit_value <= basket.taxful_total_price_of_products.amount.value:
+                return 0
         costs = []
         for component in basket.shipping_method.behavior_components.all():
             try:

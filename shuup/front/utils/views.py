@@ -45,5 +45,5 @@ def build_line(line):
             'category': str(prod_category),
             'quantity': int(line.quantity)
         }
-    except AttributeError as e:
-        logger.error(e)
+    except AttributeError:
+        pass
