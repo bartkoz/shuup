@@ -28,11 +28,13 @@ class HighlightType(Enum):
     NEWEST = "newest"
     BEST_SELLING = "best_selling"
     RANDOM = "random"
+    CATEGORY = "category"
 
     class Labels:
         NEWEST = _("Newest")
         BEST_SELLING = _("Best Selling")
         RANDOM = _("Random")
+        CATEGORY = _("Kategoria")
 
 
 class ProductHighlightPlugin(TemplatedPlugin):
@@ -83,6 +85,9 @@ class ProductHighlightPlugin(TemplatedPlugin):
             )
         elif highlight_type == HighlightType.RANDOM.value:
             products = get_random_products(context, count, orderable_only)
+        elif highlight_type == HighlightType.CATEGORY.value:
+            category_id = context.parent['object'].shop_products.first().primary_category_id
+            products = Product.objects.listed(shop=context.parent['request'].shop).filter(shop_products__primary_category_id=category_id)[:count]
         else:
             products = []
 
