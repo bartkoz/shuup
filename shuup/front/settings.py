@@ -81,7 +81,10 @@ SHUUP_TEMPLATE_HELPERS_CACHE_DURATION = 60 * 30
 #:
 #: It should be noted, however, that overriding some of the settings (such as making a
 #: required field non-required) could create other validation issues.
-SHUUP_PERSON_CONTACT_FIELD_PROPERTIES = {}
+from django import forms
+SHUUP_CHECKOUT_CONFIRM_FORM_PROPERTIES = {
+    "comment": {"widget": forms.Textarea(attrs={'rows':4, 'cols':3})}
+ }
 
 #: A dictionary defining properties to override the default field properties of the
 #: `confirm` form. Should map the field name (as a string) to a dictionary.
