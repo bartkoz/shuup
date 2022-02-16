@@ -83,7 +83,7 @@ SHUUP_TEMPLATE_HELPERS_CACHE_DURATION = 60 * 30
 #: required field non-required) could create other validation issues.
 from django import forms
 SHUUP_CHECKOUT_CONFIRM_FORM_PROPERTIES = {
-    "comment": {"widget": forms.Textarea(attrs={'rows':4, 'cols':3})}
+    "comment": {"widget": forms.Textarea(attrs={'rows': 4, 'cols': 3})}
  }
 
 #: A dictionary defining properties to override the default field properties of the
@@ -98,7 +98,6 @@ SHUUP_CHECKOUT_CONFIRM_FORM_PROPERTIES = {
 #:
 #: It should be noted, however, that overriding some of the settings (such as making a
 #: required field non-required) could create other validation issues.
-SHUUP_CHECKOUT_CONFIRM_FORM_PROPERTIES = {}
 
 #: The default "Shuup powered by" content. This content is rendered in theme bottom
 #: by default at `shuup.front.templates.shuup.front.macros.footer.jinja`.
