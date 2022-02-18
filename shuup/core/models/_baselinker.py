@@ -12,6 +12,7 @@ class BaseLinkerToken(ShuupModel):
     token = models.CharField(max_length=100)
     storage = models.CharField(max_length=20)
     order_status_id = models.CharField(max_length=50)
+    inventory = models.CharField(max_length=20, null=True)
 
 
 class BaseLinkerCategories(ShuupModel):

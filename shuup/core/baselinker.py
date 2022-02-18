@@ -2,6 +2,7 @@ import io
 import json
 import logging
 import uuid
+from decimal import Decimal
 from urllib.parse import urlparse
 
 import redis
@@ -81,6 +82,7 @@ class BaseLinkerConnector:
         self.shop = shop
         self.token = shop.bl_token.token
         self.storage = shop.bl_token.storage
+        self.inventory = shop.bl_token.inventory
         self.order_status_id = shop.bl_token.order_status_id
 
     def check_if_product_still_available(self, product_id: str, count: int = 1, variant_id: str = None):
@@ -219,6 +221,42 @@ class BaseLinkerConnector:
                     count = entry['quantity']
                     sp = prod.shop_products.first()
                     sp.default_price_value = entry['price_brutto']
+                    if count <= 0:
+                        sp.visibility = ShopProductVisibility.SEARCHABLE
+                    else:
+                        sp.visibility = ShopProductVisibility.ALWAYS_VISIBLE
+                    sp.save()
+                    stock.physical_count = count
+                    stock.logical_count = count
+                    stock.save()
+                except Exception as e:
+                    logger.debug(e)
+                    continue
+
+    def update_new_stocks(self):
+        for _ in range(1, 1000):
+            payload = {'token': self.token,
+                       'method': 'getInventoryProductsList'}
+            parameters = {f"inventory_id": self.inventory, "page": _}
+            payload['parameters'] = json.dumps(parameters)
+            stock = perform_request(payload)
+            if not stock.get('products'):
+                break
+            bl_data = stock['products']
+            for entry in bl_data.values():
+                try:
+                    prod = Product.objects.get(sku=entry['sku'])
+                    stock = prod.simple_supplier_stock_count.first()
+                    if not stock:
+                        stock = StockCount.objects.create(
+                            product=prod, supplier=prod.shop_products.first().suppliers.first()
+                        )
+                    try:
+                        count = int(list(entry.get('stock').values())[0])
+                    except Exception:
+                        count = 0
+                    sp = prod.shop_products.first()
+                    sp.default_price_value = Decimal(list(entry['prices'].values())[0])
                     if count <= 0:
                         sp.visibility = ShopProductVisibility.SEARCHABLE
                     else:
