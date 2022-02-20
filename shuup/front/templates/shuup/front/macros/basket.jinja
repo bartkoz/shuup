@@ -231,7 +231,9 @@
 {% macro render_coupon_div(basket) %}
     <div class="row basket-discount-code">
         <div class="col-sm-6 pull-right">
-            <p class="coupon-text">{% trans %}Do you have a coupon code? Enter it here. {% endtrans %}</p>
+            <p class="coupon-text">
+                Czy masz kod kuponu? Kliknij <span class="show-coupon">tutaj</span>.
+            </p>
             <div id="collapseCoupon">
                 <div class="input-group">
                     <input type="text"

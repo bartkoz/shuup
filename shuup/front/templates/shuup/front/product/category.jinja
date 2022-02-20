@@ -132,9 +132,10 @@
         dataLayer.push({'event': 'pageview', 'pageDomain': 'sklep.fishster.pl', 'pageURL': '/c/{{ object.pk }}-{{ object.slug }}/', 'pageType': 'listing'});
         function loadProductsAsync(url) {
             showLoader()
-            $.get(url, function (data, status) {
-                ajax_content.innerHTML = data
-            });
+            $.get({
+                url,
+                cache: false
+            }).then((data) => { ajax_content.innerHTML = data })
         }
         loadProductsAsync("{{ request.get_full_path() }}")
         function showLoader(){
