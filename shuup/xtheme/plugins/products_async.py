@@ -38,7 +38,7 @@ class ProductHighlightPlugin(TemplatedPlugin):
     identifier = "async_product_highlight"
     name = _("Product Highlights (asynchronous)")
     template_name = "shuup/xtheme/plugins/highlight_plugin_async.jinja"
-    cacheable = True
+    cacheable = False
     fields = [
         ("title", TranslatableField(label=_("Title"), required=False, initial="")),
         (

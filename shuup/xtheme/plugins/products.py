@@ -41,7 +41,7 @@ class ProductHighlightPlugin(TemplatedPlugin):
     identifier = "product_highlight"
     name = _("Product Highlights")
     template_name = "shuup/xtheme/plugins/highlight_plugin.jinja"
-    cacheable = True
+    cacheable = False
     fields = [
         ("title", TranslatableField(label=_("Title"), required=False, initial="")),
         (
