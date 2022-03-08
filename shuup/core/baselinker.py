@@ -86,6 +86,16 @@ class BaseLinkerConnector:
         self.order_status_id = shop.bl_token.order_status_id
 
     def check_if_product_still_available(self, product_id: str, count: int = 1, variant_id: str = None):
+        if self.shop.bl_token.new_api:
+            return self.check_if_product_still_available_new(product_id=product_id, count=count, variant_id=variant_id)
+        return self.check_if_product_still_available_old(product_id=product_id, count=count, variant_id=variant_id)
+
+    def get_current_storage(self, product_id: str, variant_id: str = None):
+        if self.shop.bl_token.new_api:
+            return self.get_current_storage_new(product_id=product_id, variant_id=variant_id)
+        return self.get_current_storage_old(product_id=product_id, variant_id=variant_id)
+
+    def check_if_product_still_available_old(self, product_id: str, count: int = 1, variant_id: str = None):
         is_available = False
         payload = {'token': self.token,
                    'method': 'getProductsData',
@@ -117,7 +127,7 @@ class BaseLinkerConnector:
             'https://api.baselinker.com/connector.php',
             data=payload)
 
-    def get_current_storage(self, product_id: str, variant_id: str = None):
+    def get_current_storage_old(self, product_id: str, variant_id: str = None):
         payload = {'token': self.token,
                    'method': 'getProductsData',
                    'parameters': '''{
@@ -130,6 +140,41 @@ class BaseLinkerConnector:
             quantity = data['products'][product_id][variant_id]['quantity']
         else:
             quantity = data['products'][product_id]['quantity']
+        return quantity
+
+    def check_if_product_still_available_new(self, product_id: str, count: int = 1, variant_id: str = None):
+        is_available = False
+        payload = {'token': self.token,
+                   'method': 'getInventoryProductsData',
+                   'parameters': '''{
+                   "inventory_id": "%s",
+                   "products": [%s]}''' % (self.inventory, product_id)}
+        data = requests.post(
+            'https://api.baselinker.com/connector.php',
+            data=payload).json()
+        try:
+            if variant_id:
+                if list(data['products'][product_id][variant_id]['stock'].variants())[0] >= count:
+                    is_available = True
+            elif list(data['products'][product_id]['stock'].values())[0] >= count:
+                is_available = True
+        except (KeyError, TypeError):
+            is_available = False
+        return is_available
+
+    def get_current_storage_new(self, product_id: str, variant_id: str = None):
+        payload = {'token': self.token,
+                   'method': 'getInventoryProductsData',
+                   'parameters': '''{
+                   "inventory_id": "%s",
+                   "products": [%s]}''' % (self.inventory, product_id)}
+        data = requests.post(
+            'https://api.baselinker.com/connector.php',
+            data=payload).json()
+        if variant_id:
+            quantity = list(data['products'][product_id][variant_id]['stock'].variants())[0]
+        else:
+            quantity = list(data['products'][product_id]['stock'].values())[0]
         return quantity
 
     def _build_product(self, line):

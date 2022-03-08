@@ -13,6 +13,7 @@ class BaseLinkerToken(ShuupModel):
     storage = models.CharField(max_length=20)
     order_status_id = models.CharField(max_length=50)
     inventory = models.CharField(max_length=20, null=True)
+    new_api = models.BooleanField(default=False)
 
 
 class BaseLinkerCategories(ShuupModel):
