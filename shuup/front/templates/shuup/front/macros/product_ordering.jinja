@@ -51,6 +51,7 @@
     </div>
 {% endmacro %}
 
+<!----------------------------------->
 {% macro supplier_input(shop_product, supplier) %}
     {% if shop_product.product.variation_parent %}
         {%- set product_id = shop_product.product.variation_parent.pk -%}
@@ -218,6 +219,9 @@
             {{ add_to_cart_btn(shop_product, is_orderable, button_text=button_text) }}
         {% endif %}
     {% endif %}
+    <div id="product-description" style="display: none">
+        {{ product.description|safe }}
+    </div>
 {% endmacro %}
 
 {% macro render_purchase_options(subscription_options) %}

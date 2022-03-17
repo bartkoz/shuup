@@ -39,7 +39,7 @@ window.updatePrice = function updatePrice(productId) {
         const $content = $("<div>").append($.parseHTML(responseText));
         const priceDiv = "#product-price-div-" + productId;
         const quantityDiv = "#stock-quantity"
-
+        const descriptionDiv = "#product-description"
         if ($content.find("[id^='no-price']").length > 0) {
             $("#add-to-cart-button-" + productId).prop("disabled", true);
         } else {
@@ -48,8 +48,8 @@ window.updatePrice = function updatePrice(productId) {
 
         $(priceDiv).replaceWith($content.find(priceDiv));
         $(quantityDiv).replaceWith($content.find(quantityDiv));
-        // $("#description").replaceWith($content.find("#prod_description"));
-        // console.log($content.find("#prod_description"))
+        $("#description").replaceWith($content.find(descriptionDiv).css("display", "block"));
+        $(descriptionDiv).replaceWith($content.find(descriptionDiv).css("display", "block"));
 
         // ensure images are updated
         const combinationCarouselID = "#carousel_product_" + $(priceDiv).data("product-id");
