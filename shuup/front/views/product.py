@@ -5,6 +5,8 @@
 #
 # This source code is licensed under the OSL-3.0 license found in the
 # LICENSE file in the root directory of this source tree.
+import json
+
 from django.http.response import HttpResponseRedirect
 from django.utils.safestring import mark_safe
 from django.utils.translation import get_language, ugettext_lazy as _
@@ -45,7 +47,7 @@ class ProductDetailView(DetailView):
             final_data[variation_pk_map[item['pk']]] = item['sku']
         # TODO: Maybe add hook for ProductDetailView get_context_data?
         # dispatch_hook("get_context_data", view=self, context=context)
-        context['sku_map'] = mark_safe(final_data)
+        context['sku_map'] = mark_safe(json.dumps(final_data))
         return context
 
     def get(self, request, *args, **kwargs):
