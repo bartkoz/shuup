@@ -7,6 +7,7 @@
 # LICENSE file in the root directory of this source tree.
 from __future__ import unicode_literals
 
+from django.conf import settings
 from django.views.generic import ListView
 
 from shuup.core.models import Product
@@ -32,6 +33,32 @@ class SearchView(ListView):
         return super(SearchView, self).dispatch(request, *args, **kwargs)
 
     def get_queryset(self):
+        return Product.objects.none()
+
+    def get_context_data(self, **kwargs):
+        context = super(SearchView, self).get_context_data(**kwargs)
+        q = self.request.GET.get('q')
+        context["form"] = self.form
+        if q:
+            if settings.ENVIRONMENT == 'STAGING':
+                context["search"] = f"{'https://' if self.request.is_secure() else 'http://'}{self.request.get_host()}/sklep/search-async/?q={q}"
+            else:
+                context["search"] = f"{'https://' if self.request.is_secure() else 'http://'}{self.request.get_host()}/search-async/?q={q}"
+        return context
+
+
+class AsyncSearchResults(ListView):
+
+    form_class = ProductListForm
+    template_name = "shuup/simple_search/search_async.jinja"
+    model = Product
+    context_object_name = "products"
+
+    def dispatch(self, request, *args, **kwargs):
+        self.form = ProductListForm(request=self.request, shop=self.request.shop, category=None, data=self.request.GET)
+        return super().dispatch(request, *args, **kwargs)
+
+    def get_queryset(self):
         if not self.form.is_valid():
             return Product.objects.none()
         data = self.form.cleaned_data
@@ -41,7 +68,7 @@ class SearchView(ListView):
         return get_product_queryset(products, self.request, None, data).distinct()
 
     def get_context_data(self, **kwargs):
-        context = super(SearchView, self).get_context_data(**kwargs)
+        context = super().get_context_data(**kwargs)
         context["form"] = self.form
         products = context["products"]
         if products:

@@ -7,8 +7,9 @@
 # LICENSE file in the root directory of this source tree.
 from django.conf.urls import url
 
-from .views import SearchView
+from .views import SearchView, AsyncSearchResults
 
 urlpatterns = [
     url(r"^search/$", SearchView.as_view(), name="product_search"),
+    url(r"^search-async/$", AsyncSearchResults.as_view(), name="product_search_async"),
 ]

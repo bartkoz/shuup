@@ -19,4 +19,7 @@
     {% else %}
     <span class="small text-muted">{% trans %}Combination not available{% endtrans %}</span>
     {% endif %}
+   <div id="product-description" style="display: none">
+        {{ product.description|safe }}
+    </div>
 </div>
