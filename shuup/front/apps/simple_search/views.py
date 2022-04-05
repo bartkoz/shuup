@@ -37,13 +37,14 @@ class SearchView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super(SearchView, self).get_context_data(**kwargs)
-        q = self.request.GET.get('q')
+        query_params = self.request.GET
         context["form"] = self.form
-        if q:
+        if query_params:
+            params = '&'.join([f'{k}={v}' for k, v in query_params.items()])
             if settings.ENVIRONMENT == 'STAGING':
-                context["search"] = f"{'https://' if self.request.is_secure() else 'http://'}{self.request.get_host()}/sklep/search-async/?q={q}"
+                context["search"] = f"{'https://' if self.request.is_secure() else 'http://'}{self.request.get_host()}/sklep/search-async/?{params}"
             else:
-                context["search"] = f"{'https://' if self.request.is_secure() else 'http://'}{self.request.get_host()}/search-async/?q={q}"
+                context["search"] = f"{'https://' if self.request.is_secure() else 'http://'}{self.request.get_host()}/search-async/?{params}"
         return context
 
 
