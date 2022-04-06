@@ -35,7 +35,7 @@ window.updatePrice = function updatePrice(productId) {
             data[obj.name] = obj.value;
         });
     }
-    jQuery.ajax({url: "/xtheme/product_price", dataType: "html", data: data}).done(function(responseText) {
+    jQuery.ajax({url: "/sklep/xtheme/product_price", dataType: "html", data: data}).done(function(responseText) {
         const $content = $("<div>").append($.parseHTML(responseText));
         const priceDiv = "#product-price-div-" + productId;
         const quantityDiv = "#stock-quantity"

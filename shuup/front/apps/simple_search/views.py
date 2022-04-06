@@ -54,6 +54,7 @@ class AsyncSearchResults(ListView):
     template_name = "shuup/simple_search/search_async.jinja"
     model = Product
     context_object_name = "products"
+    paginate_by = 12
 
     def dispatch(self, request, *args, **kwargs):
         self.form = ProductListForm(request=self.request, shop=self.request.shop, category=None, data=self.request.GET)
@@ -65,19 +66,19 @@ class AsyncSearchResults(ListView):
         data = self.form.cleaned_data
         if not (data and data.get("q")):  # pragma: no cover
             return Product.objects.none()
-        products = Product.objects.filter(get_query_filters(self.request, None, data=data))
-        return get_product_queryset(products, self.request, None, data).distinct()
+        products = Product.objects.filter(get_query_filters(self.request, None, data=data), shop_products__visibility=3)
+        return products
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["form"] = self.form
         products = context["products"]
+        query_params = self.request.GET
+        if query_params:
+            context["params"] = '&'.join([f'{k}={v}' for k, v in query_params.items() if k != 'page'])
         if products:
             data = self.form.cleaned_data
-            products = post_filter_products(self.request, None, products, data)
-            products = cache_product_things(self.request, products)
             products = sort_products(self.request, None, products, data)
-            products = [p for p in products if is_visible({"request": self.request}, p)]
             context["products"] = products
         context["no_results"] = self.form.is_valid() and not products
         return context
