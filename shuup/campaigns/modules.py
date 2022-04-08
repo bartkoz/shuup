@@ -103,6 +103,8 @@ class BasketCampaignModule(OrderSourceModifierModule):
 
                 # make sure there is at least one item in the order source that has this supplier
                 has_supplier = False
+                if not order_source.get_final_lines():
+                    return True
                 for line in order_source.get_final_lines():
                     if line.supplier in suppliers:
                         has_supplier = True

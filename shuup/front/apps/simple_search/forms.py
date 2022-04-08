@@ -45,12 +45,11 @@ def get_compiled_query(query_string, needles):
     Compile query string into `Q` objects and return it
     """
     compiled_query = None
-    for word in get_query_words(query_string):
-        inner_query = None
-        for needle in needles:
-            q = Q(**{"%s__icontains" % needle: word})
-            inner_query = q if inner_query is None else inner_query | q
-        compiled_query = inner_query if compiled_query is None else compiled_query & inner_query
+    inner_query = None
+    for needle in needles:
+        q = Q(**{"%s__icontains" % needle: query_string})
+        inner_query = q if inner_query is None else inner_query | q
+    compiled_query = inner_query if compiled_query is None else compiled_query & inner_query
     return compiled_query
 
 
@@ -72,22 +71,22 @@ def get_search_product_ids(request, query, limit=settings.SHUUP_SIMPLE_SEARCH_LI
     query = query.strip().lower()
     cache_key_elements = {"query": query, "shop": request.shop.pk, "customer": request.customer.pk}
 
-    key, val = context_cache.get_cached_value(
-        identifier="simple_search", item=None, context=request, cache_key_elements=cache_key_elements
-    )
-    if val is not None:
-        return val
+    # key, val = context_cache.get_cached_value(
+    #     identifier="simple_search", item=None, context=request, cache_key_elements=cache_key_elements
+    # )
+    # if val is not None:
+    #     return val
 
     product_ids = get_product_ids_for_query_str(request, query, limit)
-    for word in query.split(" ") or []:
-        if word == query:
-            break
-        prod_count = len(product_ids)
-        if prod_count >= limit:
-            break
-        product_ids += get_product_ids_for_query_str(request, word.strip(), limit, product_ids)
+    # for word in query.split(" ") or []:
+    #     if word == query:
+    #         break
+    prod_count = len(product_ids)
+    # if prod_count >= limit:
+    # break
+    product_ids += get_product_ids_for_query_str(request, query.strip(), limit, product_ids)
 
-    context_cache.set_cached_value(key, product_ids[:limit])
+    # context_cache.set_cached_value(key, product_ids[:limit])
     return product_ids
 
 

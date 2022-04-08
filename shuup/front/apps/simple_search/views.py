@@ -8,6 +8,7 @@
 from __future__ import unicode_literals
 
 from django.conf import settings
+from django.contrib.postgres.search import SearchQuery, SearchVector, SearchRank
 from django.views.generic import ListView
 
 from shuup.core.models import Product
@@ -67,6 +68,15 @@ class AsyncSearchResults(ListView):
         if not (data and data.get("q")):  # pragma: no cover
             return Product.objects.none()
         products = Product.objects.filter(get_query_filters(self.request, None, data=data), shop_products__visibility=3)
+        query = data.get("q")
+        query = SearchQuery(query)
+        search_vector = SearchVector('translations__name', 'translations__description')
+        products = products.annotate(search=search_vector, rank=SearchRank(search_vector, query)).filter(search=query).order_by("-rank")
+        # lista = []
+        # for prod in products:
+        #     lista.append([prod.name, 10 if any([val in prod.name for val in [query.capitalize(), query.upper(), query.lower()]]) else 0, 1 if any([val in prod.description for val in [query.capitalize(), query.upper(), query.lower()]]) else 0])
+        # lista = sorted(lista, key=lambda x: sum([x[1], x[2]]), reverse=True)
+        # products.sort(key=lambda x: sum([10 if any([val in x.name for val in [query.capitalize(), query.upper(), query.lower()]]) else 0, 1 if any([val in x.description for val in [query.capitalize(), query.upper(), query.lower()]]) else 0]), reverse=True)
         return products
 
     def get_context_data(self, **kwargs):
@@ -80,5 +90,6 @@ class AsyncSearchResults(ListView):
             data = self.form.cleaned_data
             products = sort_products(self.request, None, products, data)
             context["products"] = products
+            context['products_count'] = self.get_queryset().count()
         context["no_results"] = self.form.is_valid() and not products
         return context
