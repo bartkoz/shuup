@@ -178,8 +178,11 @@
                      <div class="total-price-label col-xs-6"><strong>Wartość produktów</strong></div>
                      <div class="total-price-label text-right col-xs-6"><strong>{{ ('%0.2f zł'|format(basket.taxful_total_price_of_products)).replace('.', ',') }}</strong></div>
                      <div class="total-price-label col-xs-6"><strong>Dostawa</strong></div>
-                     <div class="total-price-label text-right col-xs-6"><strong>{{ ('%0.2f zł'|format(basket.total_price - basket.taxful_total_price_of_products)).replace('.', ',') }}</strong></div>
-
+                     <div class="total-price-label text-right col-xs-6"><strong>{{ ('%0.2f zł'|format(delivery)).replace('.', ',') }}</strong></div>
+                     {% if basket.codes %}
+                         <div class="total-price-label col-xs-6"><strong>Rabat</strong></div>
+                         <div class="total-price-label text-right col-xs-6"><strong>-{{ ('%0.2f zł'|format(basket.total_discount)).replace('.', ',') }}</strong></div>
+                     {% endif %}
                         <div class="total-price-label col-xs-6"><strong>Do zapłaty</strong></div>
                         <div class="total-price text-right col-xs-6"><strong>{{ basket|total_price }}</strong></div>
 

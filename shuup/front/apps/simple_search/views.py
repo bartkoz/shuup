@@ -71,7 +71,21 @@ class AsyncSearchResults(ListView):
         query = data.get("q")
         query = SearchQuery(query)
         search_vector = SearchVector('translations__name', 'translations__description')
-        products = products.annotate(search=search_vector, rank=SearchRank(search_vector, query)).filter(search=query).order_by("-rank")
+        sort = self.request.GET.get('sort')
+        if sort:
+            if sort == 'created_date_d':
+                products = products.order_by('-pk')
+            elif sort == 'price_a':
+                products = products.order_by('shop_products__default_price_value')
+            elif sort == 'price_d':
+                products = products.order_by('-shop_products__default_price_value')
+            return products
+        products = products.annotate(
+            search=search_vector, rank=SearchRank(search_vector, query))\
+            .filter(
+            search=query).order_by(
+            "-rank"
+        )
         # lista = []
         # for prod in products:
         #     lista.append([prod.name, 10 if any([val in prod.name for val in [query.capitalize(), query.upper(), query.lower()]]) else 0, 1 if any([val in prod.description for val in [query.capitalize(), query.upper(), query.lower()]]) else 0])
@@ -88,7 +102,7 @@ class AsyncSearchResults(ListView):
             context["params"] = '&'.join([f'{k}={v}' for k, v in query_params.items() if k != 'page'])
         if products:
             data = self.form.cleaned_data
-            products = sort_products(self.request, None, products, data)
+            # products = sort_products(self.request, None, products, data)
             context["products"] = products
             context['products_count'] = self.get_queryset().count()
         context["no_results"] = self.form.is_valid() and not products

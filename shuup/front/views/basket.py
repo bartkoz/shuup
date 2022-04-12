@@ -21,6 +21,7 @@ class DefaultBasketView(TemplateView):
         context["basket"] = basket
         context["errors"] = list(basket.get_validation_errors())
         context['products'] = mark_safe([x for x in [build_line(line) for line in basket.get_final_lines()] if x])
+        context['delivery'] = sum([x.taxful_price.amount.value for x in basket.get_final_lines() if x.type.name == 'SHIPPING'])
         return context
 
 
