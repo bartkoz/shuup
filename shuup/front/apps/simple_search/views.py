@@ -21,6 +21,7 @@ from shuup.front.utils.sorts_and_filters import (
     sort_products,
 )
 from shuup.front.utils.views import cache_product_things
+from shuup.core.models import SearchQuery as Sq
 
 
 class SearchView(ListView):
@@ -107,3 +108,8 @@ class AsyncSearchResults(ListView):
             context['products_count'] = self.get_queryset().count()
         context["no_results"] = self.form.is_valid() and not products
         return context
+
+    def get(self, request, *args, **kwargs):
+        query = request.GET.get("q")
+        Sq.objects.create(query=query)
+        return super().get(request, *args, **kwargs)

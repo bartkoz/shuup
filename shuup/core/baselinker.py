@@ -242,8 +242,13 @@ class BaseLinkerConnector:
                                            "invoice_postcode": basket.shipping_address.postal_code,
                                            "invoice_country_code": basket.shipping_address.country.code,
                                            }}
-        payload['parameters'] = json.dumps(parameters)
-        perform_request(payload)
+        try:
+            parameters = {k: str(v) for k, v in parameters.items()}
+            payload['parameters'] = json.dumps(parameters)
+            data = perform_request(payload)
+            logger.error(f"data: {data}, payload: {payload}")
+        except Exception as e:
+            logger.error(e)
 
     def update_stocks(self):
         for _ in range(1, 1000):

@@ -4,7 +4,17 @@
 {% block checkout_phase_content %}
     <div class="row">
         {% set forms = form.forms %}
+            <div class="col-md-6">
+            <form role="form" method="post" action="">
+                {% csrf_token %}
+                {% set method_form = forms["checkout_method_choice"] %}
+                {{ macros.render_field(method_form.register) }}
+                {{ checkout_macros.default_buttons() }}
+            </form>
+            {% placeholder "checkout_method_choice_right" %}{% endplaceholder %}
+        </div>
         <div class="col-md-6">
+        <p class="collapse-element__header">Posiadasz konto? Kliknij <span>tutaj</span></p>
             <form class="single-page-refresh-after" role="form" method="post" action="">
                 {% csrf_token %}
                 {% set login_form = forms["login"] %}
@@ -21,15 +31,6 @@
                     {% trans %}Forgot your password?{% endtrans %}
                 </a>
             </form>
-        </div>
-        <div class="col-md-6">
-            <form role="form" method="post" action="">
-                {% csrf_token %}
-                {% set method_form = forms["checkout_method_choice"] %}
-                {{ macros.render_field(method_form.register) }}
-                {{ checkout_macros.default_buttons() }}
-            </form>
-            {% placeholder "checkout_method_choice_right" %}{% endplaceholder %}
         </div>
     </div>
     {% placeholder "checkout_method_choice_bottom" %}{% endplaceholder %}

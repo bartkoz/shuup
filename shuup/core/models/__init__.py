@@ -92,7 +92,7 @@ from ._supplied_products import SuppliedProduct
 from ._suppliers import Supplier, SupplierModule, SupplierShop, SupplierType
 from ._taxes import CustomerTaxGroup, Tax, TaxClass
 from ._units import DisplayUnit, PiecesSalesUnit, SalesUnit, UnitInterface
-from ._baselinker import BaseLinkerToken, BaseLinkerProductProperties
+from ._baselinker import BaseLinkerToken, BaseLinkerProductProperties, SearchQuery
 
 __all__ = [
     "AbstractOrderLine",
@@ -218,6 +218,7 @@ __all__ = [
     "WeightLimitsBehaviorComponent",
     "BaseLinkerToken",
     "BaseLinkerProductProperties",
+    "SearchQuery"
 ]
 
 update_module_attributes(__all__, __name__)

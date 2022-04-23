@@ -200,7 +200,7 @@ class PriceRangeDisplayFilter(_ContextFilter):
             if hasattr(request, priced_children_key):
                 priced_children = getattr(request, priced_children_key)
             else:
-                priced_children = get_priced_children_for_price_range(request, product, quantity, supplier) or [
+                priced_children = product.get_priced_children(request, quantity) or [
                     (product, _get_priceful(request, product, quantity, supplier))
                 ]
                 setattr(request, priced_children_key, priced_children)

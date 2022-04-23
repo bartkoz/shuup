@@ -12,7 +12,7 @@
         {% set forms = form.forms %}
         {% csrf_token %}
         {% for field in form.payment_type %}
-        <div class="radio checkout-method-radio" style="font-size: 1.2rem;">{{ field }}</div>
+        <div class="radio checkout-method-radio" style="font-size: 1.2rem; height: 52px; display: flex; justify-content: center; align-items: center;">{{ field }}</div>
         {% endfor %}
         {{ checkout_macros.default_buttons() }}
     </form>

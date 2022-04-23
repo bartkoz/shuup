@@ -28,3 +28,7 @@ class BaseLinkerProductProperties(ShuupModel):
 
     product = models.OneToOneField(Product, on_delete=models.CASCADE, related_name="bl_product_properties")
     data = JSONField()
+
+
+class SearchQuery(ShuupModel):
+    query = models.CharField(max_length=512)
