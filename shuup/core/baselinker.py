@@ -178,19 +178,23 @@ class BaseLinkerConnector:
         return quantity
 
     def _build_product(self, line):
-        return {
-            "storage": "db",
+        data = {
+            # "storage": "db",
             "storage_id": 0,
             "product_id": line.product.baselinker_id,
             "variant_id": 0,
             "name": line.product.name,
             "sku": line.product.sku,
-            "ean": "1597368451236",
+            # "ean": "1597368451236",
             "price_brutto": str(round(line.taxful_price.amount.value/line.quantity, 2)),
             "tax_rate": line.product.tax_class.name,
             "quantity": line.quantity,
             "weight": str(round(line.product.net_weight, 2))
         }
+        if self.inventory:
+            data["warehouse_id"] = self.inventory
+        else:
+            data["storage"] = "db"
 
     def add_order(self, basket, comment):
 
@@ -203,7 +207,7 @@ class BaseLinkerConnector:
             "admin_comments": "",
             "phone": basket.shipping_address.phone,
             "email": basket.shipping_address.email,
-            "user_login": basket.shipping_address.name,
+            # "user_login": basket.shipping_address.name,
             "currency": basket.currency,
             "payment_method": basket.payment_method.name,
             "payment_method_cod": "0",
