@@ -16,28 +16,29 @@ cards_url = shuup_static('decathlon/visamastercard.png')
 
 class PaymentTypeForm(forms.Form):
 
-    payment_method = forms.ChoiceField(choices=[('p24', mark_safe('<li><label for="id_payment_type-payment_method_0"><input type="radio" name="payment_type-payment_method" value="p24" class="custom-radio-list" required="" id="id_payment_type-payment_method_0">Przelewy24 <img src="https://movyu-prod.s3.eu-west-1.amazonaws.com/przelewy24_logo.svg" alt="przelewy24" style="width: 80px; height: 52px;"></label><p>Zapłać blikiem</p></li>')),
-                                                ('card', mark_safe(f'<li><label for="id_payment_type-payment_method_1"><input type="radio" name="payment_type-payment_method" value="card" class="custom-radio-list" required="" id="id_payment_type-payment_method_1">Visa/Mastercard <img src="https://movyu-prod.s3.eu-west-1.amazonaws.com/visamastercard.png" alt="visa/mastercard" style="width: 80px; height: 52px;"></label><p>Zapłać kartą</p></li>'))],
-                                       widget=forms.RadioSelect(attrs={'class': "custom-radio-list"}), label=_('Metoda Płatności'),
+    payment_method = forms.ChoiceField(choices=[('p24', mark_safe('Przelewy24 <img src="https://movyu-prod.s3.eu-west-1.amazonaws.com/przelewy24_logo.svg" alt="przelewy24" style="width: 80px; height: 52px;"><li style="margin-top: 1rem">Zapłać blikiem</li>')),
+                                                ('card', mark_safe(f'Karta Płatnicza <img src="https://movyu-prod.s3.eu-west-1.amazonaws.com/visamastercard.png" alt="visa/mastercard"><li style="margin-top: 1rem">Zapłać kartą</li>'))],
+                                       widget=forms.RadioSelect(attrs={'class': "custom-radio-list"}),
                                        required=True)
 
 
 class PaymentTypeFormCardLocked(forms.Form):
 
-    payment_method = forms.ChoiceField(choices=[('p24', mark_safe('<li><label for="id_payment_type-payment_method_0"><input type="radio" name="payment_type-payment_method" value="p24" class="custom-radio-list" required="" id="id_payment_type-payment_method_0">Przelewy24 <img src="https://movyu-prod.s3.eu-west-1.amazonaws.com/przelewy24_logo.svg" alt="przelewy24" style="width: 80px; height: 52px;"></label><p>Zapłać blikiem</p></li>')),
-                                                ('card', mark_safe(f'<li><label for="id_payment_type-payment_method_1"><input type="radio" name="payment_type-payment_method" value="card" class="custom-radio-list" required="" id="id_payment_type-payment_method_1">Visa/Mastercard <img src="https://movyu-prod.s3.eu-west-1.amazonaws.com/visamastercard.png" alt="visa/mastercard" style="width: 80px; height: 52px;"></label><p>Zapłać kartą</p></li>'))],
-                                       widget=forms.RadioSelect(attrs={'class': "custom-radio-list"}), label=_('Metoda Płatności'),
+    payment_method = forms.ChoiceField(choices=[('p24', mark_safe('Przelewy24 <img src="https://movyu-prod.s3.eu-west-1.amazonaws.com/przelewy24_logo.svg" alt="przelewy24" style="width: 80px; height: 52px;"><li style="margin-top: 1rem">Zapłać blikiem</li>')),
+                                                ('card', mark_safe(f'Karta Płatnicza <img src="https://movyu-prod.s3.eu-west-1.amazonaws.com/visamastercard.png" alt="visa/mastercard"><li style="margin-top: 1rem">Zapłać kartą</li>'))],
+                                       widget=forms.RadioSelect(attrs={'class': "custom-radio-list"}),
                                        disabled=True,
                                        initial='card')
 
 
 class PaymentTypeFormP224Locked(forms.Form):
 
-    payment_method = forms.ChoiceField(choices=[('p24', mark_safe('<li><label for="id_payment_type-payment_method_0"><input type="radio" name="payment_type-payment_method" value="p24" class="custom-radio-list" required="" id="id_payment_type-payment_method_0">Przelewy24 <img src="https://movyu-prod.s3.eu-west-1.amazonaws.com/przelewy24_logo.svg" alt="przelewy24" style="width: 80px; height: 52px;"></label><p>Zapłać blikiem</p></li>')),
-                                                ('card', mark_safe(f'<li><label for="id_payment_type-payment_method_1"><input type="radio" name="payment_type-payment_method" value="card" class="custom-radio-list" required="" id="id_payment_type-payment_method_1">Visa/Mastercard <img src="https://movyu-prod.s3.eu-west-1.amazonaws.com/visamastercard.png" alt="visa/mastercard" style="width: 80px; height: 52px;"></label><p>Zapłać kartą</p></li>'))],
-                                       widget=forms.RadioSelect(attrs={'class': "custom-radio-list"}), label=_('Metoda Płatności'),
+    payment_method = forms.ChoiceField(choices=[('p24', mark_safe('Przelewy24 <img src="https://movyu-prod.s3.eu-west-1.amazonaws.com/przelewy24_logo.svg" alt="przelewy24" style="width: 80px; height: 52px;"><li style="margin-top: 1rem">Zapłać blikiem</li>')),
+                                                ('card', mark_safe(f'Karta Płatnicza <img src="https://movyu-prod.s3.eu-west-1.amazonaws.com/visamastercard.png" alt="visa/mastercard"><li style="margin-top: 1rem">Zapłać kartą</li>'))],
+                                       widget=forms.RadioSelect(attrs={'class': "custom-radio-list"}),
                                        disabled=True,
                                        initial='p24')
+
 
 
 class PaymentType(CheckoutPhaseViewMixin, FormView):

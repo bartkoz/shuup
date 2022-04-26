@@ -180,7 +180,7 @@ class BaseLinkerConnector:
     def _build_product(self, line):
         data = {
             # "storage": "db",
-            "storage_id": 0,
+            # "storage_id": 0,
             "product_id": line.product.baselinker_id,
             "variant_id": 0,
             "name": line.product.name,
@@ -195,6 +195,7 @@ class BaseLinkerConnector:
             data["warehouse_id"] = self.inventory
         else:
             data["storage"] = "db"
+        return data
 
     def add_order(self, basket, comment):
 
@@ -215,44 +216,32 @@ class BaseLinkerConnector:
             "delivery_price": self.get_shipping_costs(basket),
             "want_invoice": "0",
             "extra_field_1": "Fishster",
-            "products": [self._build_product(line) for line in basket.get_lines()]
-        }
-        if basket.shipping_address:
-            try:
-                delivery_method = basket.shipping_method.name
-            except AttributeError:
-                delivery_method = None
-            parameters = {**parameters, **{"delivery_method": delivery_method,
-                                           "delivery_fullname": basket.shipping_address.name,
-                                           "delivery_address": f'{basket.shipping_address.street} '
-                                                               f'{basket.shipping_address.street2} '
-                                                               f'{basket.shipping_address.street3}',
-                                           "delivery_city": basket.shipping_address.city,
-                                           "delivery_postcode": basket.shipping_address.postal_code,
-                                           "phone": basket.shipping_address.phone,
-                                           "delivery_country_code": basket.shipping_address.country.code,
-                                           "delivery_point_id": "",
-                                           "delivery_point_name": "",
-                                           "delivery_point_address": "",
-                                           "delivery_point_postcode": "",
-                                           "delivery_point_city": "",
-                                           "invoice_fullname": basket.shipping_address.name,
-                                           "invoice_company": "",
-                                           "invoice_nip": "",
-                                           "invoice_address": f'{basket.shipping_address.street} '
-                                                              f'{basket.shipping_address.street2} '
-                                                              f'{basket.shipping_address.street3}',
-                                           "invoice_city": basket.shipping_address.city,
-                                           "invoice_postcode": basket.shipping_address.postal_code,
-                                           "invoice_country_code": basket.shipping_address.country.code,
-                                           }}
-        try:
-            parameters = {k: str(v) for k, v in parameters.items()}
-            payload['parameters'] = json.dumps(parameters)
-            data = perform_request(payload)
-            logger.error(f"data: {data}, payload: {payload}")
-        except Exception as e:
-            logger.error(e)
+            "delivery_method": basket.shipping_method.name,
+            "delivery_fullname": basket.shipping_address.name,
+            "delivery_address": f'{basket.shipping_address.street} '
+                                f'{basket.shipping_address.street2} '
+                                f'{basket.shipping_address.street3}',
+            "delivery_city": basket.shipping_address.city,
+            "delivery_postcode": basket.shipping_address.postal_code,
+            "delivery_country_code": basket.shipping_address.country.code,
+            "delivery_point_id": "",
+            "delivery_point_name": "",
+            "delivery_point_address": "",
+            "delivery_point_postcode": "",
+            "delivery_point_city": "",
+            "invoice_fullname": basket.shipping_address.name,
+            "invoice_company": "",
+            "invoice_nip": "",
+            "invoice_address": f'{basket.shipping_address.street} '
+                               f'{basket.shipping_address.street2} '
+                               f'{basket.shipping_address.street3}',
+            "invoice_city": basket.shipping_address.city,
+            "invoice_postcode": basket.shipping_address.postal_code,
+            "invoice_country_code": basket.shipping_address.country.code,
+            "products": [self._build_product(line) for line in basket.get_lines()]}
+        payload['parameters'] = json.dumps(parameters)
+        data = perform_request(payload)
+        logger.error(f"data: {data}, payload: {payload}")
 
     def update_stocks(self):
         for _ in range(1, 1000):
